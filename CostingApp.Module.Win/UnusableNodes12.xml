@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="True" />
+  </BOModel>
+  <Views Id="Views">
+    <DetailView Id="City_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="City">
+              <LayoutItem Id="City_DetailViewUserPanel" ViewItem="City_DetailViewUserPanel" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemCard_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="ItemCard">
+              <LayoutGroup Id="ItemCard_col1">
+                <LayoutItem Id="UnitType" ViewItem="UnitType" Index="3" RelativeSize="13.043478260869565" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject">
+              <LayoutGroup Id="Item4">
+                <LayoutGroup Id="Autod89689cb-4d8f-42ae-9e9b-d337a53e8bfe">
+                  <LayoutItem Id="UnitType" ViewItem="UnitType" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

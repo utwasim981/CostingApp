@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="True" />
+    <Class Name="CostTech.Module.Win.BO.Masters.Period">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="EndDate" DisplayFormat="{0:dd/MM/yyyy}" EditMask="dd/MM/yyyy" />
+        <Member Name="StartDate" DisplayFormat="{0:dd/MM/yyyy}" EditMask="dd/MM/yyyy" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <DetailView Id="Period_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Children_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="81.188118811881182" Removed="True">
+            <LayoutItem Id="Children" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="WXafGroupSequenceHCategory" RelativeSize="17.224880382775119" Caption="WXafGroupSequenceHCategory" Index="2" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Name" RelativeSize="100" Index="0" Removed="True" />
+              <LayoutItem Id="Parent" RelativeSize="52.631578947368418" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Period">
+              <LayoutGroup Id="Period_col1" RelativeSize="50">
+                <LayoutItem Id="PeriodName" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="StartDate" RelativeSize="27.272727272727273" />
+                <LayoutItem Id="EndDate" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="Adjustment" RelativeSize="26.605504587155963" Removed="True" />
+                <LayoutItem Id="Status" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Period_col2" RelativeSize="50" Caption="Period_col2">
+                <LayoutItem Id="CloseDate" RelativeSize="29.357798165137616" Index="0" Removed="True" />
+                <LayoutItem Id="ClosedBy" RelativeSize="29.357798165137616" Index="0" Removed="True" />
+                <LayoutItem Id="OpenedBy" RelativeSize="29.357798165137616" Index="0" Removed="True" />
+                <LayoutItem Id="Parent" ViewItem="Parent" Index="0" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="Adjustment" ViewItem="Adjustment" Index="1" RelativeSize="23.863636363636363" />
+                <LayoutItem Id="Item1" Index="2" RelativeSize="39.772727272727273" />
+                <LayoutItem Id="OpenDate" RelativeSize="28.571428571428573" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Period_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Adjustment" Index="4" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

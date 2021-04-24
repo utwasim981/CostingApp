@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="False" />
+    <Class Name="CostTech.Module.Win.BO.Masters.City">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Expression" PropertyEditorType="WXafLib.PropertyEditors.PopupExpressionPropertyEditor" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+</Application>

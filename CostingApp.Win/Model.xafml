@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Logo="ExpressAppLogo">
+  <BOModel>
+    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="False" />
+  </BOModel>
+  <NavigationItems RootGroupsStyle="OutlookAnimated" StartupNavigationItem="ItemCard_ListView" />
+  <Options UIType="TabbedMDI" FormStyle="Ribbon" LookupSmallCollectionItemCount="0" RestoreTabbedMdiLayout="False" />
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="17.2.16.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="17.2.16.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="17.2.16.0" IsNewNode="True" />
+  </SchemaModules>
+</Application>

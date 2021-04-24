@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="True" />
+  </BOModel>
+  <Views Id="Views">
+    <ListView Id="ExpenseCard_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Employee" Index="4" />
+        <ColumnInfo Id="InvoiceNumber" Index="7" />
+      </Columns>
+    </ListView>
+    <DetailView Id="EmployeeAttendance_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SizeableEditors" RelativeSize="95.668316831683171" Caption="Notes" TextAlignMode="AlignWithChildren">
+            <LayoutGroup Id="Auto5928ac11-6d9a-413c-aa38-d7337ed48344" ShowCaption="False" Caption="Auto5928ac11-6d9a-413c-aa38-d7337ed48344(6)" Direction="Horizontal" Index="0" RelativeSize="28.71927554980595" TextAlignMode="AlignWithChildren">
+              <LayoutItem Id="Employee.EmployeePhoto" ShowCaption="False" ViewItem="Employee.EmployeePhoto" Index="0" RelativeSize="26.807563959955505" SizeConstraintsType="Custom" MinSize="35, 36" />
+              <LayoutGroup Id="Item3" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="1" RelativeSize="73.1924360400445">
+                <LayoutGroup Id="Autob22a88b2-629b-4b9c-bfbf-a09bd5664a4b" ShowCaption="False" Caption="Autob22a88b2-629b-4b9c-bfbf-a09bd5664a4b(9)" Index="0" RelativeSize="40.062597809076685">
+                  <LayoutItem Id="Shop" ViewItem="Shop" Index="0" RelativeSize="17.391304347826086" />
+                  <LayoutItem Id="Employee" ViewItem="Employee" Index="1" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="Date" ViewItem="Date" Index="2" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="StartAt" ViewItem="StartAt" Index="3" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="EndAt" ViewItem="EndAt" Index="4" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="NumberOfHours" ViewItem="NumberOfHours" Index="5" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="HourPrice" ViewItem="HourPrice" Index="6" RelativeSize="17.391304347826086" />
+                </LayoutGroup>
+                <LayoutGroup Id="Autobafe8e38-4692-4083-b94a-5b5d70b83961" ShowCaption="False" Caption="Autobafe8e38-4692-4083-b94a-5b5d70b83961(15)" Index="1" RelativeSize="59.937402190923315">
+                  <LayoutItem Id="Total" ViewItem="Total" Index="0" RelativeSize="17.391304347826086" />
+                  <LayoutItem Id="Employee.Position" ViewItem="Employee.Position" Index="1" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="Employee.ContractType" ViewItem="Employee.ContractType" Index="2" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="Employee.ContractType.SalaryType" ViewItem="Employee.ContractType.SalaryType" Index="3" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="Item8" Index="4" RelativeSize="21.195652173913043" />
+                  <LayoutItem Id="Item7" Index="5" RelativeSize="22.282608695652176" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Item4" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="21.992238033635189" Caption="Notes" TextAlignMode="AlignWithChildren" Direction="Horizontal">
+              <LayoutItem Id="Item6" Index="0" RelativeSize="26.285714285714285" SizeConstraintsType="Default" MinSize="115, 40" />
+              <LayoutItem Id="Notes" ViewItem="Notes" Index="1" RelativeSize="46.285714285714285" ShowCaption="False" />
+              <LayoutItem Id="Item5" Index="2" RelativeSize="27.428571428571427" />
+            </LayoutGroup>
+            <LayoutItem Id="Notes" RelativeSize="19.922380336351875" Index="1" Removed="True" />
+            <LayoutItem Id="Item1" Index="2" RelativeSize="49.288486416558861" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="EmployeeAttendance_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Date" Index="3" />
+        <ColumnInfo Id="Total" Index="8" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ExpenseCard_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="ExpenseCard" RelativeSize="30.872483221476511" Index="1">
+              <LayoutGroup Id="ExpenseCard_col1" RelativeSize="50.056625141562854">
+                <LayoutItem Id="ExpenseDate" Index="0" RelativeSize="28.571428571428573" ViewItem="ExpenseDate" />
+                <LayoutItem Id="Shop" RelativeSize="21.428571428571427" Index="1" />
+                <LayoutItem Id="ExpenseType" RelativeSize="21.428571428571427" Index="2" />
+                <LayoutItem Id="Employee" RelativeSize="28.571428571428573" Index="3" />
+                <LayoutItem Id="Period" RelativeSize="23.529411764705884" Index="4" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ExpenseCard_col2" RelativeSize="49.943374858437146">
+                <LayoutItem Id="Period" ViewItem="Period" Index="0" RelativeSize="28.571428571428573" />
+                <LayoutItem Id="Amount" RelativeSize="21.428571428571427" Index="1" />
+                <LayoutItem Id="InvoiceNumber" RelativeSize="21.428571428571427" Index="2" />
+                <LayoutItem Id="Notes" RelativeSize="28.571428571428573" Index="3" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

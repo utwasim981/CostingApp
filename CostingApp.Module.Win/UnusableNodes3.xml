@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="True" />
+    <Class Name="CostTech.Module.Win.BO.Masters.Shop">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="FriFrom" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="FriTo" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="MonFrom" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="MonTo" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="SatFrom" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="SatTo" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="SunFrom" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="SunTo" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="ThuFrom" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="ThuTo" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="TusFrom" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="TusTo" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="WedFrom" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+        <Member Name="WedTo" PropertyEditorType="WXafLib.PropertyEditors.TimeProportyEditor" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <ListView Id="Employee_ListView_List" ClassName="CostTech.Module.Win.BO.Masters.Employee" Caption="Employees">
+      <Columns Id="Columns">
+        <ColumnInfo Id="EmployeePhoto" PropertyName="EmployeePhoto" Width="70" Index="-1" />
+        <ColumnInfo Id="FirstName" PropertyName="FirstName" Width="70" Index="-1" />
+        <ColumnInfo Id="LastName" PropertyName="LastName" Width="70" Index="-1" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Width="50" Index="0" />
+        <ColumnInfo Id="EmployeeCode" Index="1" PropertyName="EmployeeCode" View="" Width="70" />
+        <ColumnInfo Id="FullName" Index="2" PropertyName="FullName" SortIndex="0" SortOrder="Ascending" View="" Width="400" />
+        <ColumnInfo Id="Gender" Index="3" PropertyName="Gender" View="" Width="70" />
+        <ColumnInfo Id="Position" Index="4" PropertyName="Position" View="" Width="70" />
+        <ColumnInfo Id="ContractType" Index="5" PropertyName="ContractType" View="" Width="70" />
+        <ColumnInfo Id="SalaryPerHour" PropertyName="SalaryPerHour" Width="50" Index="6" />
+        <ColumnInfo Id="MonthlySalary" PropertyName="MonthlySalary" Width="50" Index="7" />
+        <ColumnInfo Id="IsActive" PropertyName="IsActive" Width="50" Index="8" />
+      </Columns>
+    </ListView>
+    <ListView Id="Employee_ListView_Banded" ClassName="CostTech.Module.Win.BO.Masters.Employee" Caption="Employees">
+      <Columns Id="Columns">
+        <ColumnInfo Id="FirstName" PropertyName="FirstName" Width="70" Index="-1" RowIndex="-1" />
+        <ColumnInfo Id="LastName" PropertyName="LastName" Width="70" Index="-1" RowIndex="-1" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Width="50" Index="-1" />
+        <ColumnInfo Id="ContractType" Index="0" PropertyName="ContractType" View="" Width="70" OwnerBand="Information" RowIndex="4" />
+        <ColumnInfo Id="EmployeeCode" Index="0" PropertyName="EmployeeCode" View="" Width="70" OwnerBand="Information" />
+        <ColumnInfo Id="FullName" Index="0" PropertyName="FullName" SortIndex="0" SortOrder="Ascending" View="" Width="400" OwnerBand="Information" RowIndex="1" />
+        <ColumnInfo Id="Gender" Index="0" PropertyName="Gender" View="" Width="70" OwnerBand="Information" RowIndex="2" />
+        <ColumnInfo Id="IsActive" PropertyName="IsActive" Width="50" Index="0" OwnerBand="Information" RowIndex="9" />
+        <ColumnInfo Id="MonthlySalary" PropertyName="MonthlySalary" Width="50" Index="0" OwnerBand="Information" RowIndex="8" />
+        <ColumnInfo Id="Position" Index="0" PropertyName="Position" View="" Width="70" OwnerBand="Information" RowIndex="3" />
+        <ColumnInfo Id="SalaryPerHour" PropertyName="SalaryPerHour" Width="50" Index="0" OwnerBand="Information" RowIndex="5" />
+        <ColumnInfo Id="EmployeePhoto" PropertyName="EmployeePhoto" Width="70" Index="9" OwnerBand="Photo" />
+      </Columns>
+      <BandsLayout Id="BandsLayout" Enable="True" ShowColumnHeaders="False">
+        <Band Id="Photo" Caption="" Index="0" AutoFillDown="False" />
+        <Band Id="Information" Caption="Info" Index="1" />
+      </BandsLayout>
+    </ListView>
+    <ListView Id="Employee_ListView">
+      <Variants Id="Variants">
+        <Variant Id="Variant_Employee_List_View_List" ViewID="Employee_ListView_List" Caption="Standard Employees List" Index="1" />
+        <Variant Id="variant_Employee_ListView_Banded" ViewID="Employee_ListView_Banded" Caption="Advanced Employee List" Index="0" />
+      </Variants>
+    </ListView>
+  </Views>
+</Application>
