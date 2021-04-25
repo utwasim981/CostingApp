@@ -15,7 +15,8 @@ using WXafLib.General.Security;
 
 namespace CostTech.Module.Win.BO.Employees {
     [XafDefaultProperty(nameof(ContractTypeName))]
-    [NavigationItem("Employees")]
+    [NavigationItem("Employees Setup")]
+    [ImageName("BO_Contract")]
     public class ContractType : WXafBaseObject {
         string fContractTypeName;
         [Size(150)]

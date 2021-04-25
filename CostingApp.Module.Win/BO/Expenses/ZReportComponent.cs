@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using WXafLib.General.Model;
 
 namespace CostingApp.Module.Win.BO.Expenses {
-    [NavigationItem("Setup")]
+    [NavigationItem("Expenses Setup")]
     public class ZReportComponent : WXafBaseObject {
         string fComponentName;
         [RuleRequiredField("ZReportComponent_ComponentName_RuleRequiredField", DefaultContexts.Save)]

@@ -14,7 +14,8 @@ using WXafLib.General.ModelExtenders;
 using WXafLib.General.Security;
 
 namespace CostingApp.Module.Win.BO.Items {
-    [NavigationItem("Inventory")]
+    [NavigationItem("Inventory Setup")]
+    [ImageName("Unit")]
     public class UnitType : WXafBaseObject {
         string fTypeName;
         [RuleRequiredField("UnitType_TypeName_RuleRequiredField", DefaultContexts.Save)]
@@ -37,9 +38,7 @@ namespace CostingApp.Module.Win.BO.Items {
         [Browsable(false)]
         [RuleFromBoolProperty("UnitType_BasUnit_IsValid", DefaultContexts.Save, "One base unit is required")]
         public bool IsBaseItemIsValid {
-            get {
-                return Units.Count(x => x.BaseUnit) == 1;
-            }
+            get { return Units.Count(x => x.BaseUnit) == 1; }
         }
         public UnitType(Session session) : base(session) { }
     }

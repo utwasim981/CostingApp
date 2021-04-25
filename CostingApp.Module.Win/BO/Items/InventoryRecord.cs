@@ -11,7 +11,15 @@ using System.Threading.Tasks;
 using WXafLib.General.ModelExtenders;
 
 namespace CostingApp.Module.Win.BO.Items {
+    [NavigationItem("Testing")]
     public abstract class InventoryRecord : ExpenseRecord {
+        InventoryTransaction fTransaction;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        public InventoryTransaction Transaction {
+            get { return fTransaction; }
+            set { SetPropertyValue<InventoryTransaction>(nameof(Transaction), ref fTransaction, value); }
+        }
         Unit fTransactionUnit;
         [RuleRequiredField("InventoryRecord_TransactionUnit_RuleRequiredField", DefaultContexts.Save)]
         public Unit TransactionUnit {
@@ -35,11 +43,16 @@ namespace CostingApp.Module.Win.BO.Items {
             set { SetPropertyValue<Unit>(nameof(StockUnit), ref fStockUnit, value); }
         }
         double fQuantity;
-        [RuleValueComparison("InventoryRecord_Quantity_GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
         [ImmediatePostData(true)]
         public double Quantity {
             get { return fQuantity; }
             set { SetPropertyValue<double>(nameof(Quantity), ref fQuantity, value); }
+        }
+        public double QuantityIN {
+            get { return Transaction.TransactionType == EnumInventoryTransactionType.In ? Quantity : 0; }
+        }
+        public double QuantityOut {
+            get { return Transaction.TransactionType == EnumInventoryTransactionType.Out ? Quantity : 0; }
         }
         double fBaseQuantity;
         [VisibleInDetailView(false)]
@@ -63,34 +76,31 @@ namespace CostingApp.Module.Win.BO.Items {
             set { SetPropertyValue<double>(nameof(Price), ref fPrice, value); }
         }
         public InventoryRecord(Session session) : base(session) { }
-        public override void AfterConstruction() {
-            base.AfterConstruction();
-            Quantity = 1;
-        }
-        protected override void OnSaving() {
-            base.OnSaving();
-            if (ExpenseDate > Item.LastPurchaseDate) {
-                Item.LastPurchaseDate = ExpenseDate;
-                Item.LastPurchasePrice = Price;
-            }
-        }
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
             if (!IsLoading) {
-                if (propertyName == nameof(Item) && oldValue != newValue) {
-                    BaseUnit = Item != null ? Item.BaseUnit : null;
-                    if (Item.ItemType == EnumItemCard.InventoryItem)
-                        StockUnit = Item != null ? Item.StockUnit : null;
-                    else
-                        StockUnit = Item != null ? Item.BaseUnit : null;
-                }
-                if ((propertyName == nameof(Quantity) || propertyName == nameof(Price)) && oldValue != newValue)
-                    Amount = Price * Quantity;
-                if ((propertyName == nameof(Quantity) || propertyName == nameof(TransactionUnit)) && newValue != oldValue) {
-                    BaseQuantity = TransactionUnit == null ? 0 : Quantity * TransactionUnit.ConversionRate;
-                    StockQuantity = StockUnit == null ? 0 : BaseQuantity / StockUnit.ConversionRate;
-                }                
+                if (propertyName == nameof(Item) && oldValue != newValue)
+                    onItemChangeValue();
+                if (propertyName == nameof(TransactionUnit) && oldValue != newValue)
+                    calculateQuantity();
+                if (propertyName == nameof(Quantity) && oldValue != newValue)
+                    calculateQuantity();
             }
+        }
+
+        private void onItemChangeValue() {
+            if (Item != null) {
+                BaseUnit = Item != null ? Item.BaseUnit : null;
+                StockUnit = Item == null ? null : Item.StockUnit != null ? Item.StockUnit : Item.BaseUnit;
+            }
+            else {
+                BaseUnit = null;
+                StockUnit = null;
+            }
+        }        
+        private void calculateQuantity() {
+            BaseQuantity = TransactionUnit == null ? 0 : Quantity * TransactionUnit.ConversionRate;
+            StockQuantity = StockUnit == null ? 0 : Math.Round(BaseQuantity / StockUnit.ConversionRate, 2);
         }
     }
 }

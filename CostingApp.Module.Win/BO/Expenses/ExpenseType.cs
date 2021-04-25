@@ -14,7 +14,8 @@ using WXafLib.General.Security;
 
 namespace CostingApp.Module.Win.BO.Expenses {
     [XafDefaultProperty(nameof(ExpenseTypeName))]
-    [NavigationItem("Setup")]
+    [NavigationItem("Expenses Setup")]
+    [ImageName("expensetype")]
     public class ExpenseType : WXafBaseObject {       
         ExpenseCategory fExpenseCategory;
         [Association("ExpenseType-ExpenseCategory")]

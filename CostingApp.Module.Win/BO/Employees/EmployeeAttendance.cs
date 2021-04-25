@@ -21,7 +21,8 @@ using WXafLib.General.Model;
 using WXafLib.General.Security;
 
 namespace CostTech.Module.Win.BO.Employees {
-    [NavigationItem("Employees")]
+    [NavigationItem("Transactions")]
+    [ImageName("BO_Appointment")]
     public class EmployeeAttendance : ExpenseRecord {
         public string Number {
             get {
@@ -34,12 +35,10 @@ namespace CostTech.Module.Win.BO.Employees {
         public string StartAt {
             get { return fStartAt; }
             set {
-                var test = Convert.ToDateTime(value).ToString("dd/MM/yyyy HH:mm").Substring(11, 5);
-                SetPropertyValue<string>(nameof(StartAt), ref fStartAt, test);
-                if (!IsLoading && StartAt != null && EndAt != null) {
-                    CalculateNumberOfHours();
-                    CalculateTotals();
-                }
+                var _value = Convert.ToDateTime(value).ToString("dd/MM/yyyy HH:mm").Substring(11, 5);
+                SetPropertyValue<string>(nameof(StartAt), ref fStartAt, _value);
+                calculateNumberOfHours();
+                calculateTotals();
             }
         }
         string fEndAt;
@@ -48,12 +47,10 @@ namespace CostTech.Module.Win.BO.Employees {
         public string EndAt {
             get { return fEndAt; }
             set {
-                var test = Convert.ToDateTime(value).ToString("dd/MM/yyyy HH:mm").Substring(11, 5);
-                SetPropertyValue<string>(nameof(EndAt), ref fEndAt, test);
-                if (!IsLoading && StartAt != null && EndAt != null) {
-                    CalculateNumberOfHours();
-                    CalculateTotals();
-                }
+                var _value = Convert.ToDateTime(value).ToString("dd/MM/yyyy HH:mm").Substring(11, 5);
+                SetPropertyValue<string>(nameof(EndAt), ref fEndAt, _value);
+                    calculateNumberOfHours();
+                    calculateTotals();
             }
         }
         double fCalculatedHours;
@@ -65,9 +62,7 @@ namespace CostTech.Module.Win.BO.Employees {
             get { return fCalculatedHours; }
             set {
                 SetPropertyValue<double>(nameof(CalculatedHours), ref fCalculatedHours, value);
-                if (!IsLoading && StartAt != null && EndAt != null) {
-                    CalculateTotals();
-                }
+                calculateTotals();
             }
         }
         double fNumberOfHours;
@@ -76,9 +71,7 @@ namespace CostTech.Module.Win.BO.Employees {
             get { return fNumberOfHours; }
             set {
                 SetPropertyValue(nameof(NumberOfHours), ref fNumberOfHours, value);
-                if (!IsLoading && StartAt != null && EndAt != null) {
-                    CalculateTotals();
-                }
+                calculateTotals();
             }
         }
         double fCardHourPrice;
@@ -90,9 +83,7 @@ namespace CostTech.Module.Win.BO.Employees {
             get { return fCardHourPrice; }
             set {
                 SetPropertyValue<double>(nameof(CardHourPrice), ref fCardHourPrice, value);
-                if (!IsLoading && StartAt != null && EndAt != null) {
-                    CalculateTotals();
-                }
+                calculateTotals();
             }
         }
         double fHourPrice;
@@ -101,9 +92,7 @@ namespace CostTech.Module.Win.BO.Employees {
             get { return fHourPrice; }
             set {
                 SetPropertyValue<double>(nameof(HourPrice), ref fHourPrice, value);
-                if (!IsLoading && StartAt != null && EndAt != null) {
-                    CalculateTotals();
-                }
+                calculateTotals();
             }
         }
         double fCalculatedTotal;
@@ -132,7 +121,7 @@ namespace CostTech.Module.Win.BO.Employees {
         }
         protected override void OnSaving() {
             base.OnSaving();
-            CalculateTotals();
+            calculateTotals();
         }
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
@@ -146,23 +135,28 @@ namespace CostTech.Module.Win.BO.Employees {
         protected override string GetSequenceName() {
             return string.Concat(ClassInfo.FullName, ".EmployeeAttendance");
         }
-        private void CalculateNumberOfHours() {
-            var timeArray = fStartAt.Split(':');
-            var startAt = ExpenseDate + new TimeSpan(Convert.ToInt32(timeArray[0]), Convert.ToInt32(timeArray[1]), 0);
-            timeArray = fEndAt.Split(':');
-            var endAt = ExpenseDate + new TimeSpan(Convert.ToInt32(timeArray[0]), Convert.ToInt32(timeArray[1]), 0);
-            endAt = endAt < startAt ? endAt.AddDays(1) : endAt;
-            var difference = endAt - startAt;
-            CalculatedHours = difference.Hours;
-            if (difference.Minutes >= 15 && difference.Minutes <= 44)
-                CalculatedHours += 0.5;
-            else if (difference.Minutes >= 45)
-                CalculatedHours++;
-            NumberOfHours = CalculatedHours;
+
+        private void calculateNumberOfHours() {
+            if (!IsLoading && StartAt != null && EndAt != null) {
+                var timeArray = fStartAt.Split(':');
+                var startAt = ExpenseDate + new TimeSpan(Convert.ToInt32(timeArray[0]), Convert.ToInt32(timeArray[1]), 0);
+                timeArray = fEndAt.Split(':');
+                var endAt = ExpenseDate + new TimeSpan(Convert.ToInt32(timeArray[0]), Convert.ToInt32(timeArray[1]), 0);
+                endAt = endAt < startAt ? endAt.AddDays(1) : endAt;
+                var difference = endAt - startAt;
+                CalculatedHours = difference.Hours;
+                if (difference.Minutes >= 15 && difference.Minutes <= 44)
+                    CalculatedHours += 0.5;
+                else if (difference.Minutes >= 45)
+                    CalculatedHours++;
+                NumberOfHours = CalculatedHours;
+            }
         }
-        private void CalculateTotals() {
-            CalculatedTotal = CalculatedHours * CardHourPrice;
-            Amount = NumberOfHours * HourPrice;
+        private void calculateTotals() {
+            if (!IsLoading) {
+                CalculatedTotal = CalculatedHours * CardHourPrice;
+                Amount = NumberOfHours * HourPrice;
+            }
         }
     }
 

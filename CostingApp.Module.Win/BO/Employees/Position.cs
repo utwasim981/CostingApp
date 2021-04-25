@@ -14,7 +14,8 @@ using WXafLib.General.Security;
 
 namespace CostTech.Module.Win.BO.Employees {
     [XafDefaultProperty(nameof(PositionName))]
-    [NavigationItem("Employees")]
+    [NavigationItem("Employees Setup")]
+    [ImageName("BO_Position")]
     public class Position : WXafBaseObject {
         string fPositionName;
         [Size(150)]

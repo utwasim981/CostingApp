@@ -1,5 +1,6 @@
 ﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.DC;
+using DevExpress.ExpressApp.Xpo;
 using DevExpress.Persistent.Base;
 using DevExpress.Xpo;
 using System;
@@ -24,7 +25,10 @@ namespace WXafLib.General.Model {
     public abstract class WXafBase : XPObject, IWXafObject, IObjectSpaceLink {
         IObjectSpace fObjectSpace;
         [Browsable(false)]
-        public IObjectSpace ObjectSpace { get { return fObjectSpace; }  set { fObjectSpace = value; } }
+        public IObjectSpace ObjectSpace {
+            get { return fObjectSpace; }
+            set { fObjectSpace = value; }
+        }
         bool fIsActive;
         [ImmutableObject(true)]
         [XafDisplayName("Actvie")]
@@ -66,12 +70,14 @@ namespace WXafLib.General.Model {
         public override void AfterConstruction() {
             base.AfterConstruction();
             IsActive = true;
+            if (ObjectSpace == null) ObjectSpace = XPObjectSpace.FindObjectSpaceByObject(this);
         }
         protected override void OnSaving() {
             base.OnSaving();
             if (Session.IsNewObject(this)) {
                 CreatedOn = DateTime.Now;
-                CreatedBy = Session.GetObjectByKey<WXafUser>(((WXafUser)SecuritySystem.CurrentUser).Oid);
+                if (SecuritySystem.CurrentUser != null)
+                    CreatedBy = Session.GetObjectByKey<WXafUser>(((WXafUser)SecuritySystem.CurrentUser).Oid);
             }
             else {
                 UpdatedOn = DateTime.Now;

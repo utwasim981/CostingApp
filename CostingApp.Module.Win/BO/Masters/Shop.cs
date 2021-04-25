@@ -18,7 +18,8 @@ using WXafLib.General.Security;
 
 namespace CostingApp.Module.Win.BO.Masters {
     [XafDefaultProperty(nameof(ShopName))]
-    [NavigationItem("Setup")]
+    [ImageName("company")]
+    [NavigationItem("Administration")]
     public class Shop : WXafSequenceObject {
         City fCity;
         [RuleRequiredField("Shop_City.RuleRequiredField", DefaultContexts.Save)]
@@ -222,10 +223,15 @@ namespace CostingApp.Module.Win.BO.Masters {
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
             if (!IsLoading) {
-                if (propertyName == nameof(SequentialNumber) && oldValue != newValue &&
-                    (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["ShopCodeA"])
-                    ShopCode = string.Format("SH-{0}-{1}", City.CityCode, SequentialNumber.ToString().PadLeft(4, '0'));
+                if (propertyName == nameof(SequentialNumber))
+                    onSequentialNumberValueChange(oldValue, newValue);                    
             }
+        }
+
+        private void onSequentialNumberValueChange(object oldValue, object newValue) {
+            if (oldValue != newValue &&
+                (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["ShopCodeA"])
+                ShopCode = string.Format("SH-{0}-{1}", City.CityCode, SequentialNumber.ToString().PadLeft(4, '0'));
         }
     }
 }

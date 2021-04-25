@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="True" />
+  </BOModel>
+  <Views Id="Views">
+    <DetailView Id="City_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="City">
+              <LayoutItem Id="City_DetailViewUserPanel" ViewItem="City_DetailViewUserPanel" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="PurchaseInvoiceDetail_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Item2">
+          <LayoutGroup Id="Auto4d127f14-a6e0-4cd2-bdf0-2f7575770496">
+            <LayoutItem Id="QuantityIn" ViewItem="QuantityIn" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

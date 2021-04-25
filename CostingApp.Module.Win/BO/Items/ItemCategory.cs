@@ -13,8 +13,9 @@ using WXafLib.General.Model;
 using WXafLib.General.Security;
 
 namespace CostingApp.Module.Win.BO.Items {
-    [NavigationItem("Inventory")]
+    [NavigationItem("Inventory Setup")]
     [RuleCombinationOfPropertiesIsUnique("ItemCategory_ItemCategoryName_Parentcategory.RuleUniqueField", DefaultContexts.Save, "ItemCategoryName, ParentCategory")]
+    [ImageName("BO_Product_Group")]
     public class ItemCategory : WXafBaseObject, ITreeNode {
 
         string fItemCategoryName;
@@ -28,12 +29,8 @@ namespace CostingApp.Module.Win.BO.Items {
         [Association("ItemCategory-ItemCategory")]
         [XafDisplayName("Master")]
         public ItemCategory ParentCategory {
-            get {
-                return fParentCategory;
-            }
-            set {
-                SetPropertyValue(nameof(ParentCategory), ref fParentCategory, value);
-            }
+            get { return fParentCategory; }
+            set { SetPropertyValue(nameof(ParentCategory), ref fParentCategory, value); }
         }
         [Association("ItemCategory-ItemCategory"), DevExpress.Xpo.Aggregated]
         public XPCollection<ItemCategory> Categories {

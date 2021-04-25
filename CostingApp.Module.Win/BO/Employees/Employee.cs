@@ -18,7 +18,8 @@ using WXafLib.General.Security;
 
 namespace CostTech.Module.Win.BO.Employees {
     [XafDefaultProperty(nameof(FullName))]
-    [NavigationItem("Employees")]
+    [ImageName("employee")]
+    [NavigationItem("Employees Setup")]
     public class Employee : WXafSequenceObject {
         ContractType fContractType;
         [XafDisplayName("Contract Type")]
@@ -52,7 +53,7 @@ namespace CostTech.Module.Win.BO.Employees {
             get { return fFirstName; }
             set {
                 SetPropertyValue<string>(nameof(FirstName), ref fFirstName, value);
-                FullName = ObjectFormatter.Format("{FirstName} {LastName}", this, EmptyEntriesMode.RemoveDelimiterWhenEntryIsEmpty);
+                FullName = calcFullName();
             }
         }
         string fLastName;
@@ -63,7 +64,7 @@ namespace CostTech.Module.Win.BO.Employees {
             get { return fLastName; }
             set {
                 SetPropertyValue<string>(nameof(LastName), ref fLastName, value);
-                FullName = ObjectFormatter.Format("{FirstName} {LastName}", this, EmptyEntriesMode.RemoveDelimiterWhenEntryIsEmpty);
+                FullName = calcFullName();
             }
         }
         string fFullName;
@@ -72,9 +73,7 @@ namespace CostTech.Module.Win.BO.Employees {
         [RuleUniqueValue("Employee_FullName_RuleUniqueValue", DefaultContexts.Save)]
         public string FullName {
             get { return fFullName; }
-            set {
-                SetPropertyValue<string>(nameof(FullName), ref fFullName, value);
-            }
+            set {SetPropertyValue<string>(nameof(FullName), ref fFullName, value); }
         }
         EnumGender fGender;
         public EnumGender Gender {
@@ -104,10 +103,18 @@ namespace CostTech.Module.Win.BO.Employees {
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
             if (!IsLoading) {
-                if (propertyName == nameof(SequentialNumber) && oldValue != newValue &&
-                    (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["EmployeeCodeA"])
-                    EmployeeCode = string.Format("EMP-{0}", SequentialNumber.ToString().PadLeft(5, '0'));
+                if (propertyName == nameof(SequentialNumber))
+                    onSequentialNumberValueChange(oldValue, newValue);
             }
+        }
+
+        private void onSequentialNumberValueChange(object oldValue, object newValue) {
+            if (oldValue != newValue &&
+                (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["EmployeeCodeA"])
+                EmployeeCode = SequentialNumber.ToString().PadLeft(4, '0');
+        }
+        private string calcFullName() {
+            return ObjectFormatter.Format("{FirstName} {LastName}", this, EmptyEntriesMode.RemoveDelimiterWhenEntryIsEmpty);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using CostingApp.Module.Win.BO.Expenses;
+using CostingApp.Module.Win.BO.Masters;
 using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.DC;
 using DevExpress.ExpressApp.SystemModule;
 using DevExpress.Persistent.Base;
@@ -15,6 +17,7 @@ using WXafLib.General;
 namespace CostingApp.Module.Win.BO {
     [NavigationItem("Administration")]
     [IsSystemConfigration(true)]    
+    [ImageName("setup")]
     public class SystemConfigration : XPObject {
         bool fCityCodeM;
         [XafDisplayName("Mandatory City Code")]
@@ -81,6 +84,17 @@ namespace CostingApp.Module.Win.BO {
         public ExpenseType VatExpense {
             get { return fVatExpense; }
             set { SetPropertyValue<ExpenseType>(nameof(VatExpense), ref fVatExpense, value); }
+        }
+
+        protected Type FixedTargetObjectType { get { return typeof(City); } }
+        private string _ExpressionForFixedType;
+        [DevExpress.ExpressApp.Core.ElementTypeProperty("FixedTargetObjectType")]
+        [Appearance("CannotEditForEmptyType2", Enabled = false, Criteria = "FixedTargetObjectType is null")]
+        [EditorAlias(DevExpress.ExpressApp.Editors.EditorAliases.PopupExpressionPropertyEditor)]
+        [Size(SizeAttribute.Unlimited)]
+        public string ExpressionForFixedType {
+            get { return _ExpressionForFixedType; }
+            set { SetPropertyValue("ExpressionForFixedType", ref _ExpressionForFixedType, value); }
         }
 
         public SystemConfigration(Session session) : base(session) { }

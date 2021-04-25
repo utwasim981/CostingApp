@@ -166,14 +166,19 @@
     <Compile Include="BO\Expenses\ExpenseRecord.cs" />
     <Compile Include="BO\Expenses\ZReport.cs" />
     <Compile Include="BO\Expenses\ZReportComponent.cs" />
-    <Compile Include="BO\Items\AssemblyItem.cs" />
+    <Compile Include="BO\Items\MenuItemComponent.cs" />
+    <Compile Include="BO\Items\MenuItem.cs" />
     <Compile Include="BO\Items\InventoryItem.cs" />
     <Compile Include="BO\Items\InventoryRecord.cs" />
+    <Compile Include="BO\Items\InventoryTransaction.cs" />
     <Compile Include="BO\Items\ItemCard.cs" />
     <Compile Include="BO\Items\ItemCategory.cs" />
     <Compile Include="BO\Items\NoneInventoryItem.cs" />
     <Compile Include="BO\Items\PurchaseInvoice.cs" />
-    <Compile Include="BO\Items\TestItemTransaction.cs" />
+    <Compile Include="BO\Items\PurchaseInvoiceDetail.cs" />
+    <Compile Include="BO\Items\SalesRecord.cs" />
+    <Compile Include="BO\Items\SalesRecordItemComponent.cs" />
+    <Compile Include="BO\Items\SalesReportItem.cs" />
     <Compile Include="BO\Items\UnitType.cs" />
     <Compile Include="BO\Masters\Period\BasePeriod.cs" />
     <Compile Include="BO\Masters\City.cs" />
@@ -224,7 +229,6 @@
     <None Include="Editors\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\ReadMe.txt" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -345,6 +349,89 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="UnusableNodes15.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\employee.png" />
+    <EmbeddedResource Include="Images\employee_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\invoice.png" />
+    <EmbeddedResource Include="Images\invoice_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\bill.png" />
+    <EmbeddedResource Include="Images\bill_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\city.png" />
+    <EmbeddedResource Include="Images\city_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\company.png" />
+    <EmbeddedResource Include="Images\company_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\money.png" />
+    <EmbeddedResource Include="Images\money_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Calendar.png" />
+    <EmbeddedResource Include="Images\Calendar_32X32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\expensecat.png" />
+    <EmbeddedResource Include="Images\expensecat_32X32.png" />
+    <EmbeddedResource Include="Images\setup_32X32.png" />
+    <EmbeddedResource Include="Images\setup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\expensetype_32X32.png" />
+    <EmbeddedResource Include="Images\expensetype.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\itemcomponent.png" />
+    <EmbeddedResource Include="Images\itemcomponent_32X32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Unit.png" />
+    <EmbeddedResource Include="Images\Unit_32X32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\transactions.png" />
+    <EmbeddedResource Include="Images\transactions_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes16.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes17.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes18.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes19.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes20.xml">
       <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
       <SubType>Designer</SubType>
     </None>

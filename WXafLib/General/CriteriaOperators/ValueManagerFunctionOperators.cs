@@ -76,7 +76,7 @@ namespace WXafLib.General.CriteriaOperators {
     public class IsDateValueFunctionOperator : ICustomFunctionOperator {
         public string Name {
         get {
-            return "GetDate";
+            return "GetDateValue";
         }
     }
     public object Evaluate(params object[] operands) {

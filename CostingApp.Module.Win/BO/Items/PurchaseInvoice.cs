@@ -2,13 +2,15 @@
 using CostingApp.Module.Win.BO.Masters;
 using CostingApp.Module.Win.BO.Masters.Period;
 using DevExpress.Data.Filtering;
+using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Model;
+using DevExpress.ExpressApp.Xpo;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
+using DevExpress.Xpo.Metadata;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,41 +18,13 @@ using WXafLib.General.Model;
 using WXafLib.General.Security;
 
 namespace CostingApp.Module.Win.BO.Items {
-    [NavigationItem("Inventory")]
-    public class PurchaseInvoice : WXafSequenceObject {
-        Shop fShop;
-        [DataSourceCriteria("IsActive = True")]
-        [RuleRequiredField("PurchaseInvoice_Shop_RuleRequiredField", DefaultContexts.Save)]
-        public Shop Shop {
-            get { return fShop; }
-            set { SetPropertyValue<Shop>(nameof(Shop), ref fShop, value);
-                if (!IsLoading && Items.Count != 0)
-                    foreach (var item in Items)
-                        item.Shop = value;
-            }
-        }
-        BasePeriod fPeriod;
-        [ModelDefault("AllowEdit", "False")]
-        public BasePeriod Period {
-            get { return fPeriod; }
-            set { SetPropertyValue<BasePeriod>(nameof(Period), ref fPeriod, value); }
-        }
+    [NavigationItem("Transactions")]
+    [ImageName("invoice")]
+    public class PurchaseInvoice : InventoryTransaction {
+        const string NumberFormat = "Concat('PI-', PadLeft(ToStr(SequentialNumber), 6, '0'))";
+        [PersistentAlias(NumberFormat)]
         public string InvoiceNumber {
-            get { return string.Format("PI-{0}", SequentialNumber.ToString().PadLeft(6, '0')); }
-        }
-        DateTime fInvoiceDate;
-        [RuleRequiredField("PurchaseInvoice_InvoiceDate_RuleRequiredField", DefaultContexts.Save)]
-        public DateTime InvoiceDate {
-            get { return fInvoiceDate; }
-            set {
-                SetPropertyValue<DateTime>(nameof(InvoiceDate), ref fInvoiceDate, value);
-                if (!IsLoading) {
-                    if (Items.Count != 0)
-                        foreach (var item in Items)
-                            item.ExpenseDate = value;
-                    GetPeriod();
-                }
-            }
+            get { return Convert.ToString(EvaluateAlias(nameof(InvoiceNumber))); }
         }
         string fBillNumber;
         public string BillNumber {
@@ -82,11 +56,6 @@ namespace CostingApp.Module.Win.BO.Items {
             get { return fTotal; }
             set { SetPropertyValue<double>(nameof(Total), ref fTotal, value); }
         }
-        EnumStatus fStatus;
-        public EnumStatus Status {
-            get { return fStatus; }
-            set { SetPropertyValue<EnumStatus>(nameof(Status), ref fStatus, value); }
-        }
         [RuleRequiredField("PurchaseInvoice_Items_RuleRequiredField", DefaultContexts.Save)]
         [Association("PurchaseInvoice-PurchaseInvoiceDetail"), Aggregated]
         public XPCollection<PurchaseInvoiceDetail> Items {
@@ -95,61 +64,50 @@ namespace CostingApp.Module.Win.BO.Items {
             }
         }
 
-        public PurchaseInvoice(Session session) : base(session) { }
+        public PurchaseInvoice(Session session) : base(session) {
+        }
         public override void AfterConstruction() {
             base.AfterConstruction();
-            InvoiceDate = DateTime.Now;
+            TransactionDate = DateTime.Now;
+            TransactionType = EnumInventoryTransactionType.In;
+        }
+        protected override void OnChanged(string propertyName, object oldValue, object newValue) {
+            base.OnChanged(propertyName, oldValue, newValue);
         }
         protected override void OnSaving() {
             base.OnSaving();
             Total = Items.Sum(x => x.Amount);
+            updateItemsData();            
+            updateItemsCards();
         }
-        private void GetPeriod() {
-            Period = Session.FindObject<BasePeriod>(CriteriaOperator.Parse("StartDate <= ? And EndDate >= ?", InvoiceDate, InvoiceDate));
+        protected override string GetSequenceName() {
+            return string.Concat(ClassInfo.FullName, ".PurchaseInvoice");
         }
-    }
-    public class PurchaseInvoiceDetail : InventoryRecord {
-        PurchaseInvoice fInvoice;
-        [Association("PurchaseInvoice-PurchaseInvoiceDetail")]
-        public PurchaseInvoice Invoice {
-            get { return fInvoice; }
-            set { SetPropertyValue<PurchaseInvoice>(nameof(Invoice), ref fInvoice, value); }
-        }
-        [NonPersistent]
-        [Browsable(false)]
-        [RuleFromBoolProperty("PurchaseInvoiceDetail_Item_IsValid", DefaultContexts.Save, "Item must not be empty")]
-        public bool IsItemIsValid {
-            get {
-                return Item != null;
+
+        private void updateItemsData() {
+            if (Items.Count != 0) {
+                foreach (var item in Items) {
+                    if (item.Shop != Shop)
+                        item.Shop = Shop;
+                    if (item.ExpenseDate != TransactionDate)
+                        item.ExpenseDate = TransactionDate;
+                    if (item.Period != Period)
+                        item.Period = Period;
+                }
             }
         }
-        public PurchaseInvoiceDetail(Session session) : base(session) { }
-        protected override void OnChanged(string propertyName, object oldValue, object newValue) {
-            base.OnChanged(propertyName, oldValue, newValue);
-            if (!IsLoading && !IsDeleted) {
-                if (propertyName == nameof(Invoice) && oldValue != newValue) {
-                    Shop = Invoice != null ? Invoice.Shop : null;
-                    Period = Invoice != null ? Invoice.Period : null;
-                    ExpenseDate = Invoice.InvoiceDate;
+        private void updateItemsCards() {
+            foreach (var item in Items) {
+                item.Item.UpdateLasPurchasePrice(item);
+                if (Session.IsNewObject(item))
+                    item.Item.UpdateQuantityOnHand(Math.Round((item.Quantity * item.TransactionUnit.ConversionRate) / item.StockUnit.ConversionRate, 2));
+                else if (Session.IsObjectToSave(item)) {
+                    XPMemberInfo qunatityInfo = item.ClassInfo.GetMember(nameof(item.Quantity));
+                    var oldValue = PersistentBase.GetModificationsStore(item).GetPropertyOldValue(qunatityInfo);
+                    if (oldValue != null)
+                        item.Item.UpdateQuantityOnHand(item.Quantity - Convert.ToDouble(oldValue));
                 }
-                if (propertyName == nameof(Item) && oldValue != newValue) {
-                    if (Item != null) {
-                        TransactionUnit = Item.PurchaseUnit;
-                        Price = Item.PurchasePrice;
-                    }
-                    else {
-                        TransactionUnit = null;
-                        Price = 0;
-                    }
-                }
-                if (propertyName == nameof(Amount) && oldValue != newValue)
-                    Invoice.Total = Invoice != null ? Invoice.Items.Sum(x => x.Amount) : 0;
             }
-        }
-        protected override void OnSaving() {
-            base.OnSaving();
-            if (Invoice != null)
-                Invoice.Total = Invoice.Items.Sum(x => x.Amount);
         }
     }
 }

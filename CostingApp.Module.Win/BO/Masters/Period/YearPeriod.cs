@@ -29,7 +29,7 @@ namespace CostingApp.Module.Win.BO.Masters.Period {
         }
         public override void AfterConstruction() {
             base.AfterConstruction();
-            PeriodType = EnumPersiodType.Year;
+            PeriodType = EnumPersiodType.Year;            
         }
     }
 }

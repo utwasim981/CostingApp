@@ -13,18 +13,15 @@ using WXafLib.General.Security;
 
 namespace CostingApp.Module.Win.BO.Masters.Period {
     [XafDefaultProperty(nameof(PeriodName))]
-    [NavigationItem("Setup")]
-    public abstract class Period : WXafSequenceObject, ITreeNode {       
+    [NavigationItem("Administration")]
+    [ImageName("Calendar")]
+    public abstract class Period : WXafSequenceObject, ITreeNode {
         private string fPeriodName;
         [RuleRequiredField("Period_PeriodName_RuleRequiredField", DefaultContexts.Save)]
         [RuleUniqueValue("Period_PeriodName_RuleUniqueValue", DefaultContexts.Save)]
         public string PeriodName {
-            get {
-                return fPeriodName;
-            }
-            set {
-                SetPropertyValue<string>(nameof(PeriodName), ref fPeriodName, value);
-            }
+            get { return fPeriodName; }
+            set { SetPropertyValue<string>(nameof(PeriodName), ref fPeriodName, value); }
         }
         DateTime fStartDate;
         public DateTime StartDate {
@@ -35,6 +32,11 @@ namespace CostingApp.Module.Win.BO.Masters.Period {
         public DateTime EndDate {
             get { return dateTime; }
             set { SetPropertyValue<DateTime>(nameof(EndDate), ref dateTime, value); }
+        }
+        [Browsable(false)]
+        public EnumPersiodType PeriodType {
+            get { return fPeriodType; }
+            set { SetPropertyValue<EnumPersiodType>(nameof(PeriodType), ref fPeriodType, value); }
         }
         EnumStatus fStatus;
         public EnumStatus Status {
@@ -70,40 +72,47 @@ namespace CostingApp.Module.Win.BO.Masters.Period {
             set { SetPropertyValue<WXafUser>(nameof(ClosedBy), ref fClosedBy, value); }
         }
         EnumPersiodType fPeriodType;
-        [Browsable(false)]
-        public EnumPersiodType PeriodType {
-            get { return fPeriodType; }
-            set { SetPropertyValue<EnumPersiodType>(nameof(PeriodType), ref fPeriodType, value); }
-        }
-        WXafUser fUser;
-        [Browsable(false)]
-        public WXafUser User {
-            get { return fUser; }
-            set { SetPropertyValue<WXafUser>(nameof(User), ref fUser, value); }
-        }
         [NonPersistent]
         [Browsable(false)]
         [RuleFromBoolProperty("Period_StartDateGreaterThanEndDate_IsValid", DefaultContexts.Save, "The start date must be less than the end date", UsedProperties = "StartDate, EndDate")]
         public bool IsStartDateEndDateIsValid {
-            get {                
-                return StartDate < EndDate;
-            }
+            get { return StartDate < EndDate; }
         }
         [NonPersistent]
         [Browsable(false)]
         [RuleFromBoolProperty("Period_PeriodDateRange_IsValid", DefaultContexts.Save, "The date range is overlaping", UsedProperties = "StartDate, EndDate")]
         public bool IsDateRangeIsValid {
             get {
-                string criteria = $"({nameof(StartDate)} <= ?) And ({nameof(EndDate)} >= ?) And ({nameof(PeriodType)} = ?)";
-                var periods = ObjectSpace.GetObjects<Period>(CriteriaOperator.Parse(criteria, EndDate, StartDate, PeriodType));
-                return periods.Count == 0;
+                var co = CriteriaOperator.And(new BinaryOperator(nameof(StartDate), EndDate, BinaryOperatorType.LessOrEqual),
+                                              new BinaryOperator(nameof(EndDate), StartDate, BinaryOperatorType.GreaterOrEqual),
+                                              new BinaryOperator(nameof(PeriodType), PeriodType, BinaryOperatorType.Equal));
+
+                return ObjectSpace.GetObjects<Period>(co).Count == 0;
             }
         }
+
         public Period(Session session) : base(session) { }
+        public override void AfterConstruction() {
+            base.AfterConstruction();
+            Status = EnumStatus.None;
+        }
         protected override void OnSaving() {
             base.OnSaving();
             OpenDate = DateTime.Now;
             OpenedBy = ObjectSpace.GetObject<WXafUser>((WXafUser)SecuritySystem.CurrentUser);
+        }
+
+        public static BasePeriod GetOpenedPeriodForDate(IObjectSpace objectSpace, DateTime date) {
+            var co = CriteriaOperator.And(CriteriaOperator.And(new BinaryOperator(nameof(StartDate), date, BinaryOperatorType.LessOrEqual),
+                new BinaryOperator(nameof(EndDate), date, BinaryOperatorType.GreaterOrEqual)),
+                new BinaryOperator(nameof(Status), EnumStatus.Opened, BinaryOperatorType.Equal));
+            return objectSpace.FindObject<BasePeriod>(co);
+        }
+        public static BasePeriod GetClosedPeriodForDate(IObjectSpace objectSpace, DateTime date) {
+            var co = CriteriaOperator.And(CriteriaOperator.And(new BinaryOperator(nameof(StartDate), date, BinaryOperatorType.LessOrEqual),
+                new BinaryOperator(nameof(EndDate), date, BinaryOperatorType.GreaterOrEqual)),
+                new BinaryOperator(nameof(Status), EnumStatus.Closed, BinaryOperatorType.Equal));
+            return objectSpace.FindObject<BasePeriod>(co);
         }
 
 

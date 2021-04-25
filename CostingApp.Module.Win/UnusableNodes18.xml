@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="True" />
+    <Class Name="CostingApp.Module.Win.BO.Items.AssemblyItem" DefaultDetailView="AssemblyItem_DetailView_ItemCard" />
+  </BOModel>
+  <Views Id="Views">
+    <ListView Id="AssemblyItem_Components_ListView" AllowEdit="True" NewItemRowPosition="Bottom" Caption="Components" />
+    <ListView Id="AssemblyItem_LookupListView" EditorTypeName="DevExpress.ExpressApp.Win.Editors.GridListEditor">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="0" />
+        <ColumnInfo Id="ItemCode" PropertyName="ItemCode" Index="1" />
+        <ColumnInfo Id="ItemName" Index="2" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ItemComponent_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="XPObject" Index="0" RelativeSize="100" Caption="Oid">
+              <LayoutGroup Id="Autoa5358b74-492b-4b44-91a3-be2cc5ac3b55" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="3.9603960396039604">
+                <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="49.94535519125683" />
+                <LayoutItem Id="Item3" Index="1" RelativeSize="50.05464480874317" />
+              </LayoutGroup>
+              <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="14.108910891089108" Direction="Horizontal" Caption=" ">
+                <LayoutGroup Id="Auto1e713d61-0753-4510-af08-ec56f31bca98" ShowCaption="False" Caption="" Index="0" RelativeSize="49.943883277216614">
+                  <LayoutItem Id="Component" ViewItem="Component" Index="0" RelativeSize="36.363636363636367" />
+                  <LayoutItem Id="Unit" ViewItem="Unit" Index="1" RelativeSize="27.272727272727273" />
+                  <LayoutItem Id="Quantity" ViewItem="Quantity" Index="2" RelativeSize="36.363636363636367" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto93dbebe0-0fcb-47a6-bb88-55562a80d2a1" ShowCaption="False" Caption="" Index="1" RelativeSize="50.056116722783386">
+                  <LayoutItem Id="Item4" Index="0" RelativeSize="36.363636363636367" />
+                  <LayoutItem Id="Item5" Index="1" RelativeSize="27.272727272727273" />
+                  <LayoutItem Id="Item6" Index="2" RelativeSize="36.363636363636367" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutItem Id="Item1" Index="2" RelativeSize="81.930693069306926" />
+              <LayoutItem Id="Oid" RelativeSize="3.9603960396039604" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ItemComponent" RelativeSize="4.3316831683168315" Caption="ItemComponent" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Quantity" RelativeSize="100" Index="0" Removed="True" />
+              <LayoutItem Id="Unit" RelativeSize="54.237288135593218" Index="0" Removed="True" />
+              <LayoutItem Id="Component" RelativeSize="38.554216867469883" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="AssemblyItem_DetailView_ItemCard" ClassName="CostingApp.Module.Win.BO.Items.AssemblyItem">
+      <Items Id="Items">
+        <PropertyEditor Id="BaseUnit" PropertyName="BaseUnit" />
+        <PropertyEditor Id="Category" PropertyName="Category" />
+        <PropertyEditor Id="Components" PropertyName="Components" View="AssemblyItem_Components_ListView" />
+        <PropertyEditor Id="ExpenseType" PropertyName="ExpenseType" />
+        <PropertyEditor Id="IsActive" PropertyName="IsActive" />
+        <PropertyEditor Id="ItemCode" PropertyName="ItemCode" />
+        <PropertyEditor Id="ItemName" PropertyName="ItemName" />
+        <PropertyEditor Id="ItemType" PropertyName="ItemType" />
+        <PropertyEditor Id="LastPurchaseDate" PropertyName="LastPurchaseDate" />
+        <PropertyEditor Id="LastPurchasePrice" PropertyName="LastPurchasePrice" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" />
+        <PropertyEditor Id="PurchasePrice" PropertyName="PurchasePrice" />
+        <PropertyEditor Id="PurchaseUnit" PropertyName="PurchaseUnit" />
+        <PropertyEditor Id="QuantityOnHand" PropertyName="QuantityOnHand" />
+        <PropertyEditor Id="SalesUnit" PropertyName="SalesUnit" />
+        <PropertyEditor Id="SellPrice" PropertyName="SellPrice" />
+        <PropertyEditor Id="StockUnit" PropertyName="StockUnit" />
+        <PropertyEditor Id="UnitType" PropertyName="UnitType" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="100">
+            <LayoutGroup Id="Autoa63651b6-2c07-4d88-96b7-5e81595f846b" ShowCaption="False" Caption="Autoa63651b6-2c07-4d88-96b7-5e81595f846b(3)" Direction="Horizontal" Index="0" RelativeSize="4.6454767726161368">
+              <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="35.045317220543808" />
+              <LayoutItem Id="Item2" Index="1" RelativeSize="64.954682779456192" />
+            </LayoutGroup>
+            <LayoutGroup Id="ItemCard" Index="1" Direction="Horizontal" ShowCaption="True" Caption="Item Info." RelativeSize="13.93643031784841">
+              <LayoutGroup Id="ItemCard_col1" Index="0" ShowCaption="False" RelativeSize="49.742002063983492">
+                <LayoutItem Id="ItemCode" ViewItem="ItemCode" ShowCaption="" Index="0" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="ItemName" ViewItem="ItemName" ShowCaption="" Index="1" RelativeSize="27.272727272727273" />
+                <LayoutItem Id="Category" ViewItem="Category" ShowCaption="" Index="2" RelativeSize="36.363636363636367" />
+              </LayoutGroup>
+              <LayoutGroup Id="ItemCard_col2" Index="1" ShowCaption="False" RelativeSize="50.257997936016508" TextAlignMode="AlignWithChildren">
+                <LayoutItem Id="IsActive" ViewItem="IsActive" ShowCaption="" Index="0" RelativeSize="32.954545454545453" />
+                <LayoutItem Id="Item14" Index="1" RelativeSize="30.681818181818183" />
+                <LayoutItem Id="Item13" Index="2" RelativeSize="36.363636363636367" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Index="2" ShowCaption="False" RelativeSize="81.418092909535446" Caption="Oid" TextAlignMode="AlignWithChildren">
+              <LayoutGroup Id="Item4" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="18.018018018018019" Direction="Horizontal" Caption="Units">
+                <LayoutGroup Id="Autod89689cb-4d8f-42ae-9e9b-d337a53e8bfe" ShowCaption="False" Caption="Autod89689cb-4d8f-42ae-9e9b-d337a53e8bfe(20)" Index="0" RelativeSize="49.742002063983492">
+                  <LayoutItem Id="UnitType" ViewItem="UnitType" Index="0" RelativeSize="36.363636363636367" />
+                  <LayoutItem Id="StockUnit" ViewItem="StockUnit" Index="1" RelativeSize="27.272727272727273" />
+                  <LayoutItem Id="PurchaseUnit" ViewItem="PurchaseUnit" Index="2" RelativeSize="36.363636363636367" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto49f0cf2d-8bbd-4f79-ac41-d35c7734e997" ShowCaption="False" Caption="Auto49f0cf2d-8bbd-4f79-ac41-d35c7734e997(24)" Index="1" RelativeSize="50.257997936016508">
+                  <LayoutItem Id="SalesUnit" ViewItem="SalesUnit" Index="0" RelativeSize="36.363636363636367" />
+                  <LayoutItem Id="BaseUnit" ViewItem="BaseUnit" Index="1" RelativeSize="27.272727272727273" />
+                  <LayoutItem Id="Item3" Index="2" RelativeSize="36.363636363636367" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item7" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="17.117117117117118" Direction="Horizontal" Caption="Costing &amp; Pricing">
+                <LayoutGroup Id="Auto0090e761-5e35-42de-a59d-f11a73d2586b" ShowCaption="False" Caption="Auto0090e761-5e35-42de-a59d-f11a73d2586b(26)" Index="0" RelativeSize="49.742002063983492">
+                  <LayoutItem Id="ExpenseType" ViewItem="ExpenseType" Index="0" RelativeSize="36.363636363636367" />
+                  <LayoutItem Id="PurchasePrice" ViewItem="PurchasePrice" Index="1" RelativeSize="27.272727272727273" />
+                  <LayoutItem Id="SellPrice" ViewItem="SellPrice" Index="2" RelativeSize="36.363636363636367" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto4228a131-ecb9-4e6f-862b-b98d431c2405" ShowCaption="False" Caption="Auto4228a131-ecb9-4e6f-862b-b98d431c2405(30)" Index="1" RelativeSize="50.257997936016508">
+                  <LayoutItem Id="Item8" Index="0" RelativeSize="36.363636363636367" />
+                  <LayoutItem Id="Item9" Index="1" RelativeSize="29.545454545454547" />
+                  <LayoutItem Id="Item5" Index="2" RelativeSize="34.090909090909093" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item11" ShowCaption="True" CaptionLocation="Top" Index="2" RelativeSize="13.513513513513514" Caption="Inventory Info." Direction="Horizontal">
+                <LayoutGroup Id="Autocfceb0e5-31d4-4c78-80df-c7ff7aa318d6" ShowCaption="False" Caption="Autocfceb0e5-31d4-4c78-80df-c7ff7aa318d6(35)" Index="0" RelativeSize="49.742002063983492">
+                  <LayoutItem Id="LastPurchaseDate" ViewItem="LastPurchaseDate" Index="0" RelativeSize="50" />
+                  <LayoutItem Id="LastPurchasePrice" ViewItem="LastPurchasePrice" Index="1" RelativeSize="50" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto0f36fc13-bf90-4421-9333-9d07d746c682" ShowCaption="False" Caption="Auto0f36fc13-bf90-4421-9333-9d07d746c682(38)" Index="1" RelativeSize="50.257997936016508">
+                  <LayoutItem Id="QuantityOnHand" ViewItem="QuantityOnHand" Index="0" RelativeSize="50" />
+                  <LayoutItem Id="Item12" Index="1" RelativeSize="50" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutItem Id="Components" ViewItem="Components" Index="3" RelativeSize="46.546546546546544" ShowCaption="True" CaptionLocation="Top" />
+              <LayoutItem Id="UserPanel" ViewItem="UserPanel" Index="4" RelativeSize="4.8048048048048049" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="City_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="City">
+              <LayoutItem Id="City_DetailViewUserPanel" ViewItem="City_DetailViewUserPanel" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemCard_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="XPObject">
+              <LayoutGroup Id="Item4">
+                <LayoutGroup Id="Autod89689cb-4d8f-42ae-9e9b-d337a53e8bfe">
+                  <LayoutItem Id="UnitType" ViewItem="UnitType" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="PurchaseInvoice_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="PurchaseInvoice">
+              <LayoutGroup Id="PurchaseInvoice_col1" RelativeSize="49.945474372955289">
+                <LayoutItem Id="InvoiceNumber" Index="0" RelativeSize="28.571428571428573" />
+                <LayoutItem Id="Period" Index="1" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="InvoiceDate" RelativeSize="21.428571428571427" Index="2" />
+                <LayoutItem Id="Shop" Index="3" RelativeSize="28.571428571428573" />
+              </LayoutGroup>
+              <LayoutGroup Id="PurchaseInvoice_col2" RelativeSize="50.054525627044711">
+                <LayoutItem Id="BillNumber" RelativeSize="28.571428571428573" />
+                <LayoutItem Id="Notes" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="Total" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="Status" RelativeSize="28.571428571428573" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseInvoice_Items_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityIn" Index="4" Caption="Quantity" AllowGroup="False" AllowSort="False" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseInvoiceDetail_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="QuantityIn" Caption="Quantity" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Item2">
+          <LayoutGroup Id="Auto4d127f14-a6e0-4cd2-bdf0-2f7575770496">
+            <LayoutItem Id="QuantityIn" ViewItem="QuantityIn" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesReportItem_Components_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityIn" AllowGroup="False" AllowSort="False" AllowEdit="False" Index="-1" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

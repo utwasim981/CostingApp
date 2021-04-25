@@ -22,7 +22,8 @@ using WXafLib.General.Security;
 
 namespace CostingApp.Module.Win.BO.Masters {
     [XafDefaultProperty(nameof(CityName))]
-    [NavigationItem("Setup")]
+    [ImageName("city")]
+    [NavigationItem("Administration")]
     public class City : WXafSequenceObject {
         string fCityCode;
         [Appearance("City_CityCode.Enable", Enabled = false, Criteria = "GetBoolean('CityCodeA') = True")]
@@ -40,9 +41,6 @@ namespace CostingApp.Module.Win.BO.Masters {
             get { return fCityName; }
             set { SetPropertyValue<string>(nameof(CityName), ref fCityName, value); }
         }
-        private bool fIsActive;
-        [ImmediatePostData(true)]
-        [XafDisplayName(@"Active")]
         [VisibleInDetailView(false)]
         [Association(@"Shop-City"), DevExpress.Xpo.Aggregated]
         public XPCollection<Shop> Shops { get { return GetCollection<Shop>(nameof(Shops)); } }
@@ -54,10 +52,15 @@ namespace CostingApp.Module.Win.BO.Masters {
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
             if (!IsLoading) {
-                if (propertyName == nameof(SequentialNumber) && oldValue != newValue &&
-                    (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["CityCodeA"])
-                    CityCode = SequentialNumber.ToString().PadLeft(4, '0');
+                if (propertyName == nameof(SequentialNumber))
+                    onSequentialNumberValueChange(oldValue, newValue);
             }
+        }
+
+        private void onSequentialNumberValueChange(object oldValue, object newValue) {
+            if (oldValue != newValue &&
+                (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["CityCodeA"])
+                CityCode = SequentialNumber.ToString().PadLeft(4, '0');
         }
     }
 }

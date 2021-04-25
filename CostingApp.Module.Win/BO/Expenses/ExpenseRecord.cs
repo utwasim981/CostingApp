@@ -18,7 +18,7 @@ using WXafLib.General.Model;
 using WXafLib.General.Security;
 
 namespace CostingApp.Module.Win.BO.Expenses {
-    [NavigationItem("Setup")]
+    [NavigationItem("Testing")]
     public abstract class ExpenseRecord : WXafSequenceObject {
         Shop fShop;
         [DataSourceCriteria("IsActive = True")]
@@ -32,13 +32,12 @@ namespace CostingApp.Module.Win.BO.Expenses {
         [ModelDefault("AllowEdit", "False")]
         public BasePeriod Period {
             get { return fPeriod; }
-            set {
-                SetPropertyValue<BasePeriod>(nameof(Period), ref fPeriod, value);
-            }
+            set { SetPropertyValue<BasePeriod>(nameof(Period), ref fPeriod, value); }
         }
         ExpenseType fExpenseType;
         [DataSourceCriteria("IsActive = True")]
         [RuleRequiredField("ExpenseRecord_ExpenseType_RuleRequiredField", DefaultContexts.Save)]
+        [Appearance("ExpenseRecord_ExpenseType.Enable", Enabled = false, Criteria = "Not IsNull(Item)")]
         public ExpenseType ExpenseType {
             get { return fExpenseType; }
             set { SetPropertyValue<ExpenseType>(nameof(ExpenseType), ref fExpenseType, value); }
@@ -47,11 +46,7 @@ namespace CostingApp.Module.Win.BO.Expenses {
         [RuleRequiredField("ExpenseRecord_ExpenseDate_RuleRequiredField", DefaultContexts.Save)]
         public DateTime ExpenseDate {
             get { return fExpenseDate; }
-            set {
-                SetPropertyValue<DateTime>(nameof(ExpenseDate), ref fExpenseDate, value);
-                if (!IsLoading)
-                    GetPeriod();
-            }
+            set { SetPropertyValue<DateTime>(nameof(ExpenseDate), ref fExpenseDate, value); }
         }
         double fAmount;
         [RuleValueComparison("ExpenseRecord_Amount.GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
@@ -81,6 +76,7 @@ namespace CostingApp.Module.Win.BO.Expenses {
             set { SetPropertyValue<Employee>(nameof(Employee), ref fEmployee, value); }
         }
         ItemCard fItem;
+        [DataSourceCriteria("IsActive = True")]
         public ItemCard Item {
             get { return fItem; }
             set {
@@ -90,21 +86,17 @@ namespace CostingApp.Module.Win.BO.Expenses {
             }
         }
 
-        [NonPersistent]
-        [Browsable(false)]
-        [RuleFromBoolProperty("ExpenseRecord_Period_IsValid", DefaultContexts.Save, "There is no period oppened for this date")]
-        public bool IsPeriodIsValid {
-            get {
-                return Period != null && Period.Status == EnumStatus.Opened;
-            }
-        }               
+        //[NonPersistent]
+        //[Browsable(false)]
+        //[RuleFromBoolProperty("ExpenseRecord_Period_IsValid", DefaultContexts.Save, "There is no period oppened for this date")]
+        //public bool IsPeriodIsValid {
+        //    get { return Period != null && Period.Status == EnumStatus.Opened; }
+        //}               
         public ExpenseRecord(Session session) : base(session) { }
         public override void AfterConstruction() {
             base.AfterConstruction();
             ExpenseDate = DateTime.Now;
-        }
-        private void GetPeriod() {
-            Period = Session.FindObject<BasePeriod>(CriteriaOperator.Parse("StartDate <= ? And EndDate >= ?", ExpenseDate, ExpenseDate));
+            Status = EnumStatus.Opened;
         }
     }
 }

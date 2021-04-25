@@ -10,6 +10,7 @@ using DevExpress.ExpressApp.Security.ClientServer;
 using WXafLib.General.Model;
 using WXafLib;
 using System.Linq;
+using DevExpress.Xpo;
 
 namespace CostingApp.Win {
     // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/DevExpressExpressAppWinWinApplicationMembersTopicAll.aspx
@@ -32,9 +33,11 @@ namespace CostingApp.Win {
         protected override void CreateDefaultObjectSpaceProvider(CreateCustomObjectSpaceProviderEventArgs args) {
             //args.ObjectSpaceProviders.Add(new SecuredObjectSpaceProvider((SecurityStrategyComplex)Security, XPObjectSpaceProvider.GetDataStoreProvider(args.ConnectionString, args.Connection, true), false));
             //args.ObjectSpaceProviders.Add(new NonPersistentObjectSpaceProvider(TypesInfo, null));
+            XpoDefault.TrackPropertiesModifications = true;
             IXpoDataStoreProvider dataStoreProvider = XPObjectSpaceProvider.GetDataStoreProvider(args.ConnectionString, args.Connection, true);
             args.ObjectSpaceProvider = new XPObjectSpaceProvider(dataStoreProvider, true);// TestListViewController requires a thread-safe DAL
             args.ObjectSpaceProviders.Add(new NonPersistentObjectSpaceProvider(TypesInfo, null));
+
             SequenceGenerator.Initialize(dataStoreProvider);
         }
         private void CostingAppWindowsFormsApplication_CustomizeLanguagesList(object sender, CustomizeLanguagesListEventArgs e) {

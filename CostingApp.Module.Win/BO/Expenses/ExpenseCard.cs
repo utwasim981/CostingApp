@@ -19,11 +19,14 @@ using DevExpress.Data.Filtering;
 
 
 namespace CostingApp.Module.Win.BO.Expenses {
-    [NavigationItem("Setup")]
+    [NavigationItem("Transactions")]
+    [ImageName("money")]
     public class ExpenseCard : ExpenseRecord {
+        const string NumberFormat = "Concat('EX-', PadLeft(ToStr(SequentialNumber), 6, '0'))";
+        [PersistentAlias(NumberFormat)]
         public string Number {
             get {
-                return string.Format("EX-{0}", SequentialNumber.ToString().PadLeft(6, '0'));
+                return Convert.ToString(EvaluateAlias(nameof(Number)));
             }
         }
         protected override string GetSequenceName() {

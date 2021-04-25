@@ -16,7 +16,8 @@ using WXafLib.General.Model;
 using WXafLib.General.Security;
 
 namespace CostingApp.Module.Win.BO.Items {
-    [NavigationItem("Inventory")]
+    [NavigationItem("Inventory Setup")]
+    [ImageName("BO_Product")]
     public abstract class ItemCard : WXafSequenceObject, ICategorizedItem {
         EnumItemCard fItemType;
         [VisibleInDetailView(false)]
@@ -49,12 +50,13 @@ namespace CostingApp.Module.Win.BO.Items {
         UnitType fUnitType;
         [DataSourceCriteria("IsActive = True")]
         [Association("ItemCard-UnitType")]
+        [RuleRequiredField("ItemCard_UnitType_RuleRequiredField", DefaultContexts.Save)]
         public UnitType UnitType {
             get { return fUnitType; }
             set {
                 SetPropertyValue<UnitType>(nameof(UnitType), ref fUnitType, value);
                 if (!IsLoading)
-                    BaseUnit = UnitType.Units.FirstOrDefault(x => x.BaseUnit);
+                    onUnitTypeChanged();
             }
         }
         Unit fBaseUnit;
@@ -79,7 +81,7 @@ namespace CostingApp.Module.Win.BO.Items {
         }
         Unit fStockUnit;
         [DataSourceProperty("UnitType.Units")]
-        [Appearance("ItemCard_StockUnit_Enabled", Enabled = false, Criteria = "ItemType <> 0")]
+        [Appearance("ItemCard_StockUnit_Enabled", Enabled = false, Criteria = "ItemType = 2")]
         public Unit StockUnit {
             get { return fStockUnit; }
             set { SetPropertyValue<Unit>(nameof(StockUnit), ref fStockUnit, value); }
@@ -114,9 +116,13 @@ namespace CostingApp.Module.Win.BO.Items {
             get { return fLastPurchasePrice; }
             set { SetPropertyValue<double>(nameof(LastPurchasePrice), ref fLastPurchasePrice, value); }
         }
-        private bool fIsActive;
-        [ImmediatePostData(true)]
-        [XafDisplayName(@"Active")]
+        double fQuantityOnHand;
+        [ModelDefault("AllowEdit", "False")]
+        public double QuantityOnHand {
+            get { return fQuantityOnHand; }
+            set { SetPropertyValue<double>(nameof(QuantityOnHand), ref fQuantityOnHand, value); }
+        }
+
         ITreeNode ICategorizedItem.Category {
             get {
                 return Category;
@@ -130,11 +136,30 @@ namespace CostingApp.Module.Win.BO.Items {
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
             if (!IsLoading) {
-                if (propertyName == nameof(SequentialNumber) &&
-                    (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["ItemCodeA"] &&
-                    oldValue != newValue)
-                    ItemCode = $"ITM-{SequentialNumber.ToString().PadLeft(5, '0')}";
+                if (propertyName == nameof(SequentialNumber))
+                    onSequentialNumberValueChange(oldValue, newValue);
             }
+        }
+
+        private void onSequentialNumberValueChange(object oldValue, object newValue) {
+            if (oldValue != newValue &&
+                (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["CityCodeA"])
+                ItemCode = $"ITM-{SequentialNumber.ToString().PadLeft(5, '0')}";
+        }
+        private void onUnitTypeChanged() {
+            BaseUnit = UnitType.Units.FirstOrDefault(x => x.BaseUnit);
+        }
+        public void UpdateLasPurchasePrice(InventoryRecord record) {
+            if (record.ExpenseDate > LastPurchaseDate) {
+                LastPurchaseDate = record.ExpenseDate;
+                if (PurchaseUnit == null)
+                    LastPurchasePrice = Math.Round(record.Price / record.TransactionUnit.ConversionRate, 2);
+                else
+                    LastPurchasePrice = Math.Round((record.Price / record.TransactionUnit.ConversionRate) * PurchaseUnit.ConversionRate, 2);
+            }
+        }
+        public void UpdateQuantityOnHand(double quantity) {
+            QuantityOnHand += quantity;
         }
     }
 }

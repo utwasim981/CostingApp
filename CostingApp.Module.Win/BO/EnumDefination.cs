@@ -17,11 +17,13 @@ namespace CostingApp.Module.Win.BO {
     }
     public enum EnumStatus {
         [XafDisplayName("")]
-        [ImageName("BO_Person")]
-        Opened,
+        None = 0,
         [XafDisplayName("")]
-        [ImageName("BO_Employee")]
-        Closed
+        [ImageName("State_Validation_Valid")]
+        Opened = 1,
+        [XafDisplayName("")]
+        [ImageName("Lock")]
+        Closed = 2
     }
     public enum EnumPersiodType {
         Base = 0,
@@ -47,11 +49,15 @@ namespace CostingApp.Module.Win.BO {
     public enum EnumItemCard {
         InventoryItem = 0,
         NonInventoryItem = 1,
-        AssemblyItem = 2
+        MenuItem = 2
     }
     public enum EmumCalculationType {
         Value = 0,
         Percentage = 1
+    }
+    public enum EnumInventoryTransactionType {
+        In = 0,
+        Out = 1
     }
 
 }

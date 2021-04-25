@@ -12,7 +12,7 @@ namespace WXafLib.General.CriteriaOperators {
             IsStringValueFunctionOperator.Register();
             IsNumberValueFunctionOperator.Register();
             IsDateValueFunctionOperator.Register();
-            ISEnumValueFunctionOperator.Register();
+            //ISEnumValueFunctionOperator.Register();
         }
     }
 }
