@@ -103,18 +103,20 @@ namespace CostTech.Module.Win.BO.Employees {
             get { return fCalculatedTotal; }
             set { SetPropertyValue(nameof(CalculatedTotal), ref fCalculatedTotal, value); }
         }
-        double fAmount;
-        [RuleValueComparison("Employee_Amount.GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
-        public double Amount {
-            get { return fAmount; }
-            set { SetPropertyValue<double>(nameof(Amount), ref fAmount, value); }
-        }
         [NonPersistent]
         [Browsable(false)]
         [RuleFromBoolProperty("EmployeeAttendance_Employee_IsValid", DefaultContexts.Save, "Employee must not be empty")]
         public bool IsEmployeeIsValid {
             get {
                 return Employee != null;
+            }
+        }
+        [NonPersistent]
+        [Browsable(false)]
+        [RuleFromBoolProperty("EmployeeAttendance_Amount_IsValid", DefaultContexts.Save, "Amount should be greater than 0")]
+        public bool IsAmountValid {
+            get {
+                return Amount != 0;
             }
         }
 
@@ -136,6 +138,8 @@ namespace CostTech.Module.Win.BO.Employees {
                     CardHourPrice = Employee != null && Employee.ContractType.SalaryType == EnumSalaryType.Hourly ? Employee.SalaryPerHour : 0;
                     HourPrice = Employee != null && Employee.ContractType.SalaryType == EnumSalaryType.Hourly ? Employee.SalaryPerHour : 0;
                 }
+                if (propertyName == nameof(ExpenseDate) && oldValue != newValue)
+                    Period = BasePeriod.GetOpenedPeriodForDate(ObjectSpace, ExpenseDate);
             }
         }
         protected override string GetSequenceName() {

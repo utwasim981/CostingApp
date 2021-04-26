@@ -29,14 +29,24 @@ namespace CostingApp.Module.Win.BO.Expenses {
                 return Convert.ToString(EvaluateAlias(nameof(Number)));
             }
         }
-        double fAmount;
-        [RuleValueComparison("ExpenseRecord_Amount.GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
-        public double Amount {
-            get { return fAmount; }
-            set { SetPropertyValue<double>(nameof(Amount), ref fAmount, value); }
+
+        [NonPersistent]
+        [Browsable(false)]
+        [RuleFromBoolProperty("ExpenseCard_Amount_IsValid", DefaultContexts.Save, "Amount should be greater than 0")]
+        public bool IsAmountValid {
+            get {
+                return Amount != 0;
+            }
         }
         protected override string GetSequenceName() {
             return string.Concat(ClassInfo.FullName, ".ExpenseCard");
+        }
+        protected override void OnChanged(string propertyName, object oldValue, object newValue) {
+            base.OnChanged(propertyName, oldValue, newValue);
+            if (!IsLoading) {
+                if (propertyName == nameof(ExpenseDate) && oldValue != newValue)
+                    Period = BasePeriod.GetOpenedPeriodForDate(ObjectSpace, ExpenseDate);
+            }
         }
         public ExpenseCard(Session session) : base(session) { }
     }

@@ -68,10 +68,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>73C8C96E17CC8774297E63DE834C4F18D916D6B6</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>0537BE7F220D81FA82174A2C89AE42D25EF3A1AA</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>CostingApp.Win_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>CostingApp.Win_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -219,6 +219,7 @@
       <DependentUpon>WinApplication.cs</DependentUpon>
     </Compile>
     <Content Include="TechpoolLogo.ico" />
+    <None Include="CostingApp.Win_1_TemporaryKey.pfx" />
     <None Include="CostingApp.Win_TemporaryKey.pfx" />
     <None Include="UnusableNodes2.xml">
       <DependentUpon>Model.xafml</DependentUpon>
@@ -278,10 +279,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
+      <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
