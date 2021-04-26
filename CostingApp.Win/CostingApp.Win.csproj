@@ -35,7 +35,7 @@
     <SuiteName>TechPool</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>download.htm</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -68,10 +68,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>0537BE7F220D81FA82174A2C89AE42D25EF3A1AA</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>ABE1D77BF8CC62C45EA9CE33DADB3CA6B5AEC8FE</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>CostingApp.Win_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>CostingApp.Win_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -220,6 +220,7 @@
     </Compile>
     <Content Include="TechpoolLogo.ico" />
     <None Include="CostingApp.Win_1_TemporaryKey.pfx" />
+    <None Include="CostingApp.Win_2_TemporaryKey.pfx" />
     <None Include="CostingApp.Win_TemporaryKey.pfx" />
     <None Include="UnusableNodes2.xml">
       <DependentUpon>Model.xafml</DependentUpon>
