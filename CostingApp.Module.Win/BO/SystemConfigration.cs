@@ -1,4 +1,5 @@
 ﻿using CostingApp.Module.Win.BO.Expenses;
+using CostingApp.Module.Win.BO.Items;
 using CostingApp.Module.Win.BO.Masters;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.ConditionalAppearance;
@@ -86,7 +87,7 @@ namespace CostingApp.Module.Win.BO {
             set { SetPropertyValue<ExpenseType>(nameof(VatExpense), ref fVatExpense, value); }
         }
 
-        protected Type FixedTargetObjectType { get { return typeof(City); } }
+        protected Type FixedTargetObjectType { get { return typeof(ItemCard); } }
         private string _ExpressionForFixedType;
         [DevExpress.ExpressApp.Core.ElementTypeProperty("FixedTargetObjectType")]
         [Appearance("CannotEditForEmptyType2", Enabled = false, Criteria = "FixedTargetObjectType is null")]
@@ -96,6 +97,8 @@ namespace CostingApp.Module.Win.BO {
             get { return _ExpressionForFixedType; }
             set { SetPropertyValue("ExpressionForFixedType", ref _ExpressionForFixedType, value); }
         }
+
+
 
         public SystemConfigration(Session session) : base(session) { }
 

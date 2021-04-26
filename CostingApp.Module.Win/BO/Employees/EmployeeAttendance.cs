@@ -103,6 +103,12 @@ namespace CostTech.Module.Win.BO.Employees {
             get { return fCalculatedTotal; }
             set { SetPropertyValue(nameof(CalculatedTotal), ref fCalculatedTotal, value); }
         }
+        double fAmount;
+        [RuleValueComparison("Employee_Amount.GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
+        public double Amount {
+            get { return fAmount; }
+            set { SetPropertyValue<double>(nameof(Amount), ref fAmount, value); }
+        }
         [NonPersistent]
         [Browsable(false)]
         [RuleFromBoolProperty("EmployeeAttendance_Employee_IsValid", DefaultContexts.Save, "Employee must not be empty")]

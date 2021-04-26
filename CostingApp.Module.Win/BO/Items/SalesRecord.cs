@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WXafLib;
 
 namespace CostingApp.Module.Win.BO.Items {
     [NavigationItem("Transactions")]
@@ -35,20 +36,23 @@ namespace CostingApp.Module.Win.BO.Items {
         }
         [NonPersistent]
         [Browsable(false)]
-        [RuleFromBoolProperty("SalesRecord_RecordDateRange_IsValid", DefaultContexts.Save, "The date range is overlaping", UsedProperties = "FromDate, ToDate")]
+        [RuleFromBoolProperty("SalesRecord_RecordDateRange_IsValid", DefaultContexts.Save, "from date should be less than or eqaul end date", UsedProperties = "FromDate, ToDate")]
         public bool IsDateRangeIsValid {
+            get { return FromDate <= ToDate; }
+        }
+        [NonPersistent]
+        [Browsable(false)]
+        [RuleFromBoolProperty("SalesRecord_RecordDateRange_IsExist", DefaultContexts.Save, "The date range is overlaping", UsedProperties = "FromDate, ToDate")]
+        public bool IsDateRangeIsExist {
             get {
                 var co = CriteriaOperator.And(new BinaryOperator(nameof(FromDate), ToDate, BinaryOperatorType.LessOrEqual),
                                               new BinaryOperator(nameof(ToDate), FromDate, BinaryOperatorType.GreaterOrEqual));
                 if (Session.IsNewObject(this))
                     return ObjectSpace.GetObjects<SalesRecord>(co).Count == 0;
                 else {
-                    bool check = false;
-                    XPMemberInfo fromDateInfo = ClassInfo.GetMember(nameof(FromDate));
-                    check = PersistentBase.GetModificationsStore(this).GetPropertyOldValue(fromDateInfo) != null;
-                    XPMemberInfo toDateInfo = ClassInfo.GetMember(nameof(ToDate));
-                    check = PersistentBase.GetModificationsStore(this).GetPropertyOldValue(toDateInfo) != null;
-                    if (!check)
+                    object oldValue = null;
+                    if (!(WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(FromDate), out oldValue) &&
+                        WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(ToDate), out oldValue)))
                         return true;
                     else
                         return ObjectSpace.GetObjects<SalesRecord>(co).Count == 0;
@@ -57,6 +61,7 @@ namespace CostingApp.Module.Win.BO.Items {
         }
 
         [Association("SalesRecord-SalesReportItem"), Aggregated]
+        [RuleRequiredField("SalesRecord_Items_RuleRequiredField", DefaultContexts.Save)]
         public XPCollection<SalesReportItem> Items { get { return GetCollection<SalesReportItem>(nameof(Items)); } }
 
         public SalesRecord(Session session) : base(session) { }
@@ -64,10 +69,25 @@ namespace CostingApp.Module.Win.BO.Items {
             base.AfterConstruction();
             TransactionType = EnumInventoryTransactionType.Out;
         }
+        protected override void OnChanged(string propertyName, object oldValue, object newValue) {
+            base.OnChanged(propertyName, oldValue, newValue);
+            if (!IsLoading) {
+                if (propertyName == nameof(TransactionDate) && oldValue != newValue)
+                    Period = BasePeriod.GetOpenedPeriodForDate(ObjectSpace, TransactionDate);
+            }
+        }
+        protected override void OnSaving() {
+            base.OnSaving();
+            onSaving();
+        }
         protected override string GetSequenceName() {
             return string.Concat(ClassInfo.FullName, ".SalesRecord");
         }
 
+        private void onSaving() {
+            updateItemData();
+            updateItemsCards();
+        }
         private void updateItemData() {
             foreach (var item in Items)
                 foreach(var component in item.Components) {
@@ -80,19 +100,9 @@ namespace CostingApp.Module.Win.BO.Items {
                 }
         }
         private void updateItemsCards() {
-            foreach (var item in Items) {                
-                if (Session.IsNewObject(item))
-                    foreach (var component in item.Components)
-                        component.Item.UpdateQuantityOnHand(Math.Round((component.Quantity * component.TransactionUnit.ConversionRate) / component.StockUnit.ConversionRate, 2) * -1);
-                else if (Session.IsObjectToSave(item)) {
-                    foreach (var component in item.Components) {
-                        XPMemberInfo qunatityInfo = component.ClassInfo.GetMember(nameof(component.Quantity));
-                        var oldValue = PersistentBase.GetModificationsStore(component).GetPropertyOldValue(qunatityInfo);
-                        if (oldValue != null)
-                            component.Item.UpdateQuantityOnHand((component.Quantity - Convert.ToDouble(oldValue)) * -1);
-                    }
-                }
-            }
+            if (Session.IsNewObject(this))
+                foreach (var item in Items)
+                    item.CreateItemComponent();
         }
     }
 }

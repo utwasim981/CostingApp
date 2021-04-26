@@ -166,6 +166,9 @@
     <Compile Include="BO\Expenses\ExpenseRecord.cs" />
     <Compile Include="BO\Expenses\ZReport.cs" />
     <Compile Include="BO\Expenses\ZReportComponent.cs" />
+    <Compile Include="BO\Items\InventoryAdjustment.cs" />
+    <Compile Include="BO\Items\InventoryAdjustmentItem.cs" />
+    <Compile Include="BO\Items\ItemQuantity.cs" />
     <Compile Include="BO\Items\MenuItemComponent.cs" />
     <Compile Include="BO\Items\MenuItem.cs" />
     <Compile Include="BO\Items\InventoryItem.cs" />
@@ -193,6 +196,12 @@
     <Compile Include="BO\Masters\Shop.cs" />
     <Compile Include="BO\Masters\Period\YearPeriod.cs" />
     <Compile Include="BO\SystemConfigration.cs" />
+    <Compile Include="Controllers\InventoryAdjustmentController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\InventoryAdjustmentController.Designer.cs">
+      <DependentUpon>InventoryAdjustmentController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\PeriodController.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -210,6 +219,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controllers\InventoryAdjustmentController.resx">
+      <DependentUpon>InventoryAdjustmentController.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controllers\PeriodController.resx">
       <DependentUpon>PeriodController.cs</DependentUpon>
     </EmbeddedResource>
@@ -432,6 +444,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="UnusableNodes20.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes21.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes22.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes23.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes24.xml">
       <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
       <SubType>Designer</SubType>
     </None>

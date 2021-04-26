@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="True" />
+  </BOModel>
+  <Views Id="Views">
+    <DetailView Id="NoneInventoryItem_DetailView_ItemCard">
+      <Items Id="Items">
+        <PropertyEditor Id="QuantityOnHand" PropertyName="QuantityOnHand" />
+        <PropertyEditor Id="LastPurchasePrice" PropertyName="LastPurchasePrice" />
+        <PropertyEditor Id="LastPurchaseDate" PropertyName="LastPurchaseDate" />
+      </Items>
+    </DetailView>
+    <DetailView Id="MenuItem_DetailView_ItemCard">
+      <Items Id="Items">
+        <PropertyEditor Id="QuantityOnHand" PropertyName="QuantityOnHand" />
+        <PropertyEditor Id="LastPurchasePrice" PropertyName="LastPurchasePrice" />
+        <PropertyEditor Id="LastPurchaseDate" PropertyName="LastPurchaseDate" />
+      </Items>
+    </DetailView>
+    <ListView Id="ItemCard_ListView_List">
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityOnHand" PropertyName="QuantityOnHand" Index="5" />
+        <ColumnInfo Id="LastPurchasePrice" PropertyName="LastPurchasePrice" View="" Width="50" Index="-1" />
+        <ColumnInfo Id="LastPurchaseDate" PropertyName="LastPurchaseDate" View="" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemCard_ListView_Categorized">
+      <Columns Id="Columns">
+        <ColumnInfo Id="QuantityOnHand" PropertyName="QuantityOnHand" Index="5" />
+        <ColumnInfo Id="LastPurchasePrice" PropertyName="LastPurchasePrice" View="" Width="50" Index="-1" />
+        <ColumnInfo Id="LastPurchaseDate" PropertyName="LastPurchaseDate" View="" Width="70" Index="-1" />
+      </Columns>
+    </ListView>
+    <DetailView Id="InventoryItem_DetailView_ItemCard">
+      <Items Id="Items">
+        <PropertyEditor Id="QuantityOnHand" PropertyName="QuantityOnHand" />
+        <PropertyEditor Id="LastPurchasePrice" PropertyName="LastPurchasePrice" />
+        <PropertyEditor Id="LastPurchaseDate" PropertyName="LastPurchaseDate" />
+      </Items>
+    </DetailView>
+    <DetailView Id="City_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="City">
+              <LayoutItem Id="City_DetailViewUserPanel" ViewItem="City_DetailViewUserPanel" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemCard_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="ItemCard">
+              <LayoutGroup Id="ItemCard_col1">
+                <LayoutItem Id="StockUnit" Index="3" RelativeSize="28.571428571428573" />
+                <LayoutItem Id="SalesUnit" ViewItem="SalesUnit" Index="4" RelativeSize="30.201342281879196" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ItemCard_col2">
+                <LayoutItem Id="LastPurchaseDate" RelativeSize="27.272727272727273" Index="0" Removed="True" />
+                <LayoutItem Id="LastPurchasePrice" RelativeSize="27.272727272727273" Index="0" Removed="True" />
+                <LayoutItem Id="QuantityOnHand" Index="2" RelativeSize="28.571428571428573" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject">
+              <LayoutGroup Id="Item11">
+                <LayoutGroup Id="Auto0f36fc13-bf90-4421-9333-9d07d746c682">
+                  <LayoutItem Id="QuantityOnHand" ViewItem="QuantityOnHand" />
+                </LayoutGroup>
+                <LayoutGroup Id="Autocfceb0e5-31d4-4c78-80df-c7ff7aa318d6">
+                  <LayoutItem Id="LastPurchasePrice" ViewItem="LastPurchasePrice" />
+                  <LayoutItem Id="LastPurchaseDate" ViewItem="LastPurchaseDate" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ItemCard_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="LastPurchaseDate" Index="-1" />
+        <ColumnInfo Id="LastPurchasePrice" Index="-1" />
+        <ColumnInfo Id="QuantityOnHand" Index="5" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

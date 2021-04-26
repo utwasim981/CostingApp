@@ -73,11 +73,14 @@ namespace CostingApp.Module.Win.BO.Items {
         }
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
+            if (!IsLoading)
+                if (propertyName == nameof(TransactionDate) && oldValue != newValue)
+                    Period = BasePeriod.GetOpenedPeriodForDate(ObjectSpace, TransactionDate);
         }
         protected override void OnSaving() {
             base.OnSaving();
             Total = Items.Sum(x => x.Amount);
-            updateItemsData();            
+            updateItemsData();
             updateItemsCards();
         }
         protected override string GetSequenceName() {
@@ -97,17 +100,8 @@ namespace CostingApp.Module.Win.BO.Items {
             }
         }
         private void updateItemsCards() {
-            foreach (var item in Items) {
-                item.Item.UpdateLasPurchasePrice(item);
-                if (Session.IsNewObject(item))
-                    item.Item.UpdateQuantityOnHand(Math.Round((item.Quantity * item.TransactionUnit.ConversionRate) / item.StockUnit.ConversionRate, 2));
-                else if (Session.IsObjectToSave(item)) {
-                    XPMemberInfo qunatityInfo = item.ClassInfo.GetMember(nameof(item.Quantity));
-                    var oldValue = PersistentBase.GetModificationsStore(item).GetPropertyOldValue(qunatityInfo);
-                    if (oldValue != null)
-                        item.Item.UpdateQuantityOnHand(item.Quantity - Convert.ToDouble(oldValue));
-                }
-            }
+            foreach (var item in Items)
+                item.UpdateItemCard();
         }
     }
 }

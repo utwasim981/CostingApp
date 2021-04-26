@@ -33,12 +33,7 @@ namespace CostingApp.Module.Win.BO.Items {
         [RuleRequiredField("PurchaseInvoice_InvoiceDate_RuleRequiredField", DefaultContexts.Save)]
         public DateTime TransactionDate {
             get { return fTransactionDate; }
-            set {
-                SetPropertyValue<DateTime>(nameof(TransactionDate), ref fTransactionDate, value);
-                if (!IsLoading) {
-                    Period = BasePeriod.GetOpenedPeriodForDate(ObjectSpace, TransactionDate);
-                }
-            }
+            set { SetPropertyValue<DateTime>(nameof(TransactionDate), ref fTransactionDate, value); }
         }
         EnumStatus fStatus;
         [ModelDefault("AllowEdit", "False")]

@@ -5,6 +5,7 @@ using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,12 +70,20 @@ namespace CostingApp.Module.Win.BO.Items {
             set { SetPropertyValue<double>(nameof(StockQuantity), ref fStockQuantity, value); }
         }
         double fPrice;
-        [RuleValueComparison("InventoryRecord_Price_GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
+        //[RuleValueComparison("InventoryRecord_Price_GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
         [ImmediatePostData(true)]
         public double Price {
             get { return fPrice; }
             set { SetPropertyValue<double>(nameof(Price), ref fPrice, value); }
         }
+        EnumInventoryTransactionType fTransactionType;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        public EnumInventoryTransactionType TransactionType {
+            get { return fTransactionType; }
+            set { SetPropertyValue<EnumInventoryTransactionType>(nameof(TransactionType), ref fTransactionType, value); }
+        }
+
         public InventoryRecord(Session session) : base(session) { }
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
@@ -100,7 +109,7 @@ namespace CostingApp.Module.Win.BO.Items {
         }        
         private void calculateQuantity() {
             BaseQuantity = TransactionUnit == null ? 0 : Quantity * TransactionUnit.ConversionRate;
-            StockQuantity = StockUnit == null ? 0 : Math.Round(BaseQuantity / StockUnit.ConversionRate, 2);
+            StockQuantity = StockUnit == null ? BaseQuantity : Math.Round(BaseQuantity / StockUnit.ConversionRate, 2);
         }
     }
 }

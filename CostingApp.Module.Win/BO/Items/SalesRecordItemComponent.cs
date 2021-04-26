@@ -1,4 +1,6 @@
 ﻿using DevExpress.Xpo;
+using System;
+using WXafLib;
 
 namespace CostingApp.Module.Win.BO.Items {
     public class SalesRecordItemComponent : InventoryRecord {
@@ -10,6 +12,10 @@ namespace CostingApp.Module.Win.BO.Items {
         }
 
         public SalesRecordItemComponent(Session session) : base(session) { }
+        public override void AfterConstruction() {
+            base.AfterConstruction();
+            TransactionType = EnumInventoryTransactionType.Out;
+        }
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
             if (!IsLoading && propertyName == nameof(SalesReportItem) && oldValue != newValue)
@@ -18,12 +24,20 @@ namespace CostingApp.Module.Win.BO.Items {
         protected override void OnDeleting() {
             base.OnDeleting();
             if (Session.IsObjectToSave(this))
-                Item.UpdateQuantityOnHand(Quantity);
+                Item.UpdateQuantityOnHand(Shop, TransactionUnit, Quantity);
         }
 
+        public void UpdateComponentItemCard() {
+            object oldValue = null;
+            if (WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(Quantity), out oldValue))                
+                Item.UpdateQuantityOnHand(Shop, TransactionUnit, (Quantity - Convert.ToDouble(oldValue)) * -1);
+            else
+                Item.UpdateQuantityOnHand(Shop, TransactionUnit, Quantity * -1);
+        }
         private void onSalesReportItemValueChanged() {
             if (SalesReportItem != null && SalesReportItem.SalesRecord != null)
                 Transaction = SalesReportItem.SalesRecord;
         }
+
     }
 }

@@ -5,6 +5,7 @@ using CostTech.Module.Win.BO.Employees;
 using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.Model;
+using DevExpress.ExpressApp.SystemModule;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
@@ -49,7 +50,7 @@ namespace CostingApp.Module.Win.BO.Expenses {
             set { SetPropertyValue<DateTime>(nameof(ExpenseDate), ref fExpenseDate, value); }
         }
         double fAmount;
-        [RuleValueComparison("ExpenseRecord_Amount.GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
+        //[RuleValueComparison("ExpenseRecord_Amount.GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
         public double Amount {
             get { return fAmount; }
             set { SetPropertyValue<double>(nameof(Amount), ref fAmount, value); }

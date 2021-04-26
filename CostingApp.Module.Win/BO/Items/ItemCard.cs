@@ -1,4 +1,7 @@
 ﻿using CostingApp.Module.Win.BO.Expenses;
+using CostingApp.Module.Win.BO.Masters;
+using DevExpress.Data.Filtering;
+using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.DC;
 using DevExpress.ExpressApp.Model;
@@ -103,24 +106,11 @@ namespace CostingApp.Module.Win.BO.Items {
         public double SellPrice {
             get { return fSellPrice; }
             set { SetPropertyValue<double>(nameof(SellPrice), ref fSellPrice, value); }
-        }
-        DateTime fLastPurchaseDate;
+        }       
+        [Association("ItemCard-ItemQuantity"), DevExpress.Xpo.Aggregated]
         [ModelDefault("AllowEdit", "False")]
-        public DateTime LastPurchaseDate {
-            get { return fLastPurchaseDate; }
-            set { SetPropertyValue<DateTime>(nameof(LastPurchaseDate), ref fLastPurchaseDate, value); }
-        }
-        double fLastPurchasePrice;
-        [ModelDefault("AllowEdit", "False")]
-        public double LastPurchasePrice {
-            get { return fLastPurchasePrice; }
-            set { SetPropertyValue<double>(nameof(LastPurchasePrice), ref fLastPurchasePrice, value); }
-        }
-        double fQuantityOnHand;
-        [ModelDefault("AllowEdit", "False")]
-        public double QuantityOnHand {
-            get { return fQuantityOnHand; }
-            set { SetPropertyValue<double>(nameof(QuantityOnHand), ref fQuantityOnHand, value); }
+        public XPCollection<ItemQuantity> Inventory {
+            get { return GetCollection<ItemQuantity>(nameof(Inventory)); }
         }
 
         ITreeNode ICategorizedItem.Category {
@@ -149,17 +139,41 @@ namespace CostingApp.Module.Win.BO.Items {
         private void onUnitTypeChanged() {
             BaseUnit = UnitType.Units.FirstOrDefault(x => x.BaseUnit);
         }
-        public void UpdateLasPurchasePrice(InventoryRecord record) {
-            if (record.ExpenseDate > LastPurchaseDate) {
-                LastPurchaseDate = record.ExpenseDate;
-                if (PurchaseUnit == null)
-                    LastPurchasePrice = Math.Round(record.Price / record.TransactionUnit.ConversionRate, 2);
-                else
-                    LastPurchasePrice = Math.Round((record.Price / record.TransactionUnit.ConversionRate) * PurchaseUnit.ConversionRate, 2);
+        private void onUnitChange() {
+            //TODO: when ItemUnit Updated.
+            foreach(var itemQuantity in Inventory) {
             }
         }
-        public void UpdateQuantityOnHand(double quantity) {
-            QuantityOnHand += quantity;
+        public void UpdateLasPurchasePrice(Shop Shop, Unit TransactionUnit, DateTime PurchaseDate, double PurchasePrice) {
+            var itemQuantity = this.Inventory.FirstOrDefault(x => x.Shop == Shop);
+            if (itemQuantity == null) {
+                itemQuantity = ObjectSpace.CreateObject<ItemQuantity>();
+                itemQuantity.Shop = Shop;
+                itemQuantity.LastPurchaseDate = DateTime.MinValue;
+                itemQuantity.ItemCard = this;
+                Inventory.Add(itemQuantity);
+            }
+            if (PurchaseDate > itemQuantity.LastPurchaseDate) {
+                itemQuantity.LastPurchaseDate = PurchaseDate;
+                itemQuantity.LastPurchasePrice = PurchaseUnit != null ?
+                                                Math.Round((PurchasePrice * TransactionUnit.ConversionRate) / PurchaseUnit.ConversionRate, 2) :
+                                                PurchasePrice * TransactionUnit.ConversionRate;
+            }
+        }
+        public void UpdateQuantityOnHand(Shop Shop, Unit TransactionUnit, double Quantity) {
+            var itemQuantity = this.Inventory.FirstOrDefault(x => x.Shop == Shop);
+            if (itemQuantity == null) {
+                itemQuantity = ObjectSpace.CreateObject<ItemQuantity>();
+                itemQuantity.Shop = Shop;
+                itemQuantity.LastPurchaseDate = DateTime.MinValue;
+                itemQuantity.ItemCard = this;
+                Inventory.Add(itemQuantity);
+            }
+            itemQuantity.QuantityOnHand += Math.Round((Quantity * TransactionUnit.ConversionRate) / StockUnit.ConversionRate, 2);
+        }
+        public double GetQuantityOnHand(Shop Shop) {
+            var itemQuantity = Inventory.FirstOrDefault(x => x.Shop == Shop);
+            return itemQuantity == null ? 0 : itemQuantity.QuantityOnHand;
         }
     }
 }

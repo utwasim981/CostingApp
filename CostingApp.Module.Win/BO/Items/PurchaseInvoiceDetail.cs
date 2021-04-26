@@ -1,7 +1,9 @@
 ﻿using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
+using System;
 using System.ComponentModel;
 using System.Linq;
+using WXafLib;
 
 namespace CostingApp.Module.Win.BO.Items {
     public class PurchaseInvoiceDetail : InventoryRecord {
@@ -17,20 +19,28 @@ namespace CostingApp.Module.Win.BO.Items {
         }
         [NonPersistent]
         [Browsable(false)]
-        [RuleFromBoolProperty("PurchaseInvoiceDetail_Item_IsValid", DefaultContexts.Save, "Item must not be empty")]
+        [RuleFromBoolProperty("PurchaseInvoiceDetail_Item_IsValid", DefaultContexts.Save, "Item must not be empty", UsedProperties = nameof(Item))]
         public bool IsItemIsValid {
             get { return Item != null; }
         }
         [NonPersistent]
         [Browsable(false)]
-        [RuleFromBoolProperty("PurchaseInvoiceDetail_QuantityIn_IsValid", DefaultContexts.Save, "Item must not be empty")]
+        [RuleFromBoolProperty("PurchaseInvoiceDetail_Quantity_IsValid", DefaultContexts.Save, "Quantity should be greater than 0", UsedProperties = nameof(Quantity))]
         public bool IsQuantityInIsValid {
             get { return Quantity != 0; }
         }
+        [NonPersistent]
+        [Browsable(false)]
+        [RuleFromBoolProperty("PurchaseInvoiceDetail_Price_IsValid", DefaultContexts.Save, "Price should be greater than 0", UsedProperties = nameof(Price))]
+        public bool IPriceInIsValid {
+            get { return Price != 0; }
+        }
+
         public PurchaseInvoiceDetail(Session session) : base(session) { }
         public override void AfterConstruction() {
             base.AfterConstruction();
             Quantity = 1;
+            TransactionType = EnumInventoryTransactionType.In;
         }
 
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
@@ -50,7 +60,7 @@ namespace CostingApp.Module.Win.BO.Items {
         }
         protected override void OnDeleting() {
             base.OnDeleting();
-            updateIemCard();
+            Item.UpdateQuantityOnHand(Shop, TransactionUnit, Quantity * -1);
         }
 
         private void onInvoiceValueChange() {
@@ -62,7 +72,6 @@ namespace CostingApp.Module.Win.BO.Items {
             }
         }
         private void onItemValueChange() {
-
             if (Item != null) {
                 TransactionUnit = Item.PurchaseUnit;
                 Price = Item.PurchasePrice;
@@ -76,9 +85,20 @@ namespace CostingApp.Module.Win.BO.Items {
             if (Invoice != null)
                 Invoice.Total = Invoice.Items.Sum(x => x.Amount);
         }
-        private void updateIemCard() {
-            if (Session.IsObjectToSave(this))
-                Item.UpdateQuantityOnHand(Quantity * -1);
+
+        public void UpdateItemCard() {
+            Item.UpdateLasPurchasePrice(Shop, TransactionUnit, ExpenseDate, Price);
+            object quantityOldValue = null;
+            object unitOldValue = null;
+            if (WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(Quantity), out quantityOldValue))
+                if (WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(TransactionUnit), out unitOldValue)) {
+                    Item.UpdateQuantityOnHand(Shop, (Unit)unitOldValue, Convert.ToDouble(quantityOldValue) * -1);
+                    Item.UpdateQuantityOnHand(Shop, TransactionUnit, Quantity);
+                }
+                else
+                    Item.UpdateQuantityOnHand(Shop, TransactionUnit, (Quantity - Convert.ToDouble(quantityOldValue)) * -1);
+            else
+                Item.UpdateQuantityOnHand(Shop, TransactionUnit, Quantity);
         }
     }
 }

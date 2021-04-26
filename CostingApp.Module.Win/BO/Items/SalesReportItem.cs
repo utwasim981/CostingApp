@@ -3,6 +3,10 @@ using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using WXafLib.General.Model;
 using System.Linq;
+using DevExpress.Xpo.Metadata;
+using System;
+using WXafLib;
+using DevExpress.ExpressApp.Model;
 
 namespace CostingApp.Module.Win.BO.Items {
     public class SalesReportItem : WXafBase {
@@ -25,8 +29,8 @@ namespace CostingApp.Module.Win.BO.Items {
             get { return fQuantity; }
             set { SetPropertyValue<double>(nameof(Quantity), ref fQuantity, value); }
         }
-        //[VisibleInDetailView(false)]
         [Association("SalesReportItem-SalesRecordItemComponent"), Aggregated]
+        [ModelDefault("AllowEdit", "False")]
         public XPCollection<SalesRecordItemComponent> Components { get { return GetCollection<SalesRecordItemComponent>(nameof(Components)); } }
 
         public SalesReportItem(Session session) : base(session) { }
@@ -36,31 +40,42 @@ namespace CostingApp.Module.Win.BO.Items {
         }
         protected override void OnSaving() {
             base.OnSaving();
-            createUpdateItemComponent();
+            onSaving();
+            
         }
-
-        private void createUpdateItemComponent() {
-
-            if (Session.IsNewObject(this)) {
-                foreach (var itemComponent1 in Item.Components) {
-                    SalesRecordItemComponent salesComponent = null;
-                    salesComponent = ObjectSpace.CreateObject<SalesRecordItemComponent>();
-                    salesComponent.Shop = SalesRecord.Shop;
-                    salesComponent.ExpenseDate = SalesRecord.TransactionDate;
-                    salesComponent.Period = SalesRecord.Period;
-                    salesComponent.SalesReportItem = this;
-                    salesComponent.Item = itemComponent1.Component;
-                    salesComponent.TransactionUnit = itemComponent1.Unit;
-                    salesComponent.Quantity = Quantity * itemComponent1.Quantity;
-                    Components.Add(salesComponent);
+        private void onSaving() {
+            if (SalesRecord != null && !Session.IsNewObject(SalesRecord))
+                if (Session.IsNewObject(this))
+                    this.CreateItemComponent();
+                else if (Session.IsObjectToSave(this)) {
+                    object oldValue = null;
+                    if (WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(Quantity), out oldValue))
+                        UpdateItemComonent();
                 }
+        }
+        public void CreateItemComponent() {
+            foreach (var itemComponent1 in Item.Components) {
+                SalesRecordItemComponent salesComponent = null;
+                salesComponent = ObjectSpace.CreateObject<SalesRecordItemComponent>();
+                salesComponent.Shop = SalesRecord.Shop;
+                salesComponent.ExpenseDate = SalesRecord.TransactionDate;
+                salesComponent.Period = SalesRecord.Period;
+                salesComponent.SalesReportItem = this;
+                salesComponent.Item = itemComponent1.Component;
+                salesComponent.TransactionUnit = itemComponent1.Unit;
+                salesComponent.Quantity = Quantity * itemComponent1.Quantity;
+                salesComponent.UpdateComponentItemCard();
+                Components.Add(salesComponent);
             }
-            else if (Session.IsObjectToSave(this)) {
-                foreach (var itemcomponent in Item.Components) {
-                    var test = Components.FirstOrDefault(x => x.Item.Oid == itemcomponent.Component.Oid);
-                    test.Quantity = Quantity * itemcomponent.Quantity;
-                }
+            OnChanged(nameof(Components));
+        }
+        public void UpdateItemComonent() {
+            foreach (var itemcomponent in Item.Components) {
+                var component = Components.FirstOrDefault(x => x.Item.Oid == itemcomponent.Component.Oid);
+                component.Quantity = Quantity * itemcomponent.Quantity;
+                component.UpdateComponentItemCard();
             }
+            OnChanged(nameof(Components));
         }
 
     }

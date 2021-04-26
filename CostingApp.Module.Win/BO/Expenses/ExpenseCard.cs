@@ -29,6 +29,12 @@ namespace CostingApp.Module.Win.BO.Expenses {
                 return Convert.ToString(EvaluateAlias(nameof(Number)));
             }
         }
+        double fAmount;
+        [RuleValueComparison("ExpenseRecord_Amount.GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
+        public double Amount {
+            get { return fAmount; }
+            set { SetPropertyValue<double>(nameof(Amount), ref fAmount, value); }
+        }
         protected override string GetSequenceName() {
             return string.Concat(ClassInfo.FullName, ".ExpenseCard");
         }

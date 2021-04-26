@@ -59,5 +59,9 @@ namespace CostingApp.Module.Win.BO {
         In = 0,
         Out = 1
     }
+    public enum EnumInventorySteps {
+        Created = 0,
+        Approced = 1
+    }
 
 }

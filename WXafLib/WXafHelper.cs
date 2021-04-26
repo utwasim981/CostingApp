@@ -1,11 +1,13 @@
 ﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.DC;
+using DevExpress.Xpo;
+using DevExpress.Xpo.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WXafLib.General.Model;
 
 namespace WXafLib
 {
@@ -21,8 +23,8 @@ namespace WXafLib
             else
                 return string.Empty;
         }
-        public static bool CheckIfWXafBase(object Object) {            
-            var derived = XafTypesInfo.Instance.FindTypeInfo(typeof(Object));
+        public static bool CheckIfWXafBase(object Obj) {            
+            var derived = XafTypesInfo.Instance.FindTypeInfo(Obj.GetType());
             while (derived != null) {
                 if (derived.Name is "WXafBase")
                     return true;
@@ -38,6 +40,11 @@ namespace WXafLib
                 derived = derived.Base;
             }
             return false;
+        }
+        public static bool IsProrpotyChanged(XPClassInfo ClassInfo, object Obj, string ProportName, out object OldValue) {
+            XPMemberInfo memberInfo = ClassInfo.GetMember(ProportName);
+            OldValue = PersistentBase.GetModificationsStore(Obj).GetPropertyOldValue(memberInfo);
+            return OldValue != null;
         }
     }
 }
