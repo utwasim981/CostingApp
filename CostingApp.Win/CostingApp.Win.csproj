@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CostingApp.Win</RootNamespace>
     <AssemblyName>CostingApp.Win</AssemblyName>
-    <ApplicationIcon>ExpressApp.ico</ApplicationIcon>
+    <ApplicationIcon>TechpoolLogo.ico</ApplicationIcon>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -197,6 +197,7 @@
     <Compile Include="WinApplication.Designer.cs">
       <DependentUpon>WinApplication.cs</DependentUpon>
     </Compile>
+    <Content Include="TechpoolLogo.ico" />
     <None Include="UnusableNodes2.xml">
       <DependentUpon>Model.xafml</DependentUpon>
       <SubType>Designer</SubType>
@@ -225,6 +226,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="App.config" />
+    <EmbeddedResource Include="Images\TechpoolLogo.png" />
     <Content Include="Model.xafml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

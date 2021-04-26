@@ -1,9 +1,11 @@
 ﻿using DevExpress.ExpressApp.Model;
+using DevExpress.Persistent.Base;
 using DevExpress.Xpo;
 using System;
 using WXafLib;
 
 namespace CostingApp.Module.Win.BO.Items {
+    [ImageName("")]
     public class InventoryAdjustmentItem : InventoryRecord {
         InventoryAdjustment fInventoryAdjustment;
         [Association("InventoryAdjustment-InventoryAdjustmentItem")]

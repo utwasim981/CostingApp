@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace CostingApp.Module.Win.BO.Items {
     [NavigationItem("Transactions")]
+    [ImageName("BO_Order_Item")]
     public class InventoryAdjustment : InventoryTransaction {
         const string NumberFormat = "Concat('IA-', PadLeft(ToStr(SequentialNumber), 6, '0'))";
         [PersistentAlias(NumberFormat)]

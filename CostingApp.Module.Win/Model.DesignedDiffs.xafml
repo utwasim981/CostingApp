@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application>
+<Application Company="TechPool">
   <ActionDesign>
     <Actions>
       <Action Id="DialogOK" ValidationContexts="DialogOK" />
@@ -7,11 +7,15 @@
     </Actions>
   </ActionDesign>
   <BOModel>
+    <Class Name="CostingApp.Module.Win.BO.Items.InventoryAdjustmentItem" DefaultDetailViewImage="" DefaultListViewImage="" />
     <Class Name="CostingApp.Module.Win.BO.Items.InventoryItem" DefaultDetailView="InventoryItem_DetailView_ItemCard" />
     <Class Name="CostingApp.Module.Win.BO.Items.ItemCard" Caption="Items" />
     <Class Name="CostingApp.Module.Win.BO.Items.MenuItem" DefaultDetailView="MenuItem_DetailView_ItemCard" />
     <Class Name="CostingApp.Module.Win.BO.Items.MenuItemComponent" Caption="Component" />
     <Class Name="CostingApp.Module.Win.BO.Items.NoneInventoryItem" DefaultDetailView="NoneInventoryItem_DetailView_ItemCard" />
+    <Class Name="CostingApp.Module.Win.BO.Items.PurchaseInvoiceDetail" DefaultListViewImage="" DefaultDetailViewImage="" />
+    <Class Name="CostingApp.Module.Win.BO.Items.SalesRecordItemComponent" DefaultDetailViewImage="" DefaultListViewImage="" />
+    <Class Name="CostingApp.Module.Win.BO.Items.SalesReportItem" DefaultDetailViewImage="" DefaultListViewImage="" />
     <Class Name="CostingApp.Module.Win.BO.Masters.Period.Period">
       <OwnMembers>
         <Member Name="EndDate" EditMask="dd/MM/yyyy" DisplayFormat="{0:dd/MM/yyyy}" />
@@ -382,12 +386,10 @@
                 <LayoutItem Id="Period" RelativeSize="15" Index="2" />
                 <LayoutItem Id="ExpenseType" RelativeSize="15" Index="3" />
                 <LayoutItem Id="ExpenseDate" RelativeSize="15" Index="4" />
-                <LayoutItem Id="Amount" RelativeSize="20" Index="5" />
               </LayoutGroup>
               <LayoutGroup Id="ExpenseRecord_col2" RelativeSize="50.158730158730158">
                 <LayoutItem Id="Employee" Index="0" RelativeSize="20" />
                 <LayoutItem Id="Item" Index="1" RelativeSize="15" />
-                <LayoutItem Id="VendorBill" RelativeSize="15" Index="2" />
                 <LayoutItem Id="Notes" RelativeSize="15" Index="3" />
                 <LayoutItem Id="Status" Index="4" RelativeSize="15" />
                 <LayoutItem Id="Item3" Index="5" RelativeSize="20" IsNewNode="True" />

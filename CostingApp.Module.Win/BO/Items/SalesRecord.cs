@@ -16,6 +16,7 @@ using WXafLib;
 
 namespace CostingApp.Module.Win.BO.Items {
     [NavigationItem("Transactions")]
+    [ImageName("BO_Sale_v92")]
     public class SalesRecord : InventoryTransaction {
         const string NumberFormat = "Concat('SR-', PadLeft(ToStr(SequentialNumber), 6, '0'))";
         [PersistentAlias(NumberFormat)]

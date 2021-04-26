@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Security;
 using DevExpress.ExpressApp.Win;
+using DevExpress.ExpressApp.Win.Utils;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 
@@ -42,6 +43,7 @@ namespace CostingApp.Win {
                 winApplication.DatabaseUpdateMode = DatabaseUpdateMode.UpdateDatabaseAlways;
             }
 #endif
+            winApplication.SplashScreen = new DXSplashScreen("TechpoolLogo.png");
             try {
                 //DevExpress.ExpressApp.Xpo.InMemoryDataStoreProvider.Register();
                 //                winApplication.ConnectionString = DevExpress.ExpressApp.Xpo.InMemoryDataStoreProvider.ConnectionString;
