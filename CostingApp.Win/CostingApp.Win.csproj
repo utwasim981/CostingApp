@@ -68,10 +68,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>ABE1D77BF8CC62C45EA9CE33DADB3CA6B5AEC8FE</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F69A461EFA063B79C3154CED33F49D269C222B4E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>CostingApp.Win_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>CostingApp.Win_3_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -221,6 +221,7 @@
     <Content Include="TechpoolLogo.ico" />
     <None Include="CostingApp.Win_1_TemporaryKey.pfx" />
     <None Include="CostingApp.Win_2_TemporaryKey.pfx" />
+    <None Include="CostingApp.Win_3_TemporaryKey.pfx" />
     <None Include="CostingApp.Win_TemporaryKey.pfx" />
     <None Include="UnusableNodes2.xml">
       <DependentUpon>Model.xafml</DependentUpon>

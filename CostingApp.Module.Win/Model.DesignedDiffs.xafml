@@ -67,7 +67,6 @@
           <Item Id="SystemConfigration_ListView" Index="3" />
         </Items>
       </Item>
-      <Item Id="Testing" Index="5" />
     </Items>
   </NavigationItems>
   <SchemaModules>
@@ -266,7 +265,56 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="Employee_ListView" Caption="Employees" />
+    <ListView Id="Employee_ListView" Caption="Employees">
+      <Variants>
+        <Variant Id="Standard" ViewID="Employee_ListView_Standard" Index="0" IsNewNode="True" />
+        <Variant Id="Advanced" ViewID="Employee_ListView_Advanced" Index="1" IsNewNode="True" />
+      </Variants>
+    </ListView>
+    <ListView Id="Employee_ListView_Advanced" ClassName="CostTech.Module.Win.BO.Employees.Employee" Caption="Advanced Employees List" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreatedOn" PropertyName="CreatedOn" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsActive" PropertyName="IsActive" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdatedBy" PropertyName="UpdatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdatedOn" PropertyName="UpdatedOn" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="EmployeeCode" PropertyName="EmployeeCode" Width="70" Index="0" OwnerBand="Main" IsNewNode="True" />
+        <ColumnInfo Id="FullName" PropertyName="FullName" Width="400" SortIndex="0" SortOrder="Ascending" Index="0" OwnerBand="Main" RowIndex="1" IsNewNode="True" />
+        <ColumnInfo Id="ContractType" PropertyName="ContractType" Width="70" Index="1" OwnerBand="Main" RowIndex="3" IsNewNode="True" />
+        <ColumnInfo Id="Position" PropertyName="Position" Width="70" Index="2" OwnerBand="Main" RowIndex="4" IsNewNode="True" />
+        <ColumnInfo Id="FirstName" PropertyName="FirstName" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="LastName" PropertyName="LastName" Width="70" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="Gender" PropertyName="Gender" Width="70" Index="6" OwnerBand="Main" RowIndex="2" IsNewNode="True" />
+        <ColumnInfo Id="SalaryPerHour" PropertyName="SalaryPerHour" Width="50" Index="7" OwnerBand="Main" RowIndex="5" IsNewNode="True" />
+        <ColumnInfo Id="MonthlySalary" PropertyName="MonthlySalary" Width="50" Index="8" OwnerBand="Main" RowIndex="6" IsNewNode="True" />
+        <ColumnInfo Id="EmployeePhoto" PropertyName="EmployeePhoto" Width="70" Index="9" OwnerBand="Photo" IsNewNode="True" />
+      </Columns>
+      <BandsLayout Enable="True" ShowColumnHeaders="False" AllowColumnMoving="False" IsNewNode="True">
+        <Band Id="Photo" Index="0" IsNewNode="True" />
+        <Band Id="Main" Caption="Information" IsNewNode="True" />
+      </BandsLayout>
+    </ListView>
+    <ListView Id="Employee_ListView_Standard" ClassName="CostTech.Module.Win.BO.Employees.Employee" Caption="Standard Employees List" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreatedOn" PropertyName="CreatedOn" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsActive" PropertyName="IsActive" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdatedBy" PropertyName="UpdatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdatedOn" PropertyName="UpdatedOn" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FullName" PropertyName="FullName" Width="400" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="ContractType" PropertyName="ContractType" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Position" PropertyName="Position" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="EmployeeCode" PropertyName="EmployeeCode" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="FirstName" PropertyName="FirstName" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="LastName" PropertyName="LastName" Width="70" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="Gender" PropertyName="Gender" Width="70" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="SalaryPerHour" PropertyName="SalaryPerHour" Width="50" Index="7" IsNewNode="True" />
+        <ColumnInfo Id="MonthlySalary" PropertyName="MonthlySalary" Width="50" Index="8" IsNewNode="True" />
+        <ColumnInfo Id="EmployeePhoto" PropertyName="EmployeePhoto" Width="70" Index="9" IsNewNode="True" />
+      </Columns>
+    </ListView>
     <ListView Id="Employee_LookupListView" Caption="Employees" DataAccessMode="Client">
       <Columns>
         <ColumnInfo Id="Oid" PropertyName="Oid" Index="0" IsNewNode="True" />

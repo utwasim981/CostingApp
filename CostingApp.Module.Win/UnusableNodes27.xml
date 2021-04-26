@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="True" />
+  </BOModel>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Testing" Index="5" />
+    </Items>
+  </NavigationItems>
+  <Views Id="Views">
+    <DetailView Id="City_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="City">
+              <LayoutItem Id="City_DetailViewUserPanel" ViewItem="City_DetailViewUserPanel" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemCard_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="XPObject">
+              <LayoutGroup Id="Item11">
+                <LayoutGroup Id="Auto0f36fc13-bf90-4421-9333-9d07d746c682">
+                  <LayoutItem Id="QuantityOnHand" ViewItem="QuantityOnHand" />
+                </LayoutGroup>
+                <LayoutGroup Id="Autocfceb0e5-31d4-4c78-80df-c7ff7aa318d6">
+                  <LayoutItem Id="LastPurchasePrice" ViewItem="LastPurchasePrice" />
+                  <LayoutItem Id="LastPurchaseDate" ViewItem="LastPurchaseDate" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>
