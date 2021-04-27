@@ -19,6 +19,7 @@ using WXafLib.General.Model;
 using WXafLib.General.Security;
 
 namespace CostingApp.Module.Win.BO.Expenses {
+    [NavigationItem("Testing")]
     public abstract class ExpenseRecord : WXafSequenceObject {
         Shop fShop;
         [DataSourceCriteria("IsActive = True")]

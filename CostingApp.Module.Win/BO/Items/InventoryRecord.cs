@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using WXafLib.General.ModelExtenders;
 
 namespace CostingApp.Module.Win.BO.Items {
+    [NavigationItem("Testing")]
     public abstract class InventoryRecord : ExpenseRecord {
         InventoryTransaction fTransaction;
         [VisibleInDetailView(false)]
