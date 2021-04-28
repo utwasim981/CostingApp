@@ -37,15 +37,19 @@
             this.validationModule = new DevExpress.ExpressApp.Validation.ValidationModule();
             this.validationWindowsFormsModule = new DevExpress.ExpressApp.Validation.Win.ValidationWindowsFormsModule();
             this.viewVariantsModule = new DevExpress.ExpressApp.ViewVariantsModule.ViewVariantsModule();
-            this.wXafLibModule1 = new WXafLib.WXafLibModule();
+            this.pivotChartModuleBase1 = new DevExpress.ExpressApp.PivotChart.PivotChartModuleBase();
+            this.pivotChartWindowsFormsModule1 = new DevExpress.ExpressApp.PivotChart.Win.PivotChartWindowsFormsModule();
+            this.pivotGridModule1 = new DevExpress.ExpressApp.PivotGrid.PivotGridModule();
+            this.pivotGridWindowsFormsModule1 = new DevExpress.ExpressApp.PivotGrid.Win.PivotGridWindowsFormsModule();
+            this.costingAppModule1 = new CostingApp.Module.CostingAppModule();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // securityStrategyComplex1
             // 
             this.securityStrategyComplex1.Authentication = this.authenticationStandard1;
-            this.securityStrategyComplex1.RoleType = typeof(WXafLib.General.Security.WXafRole);
+            this.securityStrategyComplex1.RoleType = typeof(CostingApp.Module.CommonLibrary.General.Security.WXafRole);
             this.securityStrategyComplex1.SupportNavigationPermissionsForTypes = false;
-            this.securityStrategyComplex1.UserType = typeof(WXafLib.General.Security.WXafUser);
+            this.securityStrategyComplex1.UserType = typeof(CostingApp.Module.CommonLibrary.General.Security.WXafUser);
             // 
             // authenticationStandard1
             // 
@@ -55,6 +59,11 @@
             // 
             this.validationModule.AllowValidationDetailsAccess = true;
             this.validationModule.IgnoreWarningAndInformationRules = false;
+            // 
+            // pivotChartModuleBase1
+            // 
+            this.pivotChartModuleBase1.DataAccessMode = DevExpress.ExpressApp.CollectionSourceDataAccessMode.Client;
+            this.pivotChartModuleBase1.ShowAdditionalNavigation = false;
             // 
             // CostingAppWindowsFormsApplication
             // 
@@ -69,10 +78,14 @@
             this.Modules.Add(this.conditionalAppearanceModule);
             this.Modules.Add(this.cloneObjectModule);
             this.Modules.Add(this.viewVariantsModule);
+            this.Modules.Add(this.pivotChartModuleBase1);
+            this.Modules.Add(this.pivotChartWindowsFormsModule1);
+            this.Modules.Add(this.pivotGridModule1);
+            this.Modules.Add(this.pivotGridWindowsFormsModule1);
             this.Modules.Add(this.module4);
             this.Modules.Add(this.securityModule1);
             this.Modules.Add(this.objectsModule);
-            this.Modules.Add(this.wXafLibModule1);
+            this.Modules.Add(this.costingAppModule1);
             this.Security = this.securityStrategyComplex1;
             this.UseOldTemplates = false;
             this.DatabaseVersionMismatch += new System.EventHandler<DevExpress.ExpressApp.DatabaseVersionMismatchEventArgs>(this.CostingAppWindowsFormsApplication_DatabaseVersionMismatch);
@@ -97,6 +110,10 @@
         private DevExpress.ExpressApp.Validation.ValidationModule validationModule;
         private DevExpress.ExpressApp.Validation.Win.ValidationWindowsFormsModule validationWindowsFormsModule;
         private DevExpress.ExpressApp.ViewVariantsModule.ViewVariantsModule viewVariantsModule;
-        private WXafLib.WXafLibModule wXafLibModule1;
+        private DevExpress.ExpressApp.PivotChart.PivotChartModuleBase pivotChartModuleBase1;
+        private DevExpress.ExpressApp.PivotChart.Win.PivotChartWindowsFormsModule pivotChartWindowsFormsModule1;
+        private DevExpress.ExpressApp.PivotGrid.PivotGridModule pivotGridModule1;
+        private DevExpress.ExpressApp.PivotGrid.Win.PivotGridWindowsFormsModule pivotGridWindowsFormsModule1;
+        private Module.CostingAppModule costingAppModule1;
     }
 }

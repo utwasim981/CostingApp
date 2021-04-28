@@ -146,6 +146,7 @@
       <Name>System.Data</Name>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
       <Private>False</Private>
@@ -160,56 +161,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BO\Employees\EmployeeAttendance.cs" />
-    <Compile Include="BO\EnumDefination.cs" />
-    <Compile Include="BO\Expenses\ExpenseCard.cs" />
-    <Compile Include="BO\Expenses\ExpenseRecord.cs" />
-    <Compile Include="BO\Expenses\ZReport.cs" />
-    <Compile Include="BO\Expenses\ZReportComponent.cs" />
-    <Compile Include="BO\Items\InventoryAdjustment.cs" />
-    <Compile Include="BO\Items\InventoryAdjustmentItem.cs" />
-    <Compile Include="BO\Items\ItemQuantity.cs" />
-    <Compile Include="BO\Items\MenuItemComponent.cs" />
-    <Compile Include="BO\Items\MenuItem.cs" />
-    <Compile Include="BO\Items\InventoryItem.cs" />
-    <Compile Include="BO\Items\InventoryRecord.cs" />
-    <Compile Include="BO\Items\InventoryTransaction.cs" />
-    <Compile Include="BO\Items\ItemCard.cs" />
-    <Compile Include="BO\Items\ItemCategory.cs" />
-    <Compile Include="BO\Items\NoneInventoryItem.cs" />
-    <Compile Include="BO\Items\PurchaseInvoice.cs" />
-    <Compile Include="BO\Items\PurchaseInvoiceDetail.cs" />
-    <Compile Include="BO\Items\SalesRecord.cs" />
-    <Compile Include="BO\Items\SalesRecordItemComponent.cs" />
-    <Compile Include="BO\Items\SalesReportItem.cs" />
-    <Compile Include="BO\Items\UnitType.cs" />
-    <Compile Include="BO\Masters\Period\BasePeriod.cs" />
-    <Compile Include="BO\Masters\City.cs" />
-    <Compile Include="BO\Employees\ContractType.cs" />
-    <Compile Include="BO\Employees\Employee.cs" />
-    <Compile Include="BO\Expenses\ExpenseCategory.cs" />
-    <Compile Include="BO\Expenses\ExpenseType.cs" />
-    <Compile Include="BO\Masters\Period\OpenFullYearPeriods.cs" />
-    <Compile Include="BO\Masters\Period\Period.cs" />
-    <Compile Include="BO\Employees\Position.cs" />
-    <Compile Include="BO\Masters\Period\QuarterPeriod.cs" />
-    <Compile Include="BO\Masters\Shop.cs" />
-    <Compile Include="BO\Masters\Period\YearPeriod.cs" />
-    <Compile Include="BO\SystemConfigration.cs" />
-    <Compile Include="Controllers\InventoryAdjustmentController.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controllers\InventoryAdjustmentController.Designer.cs">
-      <DependentUpon>InventoryAdjustmentController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controllers\PeriodController.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controllers\PeriodController.Designer.cs">
-      <DependentUpon>PeriodController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DatabaseUpdate\Updater.cs" />
-    <Compile Include="WValueManager.cs" />
+    <Compile Include="Editors\ActionPropertyEditor.cs" />
+    <Compile Include="Editors\TimeProportyEditor.cs" />
+    <Compile Include="ViewItems\HintPanelViewItem.cs" />
+    <Compile Include="ViewItems\UserInfoPanelViewItem.cs" />
     <Compile Include="WinModule.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -219,12 +174,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controllers\InventoryAdjustmentController.resx">
-      <DependentUpon>InventoryAdjustmentController.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controllers\PeriodController.resx">
-      <DependentUpon>PeriodController.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -261,19 +210,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DatabaseUpdate\ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="UnusableNodes5.xml">
       <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WXafLib\WXafLib.csproj">
-      <Project>{5f15837d-d1e5-44dc-92f0-4f2ebe9c3f8d}</Project>
-      <Name>WXafLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="UnusableNodes.xml">
@@ -366,59 +306,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Images\employee.png" />
-    <EmbeddedResource Include="Images\employee_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\invoice.png" />
-    <EmbeddedResource Include="Images\invoice_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\bill.png" />
-    <EmbeddedResource Include="Images\bill_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\city.png" />
-    <EmbeddedResource Include="Images\city_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\company.png" />
-    <EmbeddedResource Include="Images\company_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\money.png" />
-    <EmbeddedResource Include="Images\money_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\lock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\Calendar.png" />
-    <EmbeddedResource Include="Images\Calendar_32X32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\expensecat.png" />
-    <EmbeddedResource Include="Images\expensecat_32X32.png" />
-    <EmbeddedResource Include="Images\setup_32X32.png" />
-    <EmbeddedResource Include="Images\setup.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\expensetype_32X32.png" />
-    <EmbeddedResource Include="Images\expensetype.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\itemcomponent.png" />
-    <EmbeddedResource Include="Images\itemcomponent_32X32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\Unit.png" />
-    <EmbeddedResource Include="Images\Unit_32X32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\transactions.png" />
-    <EmbeddedResource Include="Images\transactions_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="UnusableNodes16.xml">
       <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
       <SubType>Designer</SubType>
@@ -479,9 +366,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Images\TechpoolLogo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="UnusableNodes26.xml">
       <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
       <SubType>Designer</SubType>
@@ -495,6 +379,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="UnusableNodes28.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DXApplication2\CostingApp.Module\CostingApp.Module.csproj">
+      <Project>{ab2aa66b-203e-4e2a-99d1-264b89468399}</Project>
+      <Name>CostingApp.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes29.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes30.xml">
       <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
       <SubType>Designer</SubType>
     </None>

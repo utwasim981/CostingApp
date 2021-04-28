@@ -98,41 +98,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetailRibbonForm1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DetailRibbonForm1.Designer.cs">
-      <DependentUpon>DetailRibbonForm1.cs</DependentUpon>
-    </Compile>
     <Compile Include="General\CriteriaOperators\CriteriaOperatorRegistration.cs" />
     <Compile Include="General\CriteriaOperators\ValueManagerFunctionOperators.cs" />
-    <Compile Include="General\HideToolBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="General\ModelExtenders\IModelCommonMemberViewItem.cs" />
-    <Compile Include="General\SystemConfigrationHelper.cs" />
-    <Compile Include="General\ViewItems\UserInfoPanelViewItem.cs" />
     <Compile Include="Updater.cs" />
-    <Compile Include="PropertyEditors\TimeProportyEditor.cs" />
     <Compile Include="General\CriteriaOperators\IshowInternalIDFunctionOperator.cs" />
     <Compile Include="General\CriteriaOperators\ShowInternalIDControllers.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="General\Model\SequenceGenerator.cs" />
-    <Compile Include="General\Model\WXafBase.cs" />
-    <Compile Include="General\Model\WXafBaseObject.cs" />
-    <Compile Include="General\Model\WXafSequenceObject.cs" />
-    <Compile Include="General\Security\ActionPermission.cs" />
-    <Compile Include="General\Security\ActionPropertyEditor.cs" />
-    <Compile Include="General\Security\OverallCustomizationAllowedPermission.cs" />
-    <Compile Include="General\Security\WXafPermissionPolicyMemberPermissionsObject.cs" />
-    <Compile Include="General\Security\WXafPermissionPolicyNavigationPermissionObject.cs" />
-    <Compile Include="General\Security\WXafPermissionPolicyObjectPermissionsObject.cs" />
-    <Compile Include="General\Security\WXafPermissionPolicyRoleBase.cs" />
-    <Compile Include="General\Security\WXafPermissionPolicyTypePermissionObject.cs" />
-    <Compile Include="General\Security\WXafRole.cs" />
-    <Compile Include="General\Security\WXafUser.cs" />
-    <Compile Include="General\ViewItems\HintPanelViewItem.cs" />
     <Compile Include="Module.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -143,9 +116,6 @@
     <Compile Include="WXafHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DetailRibbonForm1.resx">
-      <DependentUpon>DetailRibbonForm1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Module.resx">
       <SubType>Designer</SubType>

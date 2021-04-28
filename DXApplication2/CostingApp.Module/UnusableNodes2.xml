@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="InventoryAdjustment_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="MainGroup">
+            <LayoutGroup Id="Auto8792bc18-ef24-4d35-ab0f-fae5650f2123">
+              <LayoutItem Id="EffectedDate" ViewItem="EffectedDate" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="InventoryAdjustment_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="EffectedDate" Index="4" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

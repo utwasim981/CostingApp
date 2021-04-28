@@ -1,0 +1,1415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Company="TechPool" Copyright="All copy right reserved to TechPool - Wasim Toutounji" Title="CosTech" Description="This application to manage expenses and inventory">
+  <ActionDesign>
+    <Actions>
+      <Action Id="InventoryAdjustment.Approve" CutomAction="True" />
+    </Actions>
+  </ActionDesign>
+  <BOModel>
+    <Class Name="CostingApp.Module.BO.Employees.EmployeeAttendance">
+      <OwnMembers>
+        <Member Name="EndAt" DisplayFormat="HH:mm" EditMask="HH:mm" />
+        <Member Name="StartAt" DisplayFormat="HH:mm" EditMask="HH:mm" />
+      </OwnMembers>
+    </Class>
+    <Class Name="CostingApp.Module.BO.Items.InventoryAdjustmentItem" ImageName="" />
+    <Class Name="CostingApp.Module.BO.Items.InventoryRecord" ImageName="" />
+    <Class Name="CostingApp.Module.BO.Items.InventoryTransaction" ImageName="" />
+    <Class Name="CostingApp.Module.BO.Items.ItemCard" ImageName="BO_Product" />
+    <Class Name="CostingApp.Module.BO.Items.ItemQuantity" DefaultListViewImage="" DefaultDetailViewImage="" ImageName="" />
+    <Class Name="CostingApp.Module.BO.Items.PurchaseInvoice">
+      <AppearanceRules>
+        <AppearanceRule Id="PurchaseInvoice_Total.Font" FontStyle="Bold" Context="Any" AppearanceItemType="ViewItem" TargetItems="Total" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+    <Class Name="CostingApp.Module.BO.Items.PurchaseInvoiceDetail">
+      <AppearanceRules>
+        <AppearanceRule Id="PurchaseInvoiceDetails_Amount.Font" TargetItems="Amount" FontStyle="Bold" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+    <Class Name="CostingApp.Module.BO.Items.SalesReportItem" ImageName="" />
+    <Class Name="CostingApp.Module.BO.Items.Unit" ImageName="" />
+    <Class Name="CostingApp.Module.BO.Masters.Shop">
+      <OwnMembers>
+        <Member Name="FriFrom" DisplayFormat="HH:mm" EditMask="HH:mm" />
+        <Member Name="FriTo" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="MonFrom" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="MonTo" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="SatFrom" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="SatTo" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="SunFrom" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="SunTo" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="ThuFrom" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="ThuTo" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="TusFrom" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="TusTo" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="WedFrom" EditMask="HH:mm" DisplayFormat="HH:mm" />
+        <Member Name="WedTo" EditMask="HH:mm" DisplayFormat="HH:mm" />
+      </OwnMembers>
+    </Class>
+    <Class Name="CostingApp.Module.CommonLibrary.General.Model.WXafBase">
+      <AppearanceRules>
+        <AppearanceRule Id="WxafBase_IsActive.BackgrounColor_DetailView" Criteria="[IsActive] = False" BackColor="255, 192, 192" Context="DetailView" TargetItems="IsActive" IsNewNode="True" />
+        <AppearanceRule Id="WxafBase_IsActive.BackgrounColor_ListView" Criteria="[IsActive] = False" TargetItems="*" BackColor="255, 192, 192" Context="ListView" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+  </BOModel>
+  <NavigationItems DefaultParentImageName="" DefaultLeafImageName="" DefaultChildItemsDisplayStyle="List" NavigationStyle="TreeList" StartupNavigationItem="">
+    <Items>
+      <Item Id="Transactions" Index="0">
+        <Items>
+          <Item Id="EmployeeAttendance_ListView" Index="0" />
+          <Item Id="ZReport_ListView" Index="1" />
+          <Item Id="ExpenseCard_ListView" Index="3" />
+          <Item Id="PurchaseInvoice_ListView" Index="4" />
+          <Item Id="SalesRecord_ListView" Index="5" />
+          <Item Id="InventoryAdjustment_ListView" Index="6" />
+        </Items>
+      </Item>
+      <Item Id="Employees Setup" Index="1">
+        <Items>
+          <Item Id="ContractType_ListView" Index="0" />
+          <Item Id="Position_ListView" Index="1" />
+          <Item Id="Employee_ListView" Index="2" />
+        </Items>
+      </Item>
+      <Item Id="Expenses Setup" Index="2">
+        <Items>
+          <Item Id="ExpenseCategory_ListView" Index="0" />
+          <Item Id="ExpenseType_ListView" Index="1" />
+          <Item Id="ZReportComponent_ListView" Index="2" />
+        </Items>
+      </Item>
+      <Item Id="Inventory Setup" Index="3">
+        <Items>
+          <Item Id="ItemCategory_ListView" Index="0" />
+          <Item Id="UnitType_ListView" Index="1" />
+          <Item Id="ItemCard_ListView" Index="2" />
+        </Items>
+      </Item>
+      <Item Id="Administration" Index="4">
+        <Items>
+          <Item Id="City_ListView" Index="0" />
+          <Item Id="Shop_ListView" Index="1" />
+          <Item Id="Period_ListView" Index="2" />
+          <Item Id="@c41d598b-d028-451b-bb4e-0611f22e45b1" ViewId="WXafRole_ListView" Caption="Roles" Index="3" IsNewNode="True" />
+          <Item Id="@c2427a82-a1f2-420b-b83d-dd720e6c9759" ViewId="WXafUser_ListView" Caption="Users" Index="4" IsNewNode="True" />
+          <Item Id="SystemConfigration_ListView" Index="5" />
+        </Items>
+      </Item>
+      <Item Id="Testing" Index="5" />
+    </Items>
+  </NavigationItems>
+  <Options>
+    <LayoutManagerOptions RequiredFieldMark="*" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="17.2.16.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="17.2.16.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="BasePeriod_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="PeriodName" Caption="Name" />
+        <PropertyEditor Id="QuarterPeriod" PropertyName="QuarterPeriod" Caption="Parent" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="BasePeriodMain" ShowCaption="True" Index="0" RelativeSize="100" Caption="" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Autoe58938b3-4580-4d44-8ea8-2162de67f2c6" ShowCaption="False" Caption="" Index="0" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="PeriodName" ViewItem="PeriodName" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="QuarterPeriod" ViewItem="QuarterPeriod" Index="1" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="StartDate" ViewItem="StartDate" Index="2" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="EndDate" ViewItem="EndDate" Index="3" RelativeSize="89.556135770234988" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="Status" ViewItem="Status" Index="1" RelativeSize="50" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="81.930693069306926" Direction="Horizontal" Removed="True">
+            <LayoutGroup Id="Period" Index="0" RelativeSize="100" Caption="Period" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="EndDate" Index="0" RelativeSize="54.237288135593218" Removed="True" />
+              <LayoutItem Id="StartDate" Index="0" RelativeSize="38.554216867469883" Removed="True" />
+              <LayoutItem Id="Status" Index="0" RelativeSize="100" Removed="True" />
+              <LayoutItem Id="PeriodName" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Index="1" RelativeSize="5.4380664652567976" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="City_DetailView" Caption=" ">
+      <Layout>
+        <LayoutGroup Id="Main" ShowCaption="True" RelativeSize="12.128712871287128" Caption=" ">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="City" RelativeSize="100" Caption="City" Direction="Horizontal">
+              <LayoutGroup Id="Auto348cca83-8271-4c6f-ba5c-14486d96749e" ShowCaption="False" Caption="Auto348cca83-8271-4c6f-ba5c-14486d96749e(4)" Index="0" RelativeSize="50" IsNewNode="True">
+                <LayoutItem Id="CityCode" ViewItem="CityCode" Index="0" RelativeSize="50" IsNewNode="True" />
+                <LayoutItem Id="CityName" ViewItem="CityName" Index="1" RelativeSize="50" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto739c0d89-0741-4b66-b418-351b29fd33ed" ShowCaption="False" Caption="Auto739c0d89-0741-4b66-b418-351b29fd33ed(7)" Index="1" RelativeSize="50" IsNewNode="True">
+                <LayoutItem Id="IsActive" ViewItem="IsActive" Index="0" RelativeSize="50" IsNewNode="True" />
+                <LayoutItem Id="Item1" Index="1" RelativeSize="50" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="CityCode" RelativeSize="54.237288135593218" Removed="True" />
+              <LayoutItem Id="CityName" RelativeSize="3.2831737346101231" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Index="1" RelativeSize="34.736842105263158" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+        <LayoutItem Id="@c67baa58-cd72-4462-ab60-97c68371aafa" Index="1" RelativeSize="87.871287128712865" IsNewNode="True" />
+      </Layout>
+    </DetailView>
+    <ListView Id="City_ListView" Caption="Cities">
+      <Columns>
+        <ColumnInfo Id="CityCode" Index="0" />
+        <ColumnInfo Id="CityName" Index="1" />
+      </Columns>
+    </ListView>
+    <ListView Id="City_LookupListView" Caption="Cities">
+      <Columns>
+        <ColumnInfo Id="CityCode" PropertyName="CityCode" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="CityName" Index="1" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ContractType_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="ContractTypeName" Caption="Name" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="ContractMain" ShowCaption="True" Direction="Horizontal" Index="0" RelativeSize="100" Caption="" IsNewNode="True">
+            <LayoutGroup Id="Auto2be91476-74f1-41ec-95ab-d9ff71c6faa5" ShowCaption="False" Caption="Auto2be91476-74f1-41ec-95ab-d9ff71c6faa5(4)" Index="0" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="ContractTypeName" ViewItem="ContractTypeName" Index="0" RelativeSize="4.1237113402061851" IsNewNode="True" />
+              <LayoutItem Id="SalaryType" ViewItem="SalaryType" Index="1" RelativeSize="95.876288659793815" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto30319214-ed2b-42b3-82e7-d7a95c769f7d" ShowCaption="False" Caption="Auto30319214-ed2b-42b3-82e7-d7a95c769f7d(7)" Index="1" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="0" RelativeSize="4.1237113402061851" IsNewNode="True" />
+              <LayoutItem Id="Item1" Index="1" RelativeSize="95.876288659793815" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="87.871287128712865" ShowCaption="True" Direction="Horizontal" Index="1" Removed="True">
+            <LayoutGroup Id="ContractType" RelativeSize="87.871287128712865" Caption="ContractType" Direction="Horizontal" Index="1" Removed="True">
+              <LayoutItem Id="SalaryType" Index="0" RelativeSize="100" Removed="True" />
+              <LayoutItem Id="ContractTypeName" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Index="1" RelativeSize="5.070422535211268" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ContractType_ListView" Caption="Contract Types">
+      <Columns>
+        <ColumnInfo Id="IsActive" Index="-1" />
+        <ColumnInfo Id="ContractTypeName" Caption="Name" />
+      </Columns>
+    </ListView>
+    <ListView Id="ContractType_LookupListView" Caption="Contract Types">
+      <Columns>
+        <ColumnInfo Id="ContractTypeName" Caption="Name" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Employee_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="ContractType" Caption="Contract" />
+        <PropertyEditor Id="EmployeeCode" Caption="Code" />
+        <PropertyEditor Id="EmployeePhoto" Caption="Photo" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="EmplyeeMain" ShowCaption="True" Index="0" RelativeSize="14.91442542787286" Caption="Personal Info" Direction="Horizontal" IsNewNode="True">
+            <LayoutItem Id="EmployeePhoto" ViewItem="EmployeePhoto" Index="0" RelativeSize="16.16" IsNewNode="True" />
+            <LayoutGroup Id="Auto37b41673-0bf9-4ac4-8428-8b52842a6cc1" ShowCaption="False" Caption="Auto37b41673-0bf9-4ac4-8428-8b52842a6cc1(14)" Index="1" RelativeSize="35.04" IsNewNode="True">
+              <LayoutItem Id="EmployeeCode" ViewItem="EmployeeCode" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutItem Id="FirstName" ViewItem="FirstName" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+              <LayoutItem Id="LastName" ViewItem="LastName" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto58ebdff9-101a-45e1-86f9-b28de9735d7e" ShowCaption="False" Caption="Auto58ebdff9-101a-45e1-86f9-b28de9735d7e(18)" Index="2" RelativeSize="48.8" IsNewNode="True">
+              <LayoutItem Id="FullName" ViewItem="FullName" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutItem Id="Gender" ViewItem="Gender" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="WorkInfo" ShowCaption="True" Caption="Work Info" Index="1" RelativeSize="85.085574572127143" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Auto482fda96-9e8a-4f1a-baa0-f9b0168ca23a" ShowCaption="False" Caption="Auto482fda96-9e8a-4f1a-baa0-f9b0168ca23a(13)" Index="0" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="ContractType" ViewItem="ContractType" Index="0" RelativeSize="4.833836858006042" IsNewNode="True" />
+              <LayoutItem Id="Position" ViewItem="Position" Index="1" RelativeSize="95.166163141993962" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto02cdf10e-e0f1-463b-bc33-eec673a375d9" ShowCaption="False" Caption="Auto02cdf10e-e0f1-463b-bc33-eec673a375d9(16)" Index="1" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="SalaryPerHour" ViewItem="SalaryPerHour" Index="0" RelativeSize="4.833836858006042" IsNewNode="True" />
+              <LayoutItem Id="MonthlySalary" ViewItem="MonthlySalary" Index="1" RelativeSize="95.166163141993962" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="73.762376237623769" Direction="Horizontal" Removed="True">
+            <LayoutGroup Id="XPObject" Index="0" RelativeSize="100" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Employee" RelativeSize="93.959731543624159" Removed="True">
+              <LayoutGroup Id="Employee_col1" RelativeSize="50" Caption="Employee_col1" Direction="Horizontal">
+                <LayoutItem Id="Position" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="FirstName" RelativeSize="21.428571428571427" Index="2" Removed="True" />
+                <LayoutItem Id="LastName" RelativeSize="50" Index="2" Removed="True" />
+                <LayoutItem Id="ContractType" RelativeSize="50" Removed="True" />
+                <LayoutItem Id="EmployeeCode" RelativeSize="17.647058823529413" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Employee_col2" RelativeSize="50" Caption="Employee_col2" Direction="Horizontal">
+                <LayoutItem Id="Gender" RelativeSize="36.363636363636367" Index="0" Removed="True" />
+                <LayoutItem Id="MonthlySalary" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="SalaryPerHour" RelativeSize="50" Index="0" Removed="True" />
+                <LayoutItem Id="EmployeePhoto" Removed="True" />
+                <LayoutItem Id="FullName" RelativeSize="28.571428571428573" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Employee_ListView" Caption="Employees">
+      <Variants>
+        <Variant Id="StandardList" Caption="Standard List" Index="0" ViewID="Employee_ListView_Standard" IsNewNode="True" />
+        <Variant Id="AdvancedList" ViewID="Employee_ListView_Advanced" Caption="Advanced List" IsNewNode="True" />
+      </Variants>
+    </ListView>
+    <ListView Id="Employee_ListView_Advanced" ClassName="CostingApp.Module.BO.Employees.Employee" Caption="Employees" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreatedOn" PropertyName="CreatedOn" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FirstName" PropertyName="FirstName" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsActive" PropertyName="IsActive" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastName" PropertyName="LastName" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdatedBy" PropertyName="UpdatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdatedOn" PropertyName="UpdatedOn" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="EmployeeCode" PropertyName="EmployeeCode" Width="70" Index="0" OwnerBand="Information" Caption="Code" IsNewNode="True" />
+        <ColumnInfo Id="EmployeePhoto" PropertyName="EmployeePhoto" Width="70" Index="0" OwnerBand="Photo" Caption="Photo" IsNewNode="True" />
+        <ColumnInfo Id="FullName" PropertyName="FullName" Width="400" SortIndex="0" SortOrder="Ascending" Index="1" OwnerBand="Information" IsNewNode="True" />
+        <ColumnInfo Id="Gender" PropertyName="Gender" Width="70" Index="2" OwnerBand="Information" IsNewNode="True" />
+        <ColumnInfo Id="Position" PropertyName="Position" Width="70" Index="3" OwnerBand="Information" IsNewNode="True" />
+        <ColumnInfo Id="ContractType" PropertyName="ContractType" Width="70" Index="4" OwnerBand="Information" Caption="Contract" IsNewNode="True" />
+        <ColumnInfo Id="MonthlySalary" PropertyName="MonthlySalary" Width="50" Index="6" OwnerBand="Information" IsNewNode="True" />
+        <ColumnInfo Id="SalaryPerHour" PropertyName="SalaryPerHour" Width="50" Index="8" OwnerBand="Information" IsNewNode="True" />
+      </Columns>
+      <BandsLayout Enable="True" IsNewNode="True">
+        <Band Id="Photo" Caption="Photo" Index="0" IsNewNode="True" />
+        <Band Id="Information" Index="1" IsNewNode="True" />
+      </BandsLayout>
+    </ListView>
+    <ListView Id="Employee_ListView_Standard" ClassName="CostingApp.Module.BO.Employees.Employee" Caption="Employees" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreatedOn" PropertyName="CreatedOn" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="EmployeePhoto" PropertyName="EmployeePhoto" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="FirstName" PropertyName="FirstName" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsActive" PropertyName="IsActive" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastName" PropertyName="LastName" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdatedBy" PropertyName="UpdatedBy" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdatedOn" PropertyName="UpdatedOn" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="EmployeeCode" PropertyName="EmployeeCode" Width="70" Index="0" Caption="Code" IsNewNode="True" />
+        <ColumnInfo Id="FullName" PropertyName="FullName" Width="400" SortIndex="0" SortOrder="Ascending" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Gender" PropertyName="Gender" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Position" PropertyName="Position" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="ContractType" PropertyName="ContractType" Width="70" Index="4" Caption="Contract" IsNewNode="True" />
+        <ColumnInfo Id="MonthlySalary" PropertyName="MonthlySalary" Width="50" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="SalaryPerHour" PropertyName="SalaryPerHour" Width="50" Index="8" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Employee_LookupListView" Caption="Employees">
+      <Columns>
+        <ColumnInfo Id="EmployeeCode" PropertyName="EmployeeCode" Index="0" Caption="Code" IsNewNode="True" />
+        <ColumnInfo Id="FullName" Index="1" />
+      </Columns>
+    </ListView>
+    <DetailView Id="EmployeeAttendance_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="Employee.ContractType" PropertyName="Employee.ContractType" Caption="Contract" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="Employee.ContractType.SalaryType" PropertyName="Employee.ContractType.SalaryType" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="Employee.EmployeeCode" PropertyName="Employee.EmployeeCode" Caption="Code" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="Employee.EmployeePhoto" PropertyName="Employee.EmployeePhoto" Caption="Photo" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="Employee.Position" PropertyName="Employee.Position" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="ExpenseDate" Caption="Date" />
+        <PropertyEditor Id="ExpenseType" Caption="Expense" AllowEdit="False" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" Direction="Horizontal" RelativeSize="100">
+          <LayoutGroup Id="AttendanceMain" ShowCaption="True" Direction="Vertical" Index="0" RelativeSize="59.175257731958766" Caption="Attendance" IsNewNode="True">
+            <LayoutItem Id="Shop" ViewItem="Shop" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+            <LayoutItem Id="Employee" ViewItem="Employee" Index="1" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="ExpenseDate" ViewItem="ExpenseDate" Index="2" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="Period" ViewItem="Period" Index="3" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="StartAt" ViewItem="StartAt" Index="4" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="EndAt" ViewItem="EndAt" Index="5" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="NumberOfHours" ViewItem="NumberOfHours" Index="6" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="HourPrice" ViewItem="HourPrice" Index="7" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="Amount" ViewItem="Amount" Index="8" RelativeSize="73.89033942558747" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="EmployeeMain" Caption="Employee Info" ShowCaption="True" Direction="Vertical" Index="1" RelativeSize="40.824742268041234" IsNewNode="True">
+            <LayoutItem Id="Employee.EmployeePhoto" ViewItem="Employee.EmployeePhoto" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+            <LayoutItem Id="Employee.EmployeeCode" ViewItem="Employee.EmployeeCode" Index="1" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="Employee.Position" ViewItem="Employee.Position" Index="2" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="Employee.ContractType" ViewItem="Employee.ContractType" Index="3" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="Employee.ContractType.SalaryType" ViewItem="Employee.ContractType.SalaryType" Index="4" RelativeSize="3.133159268929504" IsNewNode="True" />
+            <LayoutItem Id="ExpenseType" ViewItem="ExpenseType" Index="5" RelativeSize="83.289817232375981" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="EmployeeAttendance_ListView" AllowEdit="True" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="Status" Index="-1" />
+        <ColumnInfo Id="Shop" Index="1" />
+        <ColumnInfo Id="Employee" Index="2" />
+        <ColumnInfo Id="ExpenseDate" Index="3" Caption="Date" />
+        <ColumnInfo Id="Period" Index="4" />
+        <ColumnInfo Id="StartAt" Index="5" />
+        <ColumnInfo Id="EndAt" Index="6" />
+        <ColumnInfo Id="NumberOfHours" Index="7" />
+        <ColumnInfo Id="HourPrice" Index="8" />
+        <ColumnInfo Id="Amount" Index="9" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ExpenseCard_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="ExpenseDate" Caption="Date" />
+        <PropertyEditor Id="ExpenseType" Caption="Expense" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="CardMain" ShowCaption="True" Index="0" RelativeSize="100" Caption="" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Auto6f1e957d-e9d8-4236-97dc-300aa63c5b07" ShowCaption="False" Caption="" Index="0" RelativeSize="46.940928270042193" IsNewNode="True">
+              <LayoutItem Id="Number" ViewItem="Number" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="Shop" ViewItem="Shop" Index="1" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="ExpenseDate" ViewItem="ExpenseDate" Index="2" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="Period" ViewItem="Period" Index="3" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="ExpenseType" ViewItem="ExpenseType" Index="4" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="Amount" ViewItem="Amount" Index="5" RelativeSize="83.289817232375981" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto96de0726-ed0d-4902-9c87-67244c153e16" ShowCaption="False" Caption="" Index="1" RelativeSize="53.059071729957807" IsNewNode="True">
+              <LayoutItem Id="Item" ViewItem="Item" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="Employee" ViewItem="Employee" Index="1" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="Notes" ViewItem="Notes" Index="2" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="VendorBill" ViewItem="VendorBill" Index="3" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="4" RelativeSize="86.422976501305484" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100" Removed="True">
+            <LayoutGroup Id="XPObject" Index="2" RelativeSize="5.6426332288401255">
+              <LayoutItem Id="Oid" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ExpenseCard" RelativeSize="84.012539184952985" Caption="Number" Direction="Horizontal">
+              <LayoutItem Id="Number" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ExpenseRecord" RelativeSize="10.344827586206897">
+              <LayoutGroup Id="ExpenseRecord_col1" RelativeSize="50" Caption="ExpenseRecord_col1" Direction="Horizontal">
+                <LayoutItem Id="Amount" Index="0" RelativeSize="100" Removed="True" />
+                <LayoutItem Id="ExpenseType" Index="0" RelativeSize="23.529411764705884" Removed="True" />
+                <LayoutItem Id="Period" Index="0" RelativeSize="23.529411764705884" Removed="True" />
+                <LayoutItem Id="ExpenseDate" Index="2" RelativeSize="17.647058823529413" Removed="True" />
+                <LayoutItem Id="Shop" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ExpenseRecord_col2" RelativeSize="50" Caption="ExpenseRecord_col2" Direction="Horizontal">
+                <LayoutItem Id="Status" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="Employee" RelativeSize="28.571428571428573" Removed="True" />
+                <LayoutItem Id="Item" RelativeSize="23.529411764705884" Removed="True" />
+                <LayoutItem Id="Notes" RelativeSize="27.272727272727273" Removed="True" />
+                <LayoutItem Id="VendorBill" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ExpenseCard_ListView" Caption="Expense Cards" AllowEdit="True" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="Shop" Index="1" />
+        <ColumnInfo Id="ExpenseDate" Caption="Date" Index="2" />
+        <ColumnInfo Id="Period" Index="3" />
+        <ColumnInfo Id="ExpenseType" Caption="Expense" Index="4" />
+        <ColumnInfo Id="Amount" Index="5" />
+        <ColumnInfo Id="Employee" Index="6" />
+        <ColumnInfo Id="Item" Index="7" />
+        <ColumnInfo Id="Status" Index="8" />
+      </Columns>
+    </ListView>
+    <ListView Id="ExpenseCard_LookupListView" Caption="Expense Cards" />
+    <DetailView Id="ExpenseCategory_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="ExpenseCategoryName" Caption="Name" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="CategoryMain" ShowCaption="True" Index="0" RelativeSize="9.1584158415841586" Caption=" " Direction="Vertical" IsNewNode="True">
+            <LayoutGroup Id="Auto4ba21fae-77a8-48b2-a1c3-85a5260a4980" ShowCaption="False" Caption="Auto4ba21fae-77a8-48b2-a1c3-85a5260a4980(3)" Index="0" RelativeSize="100" Direction="Horizontal" IsNewNode="True">
+              <LayoutItem Id="ExpenseCategoryName" ViewItem="ExpenseCategoryName" Index="0" RelativeSize="50" IsNewNode="True" />
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="50" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="90.841584158415841" Direction="Horizontal" Index="1" Removed="True">
+            <LayoutGroup Id="XPObject" Index="0" RelativeSize="100" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ExpenseCategory" Caption="Name" Direction="Horizontal" RelativeSize="94.929577464788736" Removed="True">
+              <LayoutItem Id="ExpenseCategoryName" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ExpenseCategory_ExpenseTypes_ListView" Caption="Expense Types" />
+    <ListView Id="ExpenseCategory_ListView" Caption="Expense Categories" />
+    <ListView Id="ExpenseCategory_LookupListView" Caption="Expense Categories" />
+    <DetailView Id="ExpenseRecord_DetailView" Caption="" />
+    <DetailView Id="ExpenseType_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="ExpenseCategory" PropertyName="ExpenseCategory" Caption="Category" IsNewNode="True" />
+        <PropertyEditor Id="ExpenseTypeName" Caption="Name" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="@b148548d-cbf2-415f-ad62-0c4ba09f5bd3" ShowCaption="True" Caption=" " Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+            <LayoutGroup Id="Auto36ae6d04-118d-4719-bec8-4f1491d5dc2c" ShowCaption="False" Caption="Auto36ae6d04-118d-4719-bec8-4f1491d5dc2c(4)" Index="0" RelativeSize="45.580404685835994" IsNewNode="True">
+              <LayoutItem Id="ExpenseTypeName" ViewItem="ExpenseTypeName" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="ExpenseCategory" ViewItem="ExpenseCategory" Index="1" RelativeSize="95.822454308094" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto897950ae-bf3a-4e2c-b2f2-f594f302fc39" ShowCaption="False" Caption="Auto897950ae-bf3a-4e2c-b2f2-f594f302fc39(7)" Index="1" RelativeSize="54.419595314164006" IsNewNode="True">
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="Item1" Index="1" RelativeSize="95.822454308094" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="87.871287128712865" ShowCaption="True" Index="1" Direction="Horizontal" Removed="True">
+            <LayoutGroup Id="ExpenseType" Caption="Name" Direction="Horizontal" RelativeSize="83.415841584158414" Index="1" Removed="True">
+              <LayoutItem Id="ExpenseTypeName" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Index="1" RelativeSize="87.871287128712865" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ExpenseType_ListView" Caption="Expense Types" />
+    <ListView Id="ExpenseType_LookupListView" Caption="Expense Types">
+      <Columns>
+        <ColumnInfo Id="ExpenseCategory" PropertyName="ExpenseCategory" Index="0" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="InventoryAdjustment_DetailView" Caption="">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="MainGroup" ShowCaption="True" Index="0" RelativeSize="14.91442542787286" Caption="MainGroup(2)" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Autoa94b7bc9-1aa4-496c-aa02-810168d12f95" ShowCaption="False" Caption="Autoa94b7bc9-1aa4-496c-aa02-810168d12f95(3)" Index="0" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="Number" ViewItem="Number" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutItem Id="Shop" ViewItem="Shop" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+              <LayoutItem Id="TransactionDate" ViewItem="TransactionDate" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto8792bc18-ef24-4d35-ab0f-fae5650f2123" ShowCaption="False" Caption="Auto8792bc18-ef24-4d35-ab0f-fae5650f2123(8)" Index="1" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="Period" ViewItem="Period" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutItem Id="Step" ViewItem="Step" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Items_Group" Direction="Vertical" Index="1" RelativeSize="85.085574572127143">
+            <LayoutItem Id="Items" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="InventoryAdjustment_Items_ListView" Caption="Items" AllowEdit="True" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="Item" Index="0" DataSourceCriteria="[IsActive] = True And [ItemType] &lt;&gt; ##Enum#CostingApp.Module.BO.EnumItemCard,MenuItem#" />
+        <ColumnInfo Id="TransactionUnit" Index="1" AllowEdit="False" Caption="Unit" />
+        <ColumnInfo Id="ActualQuantity" Index="2" />
+        <ColumnInfo Id="QuantityOnHand" Index="3" />
+        <ColumnInfo Id="TransactionType" Index="4" AllowEdit="False" Caption="Transaction" />
+        <ColumnInfo Id="Quantity" Index="5" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <ListView Id="InventoryAdjustment_ListView" Caption="Inventory Adjustments">
+      <Columns>
+        <ColumnInfo Id="Shop" Index="0" />
+        <ColumnInfo Id="TransactionDate" Caption="Date" Index="2" />
+        <ColumnInfo Id="Period" Index="3" />
+        <ColumnInfo Id="Step" Index="5" />
+        <ColumnInfo Id="Status" Index="6" />
+      </Columns>
+    </ListView>
+    <DetailView Id="InventoryAdjustmentItem_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="Amount" AllowEdit="False" />
+        <PropertyEditor Id="BaseQuantity" AllowEdit="False" />
+        <PropertyEditor Id="CreatedBy" AllowEdit="False" />
+        <PropertyEditor Id="CreatedOn" AllowEdit="False" />
+        <PropertyEditor Id="Employee" AllowEdit="False" />
+        <PropertyEditor Id="ExpenseDate" AllowEdit="False" />
+        <PropertyEditor Id="ExpenseType" AllowEdit="False" />
+        <PropertyEditor Id="IsActive" AllowEdit="False" />
+        <PropertyEditor Id="Item" DataSourceCriteria="[IsActive] = True And [ItemType] &lt;&gt; ##Enum#CostingApp.Module.BO.EnumItemCard,MenuItem#" />
+        <PropertyEditor Id="Oid" AllowEdit="True" />
+        <PropertyEditor Id="Period" AllowEdit="True" />
+        <PropertyEditor Id="QuantityIN" AllowEdit="True" />
+        <PropertyEditor Id="QuantityOnHand" AllowEdit="True" />
+        <PropertyEditor Id="QuantityOut" AllowEdit="True" />
+        <PropertyEditor Id="Status" AllowEdit="True" />
+        <PropertyEditor Id="StockUnit" AllowEdit="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="InventoryRecord" RelativeSize="100" Index="0" Caption="">
+              <LayoutGroup Id="InventoryRecord_col1" RelativeSize="49.948822927328557">
+                <LayoutItem Id="Item" ViewItem="Item" Index="0" RelativeSize="4.1237113402061851" IsNewNode="True" />
+                <LayoutItem Id="TransactionUnit" Index="1" RelativeSize="3.0927835051546393" />
+                <LayoutItem Id="ActualQuantity" ViewItem="ActualQuantity" Index="2" RelativeSize="92.783505154639172" IsNewNode="True" />
+                <LayoutItem Id="Quantity" Index="3" RelativeSize="3.0927835051546393" Removed="True" />
+                <LayoutItem Id="QuantityIN" Index="3" RelativeSize="89.69072164948453" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="InventoryRecord_col2" RelativeSize="50.051177072671443">
+                <LayoutItem Id="QuantityOnHand" ViewItem="QuantityOnHand" Index="0" RelativeSize="4.1237113402061851" IsNewNode="True" />
+                <LayoutItem Id="Quantity" ViewItem="Quantity" Index="1" RelativeSize="95.876288659793815" IsNewNode="True" />
+                <LayoutItem Id="Price" RelativeSize="92.783505154639172" Index="2" Removed="True" />
+                <LayoutItem Id="QuantityOut" RelativeSize="3.0927835051546393" Index="2" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="ExpenseRecord" RelativeSize="76.283618581907092" Index="1" Removed="True">
+              <LayoutGroup Id="ExpenseRecord_col1" RelativeSize="49.948822927328557">
+                <LayoutItem Id="Amount" RelativeSize="82.372881355932208" />
+                <LayoutItem Id="ExpenseDate" RelativeSize="4.0677966101694913" />
+                <LayoutItem Id="ExpenseType" RelativeSize="4.0677966101694913" />
+                <LayoutItem Id="Period" RelativeSize="4.0677966101694913" />
+                <LayoutItem Id="Shop" RelativeSize="5.4237288135593218" />
+              </LayoutGroup>
+              <LayoutGroup Id="ExpenseRecord_col2" RelativeSize="50.051177072671443">
+                <LayoutItem Id="Employee" RelativeSize="86.440677966101688" />
+                <LayoutItem Id="Item" Removed="True" />
+                <LayoutItem Id="Notes" RelativeSize="4.0677966101694913" />
+                <LayoutItem Id="Status" RelativeSize="4.0677966101694913" />
+                <LayoutItem Id="VendorBill" RelativeSize="5.4237288135593218" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Index="2" RelativeSize="56.479217603911984" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="InventoryAdjustmentItem" RelativeSize="52.811735941320293" Caption="InventoryAdjustmentItem" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="ActualQuantity" RelativeSize="100" Index="0" Removed="True" />
+              <LayoutItem Id="QuantityOnHand" RelativeSize="51.612903225806448" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="InventoryItem_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="ExpenseType" Caption="Expense" />
+        <PropertyEditor Id="ItemCode" Caption="Code" />
+        <PropertyEditor Id="ItemName" Caption="Name" />
+        <PropertyEditor Id="ItemType" Caption="Type" />
+        <PropertyEditor Id="UnitType" PropertyName="UnitType" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="Item Main" ShowCaption="True" Direction="Horizontal" Index="0" RelativeSize="11.980440097799511" Caption="Item Main(2)" IsNewNode="True">
+            <LayoutGroup Id="Autocd3da185-c072-462b-8c94-4fd324234b7d" ShowCaption="False" Caption="Autocd3da185-c072-462b-8c94-4fd324234b7d(3)" Index="0" RelativeSize="49.846468781985671" IsNewNode="True">
+              <LayoutItem Id="ItemCode" ViewItem="ItemCode" Index="0" RelativeSize="50" IsNewNode="True" />
+              <LayoutItem Id="ItemName" ViewItem="ItemName" Index="1" RelativeSize="50" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto25177ba6-40f9-40bc-a584-b7cbf441c48c" ShowCaption="False" Caption="Auto25177ba6-40f9-40bc-a584-b7cbf441c48c(6)" Index="1" RelativeSize="50.153531218014329" IsNewNode="True">
+              <LayoutItem Id="Category" ViewItem="Category" Index="0" RelativeSize="50" IsNewNode="True" />
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="50" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Autod0b0b1f6-166b-47ce-8780-53c4c0103119" ShowCaption="False" Caption="Autod0b0b1f6-166b-47ce-8780-53c4c0103119(9)" Direction="Horizontal" Index="1" RelativeSize="15.403422982885086" IsNewNode="True">
+            <LayoutGroup Id="UnitGroup" ShowCaption="True" Caption="Units" Direction="Horizontal" Index="0" RelativeSize="49.850149850149847" IsNewNode="True">
+              <LayoutGroup Id="Auto45b45987-9871-44ef-a323-b890aae4106f" ShowCaption="False" Caption="Auto45b45987-9871-44ef-a323-b890aae4106f(12)" Index="0" RelativeSize="49.791666666666664" IsNewNode="True">
+                <LayoutItem Id="UnitType" ViewItem="UnitType" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+                <LayoutItem Id="BaseUnit" ViewItem="BaseUnit" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+                <LayoutItem Id="StockUnit" ViewItem="StockUnit" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Autoad375e83-2f44-488c-a728-e1a121d24534" ShowCaption="False" Caption="Autoad375e83-2f44-488c-a728-e1a121d24534(15)" Index="1" RelativeSize="50.208333333333336" IsNewNode="True">
+                <LayoutItem Id="PurchaseUnit" ViewItem="PurchaseUnit" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+                <LayoutItem Id="SalesUnit" ViewItem="SalesUnit" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+                <LayoutItem Id="Item2" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="SalesAndPurchase" ShowCaption="True" Caption="Sales &amp; Purchase" Direction="Horizontal" Index="1" RelativeSize="50.149850149850153" IsNewNode="True">
+              <LayoutGroup Id="Autoa11214b7-da8a-4ee3-9299-af85585f6295" ShowCaption="False" Caption="Autoa11214b7-da8a-4ee3-9299-af85585f6295(17)" Index="0" RelativeSize="52.38095238095238" IsNewNode="True">
+                <LayoutItem Id="ExpenseType" ViewItem="ExpenseType" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+                <LayoutItem Id="Item3" Index="1" RelativeSize="31.818181818181817" IsNewNode="True" />
+                <LayoutItem Id="Item1" Index="2" RelativeSize="31.818181818181817" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Autod23b4c41-110b-4b23-a371-ea087aae17c9" ShowCaption="False" Caption="Autod23b4c41-110b-4b23-a371-ea087aae17c9(20)" Index="1" RelativeSize="47.61904761904762" IsNewNode="True">
+                <LayoutItem Id="PurchasePrice" ViewItem="PurchasePrice" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+                <LayoutItem Id="SellPrice" ViewItem="SellPrice" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+                <LayoutItem Id="Item4" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Inventory_Group" Direction="Vertical" RelativeSize="72.616136919315409" Index="2">
+            <LayoutItem Id="Inventory" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="InventoryItem_LookupListView" Caption="Items">
+      <Columns>
+        <ColumnInfo Id="ItemCode" Index="0" Caption="Code" />
+        <ColumnInfo Id="ItemName" Index="1" Caption="Name" />
+        <ColumnInfo Id="BaseUnit" Removed="True" />
+        <ColumnInfo Id="Category" Removed="True" />
+        <ColumnInfo Id="CreatedBy" Removed="True" />
+        <ColumnInfo Id="CreatedOn" Removed="True" />
+        <ColumnInfo Id="ExpenseType" Removed="True" />
+        <ColumnInfo Id="IsActive" Removed="True" />
+        <ColumnInfo Id="ItemType" Removed="True" />
+        <ColumnInfo Id="Oid" Removed="True" />
+        <ColumnInfo Id="PurchasePrice" Removed="True" />
+        <ColumnInfo Id="PurchaseUnit" Removed="True" />
+        <ColumnInfo Id="SalesUnit" Removed="True" />
+        <ColumnInfo Id="SellPrice" Removed="True" />
+        <ColumnInfo Id="StockUnit" Removed="True" />
+        <ColumnInfo Id="UnitType" Removed="True" />
+        <ColumnInfo Id="UpdatedBy" Removed="True" />
+        <ColumnInfo Id="UpdatedOn" Removed="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemCard_Inventory_ListView" AllowEdit="False" AllowDelete="False" AllowLink="False" AllowNew="False" />
+    <ListView Id="ItemCard_ListView" Caption="Items">
+      <Columns>
+        <ColumnInfo Id="BaseUnit" Index="-1" />
+        <ColumnInfo Id="PurchasePrice" Index="-1" />
+        <ColumnInfo Id="PurchaseUnit" Index="-1" />
+        <ColumnInfo Id="SalesUnit" Index="-1" />
+        <ColumnInfo Id="SellPrice" Index="-1" />
+        <ColumnInfo Id="StockUnit" Index="-1" />
+        <ColumnInfo Id="UnitType" Index="-1" />
+        <ColumnInfo Id="ItemType" Caption="Type" Index="0" />
+        <ColumnInfo Id="ItemCode" Caption="Code" Index="1" />
+        <ColumnInfo Id="ItemName" Caption="Name" Index="2" />
+        <ColumnInfo Id="Category" Index="3" />
+        <ColumnInfo Id="ExpenseType" Caption="Expense" Index="4" />
+        <ColumnInfo Id="IsActive" Index="5" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemCard_LookupListView" Caption="Items">
+      <Columns>
+        <ColumnInfo Id="ItemCode" PropertyName="ItemCode" Index="0" Caption="Code" IsNewNode="True" />
+        <ColumnInfo Id="ItemName" Index="1" Caption="Name" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ItemCategory_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="ItemCategoryName" Caption="Name" />
+        <PropertyEditor Id="ParentCategory" PropertyName="ParentCategory" Caption="Parent" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="Main" ShowCaption="True" Index="0" RelativeSize="100" Caption="Main" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Autoe71dd27d-286d-448b-87fe-5a4ab6c87c90" ShowCaption="False" Caption="Autoe71dd27d-286d-448b-87fe-5a4ab6c87c90(3)" Index="0" RelativeSize="46.528497409326427" IsNewNode="True">
+              <LayoutItem Id="ItemCategoryName" ViewItem="ItemCategoryName" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="ParentCategory" ViewItem="ParentCategory" Index="1" RelativeSize="95.822454308094" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Autob702c223-4da1-44a6-88c3-7ee161cf3789" ShowCaption="False" Caption="Autob702c223-4da1-44a6-88c3-7ee161cf3789(6)" Index="1" RelativeSize="53.471502590673573" IsNewNode="True">
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="Item1" Index="1" RelativeSize="95.822454308094" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+          <TabbedGroup Id="Tabs" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ItemCategory_ListView" Caption="Item Categories">
+      <Columns>
+        <ColumnInfo Id="ItemCategoryName" Caption="Name" Index="0" />
+        <ColumnInfo Id="Parent" Index="1" Removed="True" />
+        <ColumnInfo Id="ParentCategory" PropertyName="ParentCategory" Caption="Parent" Index="1" IsNewNode="True" Removed="True" />
+        <ColumnInfo Id="IsActive" Index="2" />
+        <ColumnInfo Id="Name" Removed="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemCategory_LookupListView">
+      <Columns>
+        <ColumnInfo Id="ItemCategoryName" PropertyName="ItemCategoryName" Caption="Name" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Parent" PropertyName="Parent" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Name" Removed="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="MenuItem_Components_ListView" AllowDelete="True" AllowEdit="True" NewItemRowPosition="Top" Caption="Components" />
+    <DetailView Id="MenuItem_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="ExpenseType" Caption="Expense" />
+        <PropertyEditor Id="ItemCode" Caption="Code" />
+        <PropertyEditor Id="ItemName" Caption="Name" />
+        <PropertyEditor Id="ItemType" Caption="Type" />
+        <PropertyEditor Id="UnitType" PropertyName="UnitType" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="ItemMain" ShowCaption="True" Direction="Horizontal" Index="0" RelativeSize="11.980440097799511" Caption="" IsNewNode="True">
+            <LayoutGroup Id="Autoaddb017d-7213-49c3-b0c7-d7627afd5cc0" ShowCaption="False" Caption="Autoaddb017d-7213-49c3-b0c7-d7627afd5cc0(3)" Index="0" RelativeSize="46.542827657378744" IsNewNode="True">
+              <LayoutItem Id="ItemCode" ViewItem="ItemCode" Index="0" RelativeSize="50" IsNewNode="True" />
+              <LayoutItem Id="ItemName" ViewItem="ItemName" Index="1" RelativeSize="50" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Autoe2417d60-7659-4771-9ca3-5fd08ba50d10" ShowCaption="False" Caption="Autoe2417d60-7659-4771-9ca3-5fd08ba50d10(6)" Index="1" RelativeSize="53.457172342621256" IsNewNode="True">
+              <LayoutItem Id="Category" ViewItem="Category" Index="0" RelativeSize="50" IsNewNode="True" />
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="50" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="UnitGroup" ShowCaption="True" Direction="Horizontal" Index="1" RelativeSize="13.93643031784841" Caption="Units" IsNewNode="True">
+            <LayoutGroup Id="Auto417b3bdf-d4ee-45b5-a99c-059638912d7d" ShowCaption="False" Caption="" Index="0" RelativeSize="46.542827657378744" IsNewNode="True">
+              <LayoutItem Id="UnitType" ViewItem="UnitType" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutItem Id="BaseUnit" ViewItem="BaseUnit" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+              <LayoutItem Id="StockUnit" ViewItem="StockUnit" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto49b07c37-6045-4d13-ad81-276eb051ab7f" ShowCaption="False" Caption="" Index="1" RelativeSize="53.457172342621256" IsNewNode="True">
+              <LayoutItem Id="PurchaseUnit" ViewItem="PurchaseUnit" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutItem Id="SalesUnit" ViewItem="SalesUnit" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+              <LayoutItem Id="Item1" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="ComponantGroup" ShowCaption="True" Direction="Vertical" Index="2" RelativeSize="74.083129584352079" Caption="Componants" IsNewNode="True">
+            <LayoutItem Id="Components" ViewItem="Components" Index="0" RelativeSize="100" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+          <TabbedGroup Id="Tabs" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="MenuItem_LookupListView" Caption="Items">
+      <Columns>
+        <ColumnInfo Id="ItemCode" PropertyName="ItemCode" Caption="Code" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="ItemName" Index="1" Caption="Name" />
+      </Columns>
+    </ListView>
+    <DetailView Id="MenuItemComponent_DetailView" Caption="">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="MainGroup" ShowCaption="True" Index="0" RelativeSize="100" Caption="" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Autoc245f408-5960-4231-a293-a5a880436eb9" ShowCaption="False" Caption="" Index="0" RelativeSize="48.54771784232365" IsNewNode="True">
+              <LayoutItem Id="Component" ViewItem="Component" Index="0" RelativeSize="5.2219321148825069" IsNewNode="True" />
+              <LayoutItem Id="Unit" ViewItem="Unit" Index="1" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="Quantity" ViewItem="Quantity" Index="2" RelativeSize="90.600522193211489" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="Item1" Index="1" RelativeSize="51.45228215767635" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="NoneInventoryItem_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="ExpenseType" Caption="Expense" />
+        <PropertyEditor Id="ItemCode" Caption="Code" />
+        <PropertyEditor Id="ItemName" Caption="Name" />
+        <PropertyEditor Id="ItemType" Caption="Type" />
+        <PropertyEditor Id="UnitType" PropertyName="UnitType" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="MainGroup" ShowCaption="True" Index="0" RelativeSize="11.980440097799511" Caption="" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Auto6027255a-0d39-4519-83bb-258932db74cc" ShowCaption="False" Caption="Auto6027255a-0d39-4519-83bb-258932db74cc(3)" Index="0" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="ItemCode" ViewItem="ItemCode" Index="0" RelativeSize="50" IsNewNode="True" />
+              <LayoutItem Id="ItemName" ViewItem="ItemName" Index="1" RelativeSize="50" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto7e8e622e-852c-4b9a-b344-bbb201b433c3" ShowCaption="False" Caption="Auto7e8e622e-852c-4b9a-b344-bbb201b433c3(6)" Index="1" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="Category" ViewItem="Category" Index="0" RelativeSize="50" IsNewNode="True" />
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="50" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="UnitGroup" ShowCaption="True" Direction="Horizontal" Index="1" RelativeSize="13.93643031784841" Caption="Units" IsNewNode="True">
+            <LayoutGroup Id="Autoa83677cc-5a79-4b89-8220-5ca4baa105e5" ShowCaption="False" Caption="Autoa83677cc-5a79-4b89-8220-5ca4baa105e5(10)" Index="0" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="UnitType" ViewItem="UnitType" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutItem Id="BaseUnit" ViewItem="BaseUnit" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+              <LayoutItem Id="StockUnit" ViewItem="StockUnit" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Autoa793e725-3b1e-47a3-afee-1730696ef740" ShowCaption="False" Caption="Autoa793e725-3b1e-47a3-afee-1730696ef740(14)" Index="1" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="PurchaseUnit" ViewItem="PurchaseUnit" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutItem Id="SalesUnit" ViewItem="SalesUnit" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+              <LayoutItem Id="ExpenseType" ViewItem="ExpenseType" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Inventory_Group" Direction="Vertical" Index="2" RelativeSize="74.083129584352079">
+            <LayoutItem Id="Inventory" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="NoneInventoryItem_LookupListView" Caption="Items">
+      <Columns>
+        <ColumnInfo Id="ItemCode" Caption="Code" Index="0" />
+        <ColumnInfo Id="ItemName" Caption="Name" Index="1" />
+        <ColumnInfo Id="BaseUnit" Removed="True" />
+        <ColumnInfo Id="Category" Removed="True" />
+        <ColumnInfo Id="CreatedBy" Removed="True" />
+        <ColumnInfo Id="CreatedOn" Removed="True" />
+        <ColumnInfo Id="ExpenseType" Removed="True" />
+        <ColumnInfo Id="IsActive" Removed="True" />
+        <ColumnInfo Id="ItemType" Removed="True" />
+        <ColumnInfo Id="Oid" Removed="True" />
+        <ColumnInfo Id="PurchasePrice" Removed="True" />
+        <ColumnInfo Id="PurchaseUnit" Removed="True" />
+        <ColumnInfo Id="SalesUnit" Removed="True" />
+        <ColumnInfo Id="SellPrice" Removed="True" />
+        <ColumnInfo Id="StockUnit" Removed="True" />
+        <ColumnInfo Id="UnitType" Removed="True" />
+        <ColumnInfo Id="UpdatedBy" Removed="True" />
+        <ColumnInfo Id="UpdatedOn" Removed="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Period_ListView" AllowDelete="True" AllowLink="False" AllowNew="True" AllowEdit="False" Caption="Periods">
+      <Columns>
+        <ColumnInfo Id="PeriodName" Caption="Period" AllowEdit="True" AllowGroup="False" AllowSort="False" />
+        <ColumnInfo Id="StartDate" AllowEdit="True" AllowGroup="False" AllowSort="False" />
+        <ColumnInfo Id="EndDate" AllowGroup="False" AllowSort="False" />
+        <ColumnInfo Id="Status" AllowGroup="False" AllowSort="False" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Position_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="PositionName" Caption="Name" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="MainPosition" ShowCaption="True" Index="0" RelativeSize="100" Caption="" Direction="Horizontal" IsNewNode="True">
+            <LayoutItem Id="PositionName" ViewItem="PositionName" Index="0" RelativeSize="50" IsNewNode="True" />
+            <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="50" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="90.841584158415841" Direction="Horizontal" Index="0" Removed="True">
+            <LayoutGroup Id="XPObject" Index="0" RelativeSize="100" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="3.9603960396039604" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Position" RelativeSize="4.3316831683168315" Caption="Position Name" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="PositionName" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Position_ListView" Caption="Positions">
+      <Columns>
+        <ColumnInfo Id="IsActive" Index="-1" />
+        <ColumnInfo Id="PositionName" Caption="Name" />
+      </Columns>
+    </ListView>
+    <ListView Id="Position_LookupListView" Caption="Positions">
+      <Columns>
+        <ColumnInfo Id="PositionName" Caption="Name" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseInvoice_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="InvoiceNumber" Caption="Number" />
+        <PropertyEditor Id="TransactionDate" Caption="Date" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="MainGroup" ShowCaption="True" Index="0" RelativeSize="17.848410757946212" Caption="" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Auto3e9fc439-02c4-4a5a-a9e4-f4f328067fb4" ShowCaption="False" Caption="Auto3e9fc439-02c4-4a5a-a9e4-f4f328067fb4(5)" Index="0" RelativeSize="50.308641975308639" IsNewNode="True">
+              <LayoutItem Id="InvoiceNumber" ViewItem="InvoiceNumber" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+              <LayoutItem Id="Shop" ViewItem="Shop" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="TransactionDate" ViewItem="TransactionDate" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="Period" ViewItem="Period" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto9802aa07-9117-4c26-8bc6-ed75cf95e66d" ShowCaption="False" Caption="Auto9802aa07-9117-4c26-8bc6-ed75cf95e66d(10)" Index="1" RelativeSize="49.691358024691361" IsNewNode="True">
+              <LayoutItem Id="BillNumber" ViewItem="BillNumber" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+              <LayoutItem Id="Notes" ViewItem="Notes" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="Total" ViewItem="Total" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Items_Group" Direction="Vertical" Index="1" RelativeSize="82.151589242053788">
+            <LayoutItem Id="Items" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseInvoice_Items_ListView" Caption="Items" AllowEdit="True" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="QuantityIN" Index="-1" />
+        <ColumnInfo Id="QuantityOut" Index="-1" />
+        <ColumnInfo Id="Item" Index="0" DataSourceCriteria="[IsActive] = True And [ItemType] &lt;&gt; ##Enum#CostingApp.Module.BO.EnumItemCard,MenuItem#" />
+        <ColumnInfo Id="TransactionUnit" Index="1" Caption="Unit" />
+        <ColumnInfo Id="Quantity" Index="2" />
+        <ColumnInfo Id="Price" Index="3" />
+        <ColumnInfo Id="Amount" Index="4" />
+        <ColumnInfo Id="ExpenseType" Index="5" Caption="Expense" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchaseInvoice_ListView" Caption="Purchase Invoices">
+      <Columns>
+        <ColumnInfo Id="BillNumber" Index="-1" />
+        <ColumnInfo Id="Notes" Index="-1" />
+        <ColumnInfo Id="Shop" Index="0" />
+        <ColumnInfo Id="InvoiceNumber" Index="1" Caption="Number" />
+        <ColumnInfo Id="TransactionDate" Index="2" Caption="Date" />
+        <ColumnInfo Id="Period" Index="3" />
+        <ColumnInfo Id="Total" Index="4" />
+        <ColumnInfo Id="Status" Index="5" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseInvoiceDetail_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="Amount" AllowEdit="False" />
+        <PropertyEditor Id="BaseQuantity" AllowEdit="False" />
+        <PropertyEditor Id="CreatedBy" AllowEdit="False" />
+        <PropertyEditor Id="CreatedOn" AllowEdit="False" />
+        <PropertyEditor Id="Employee" AllowEdit="False" />
+        <PropertyEditor Id="ExpenseDate" AllowEdit="False" />
+        <PropertyEditor Id="ExpenseType" AllowEdit="False" />
+        <PropertyEditor Id="IsActive" AllowEdit="False" />
+        <PropertyEditor Id="Shop" AllowEdit="False" />
+        <PropertyEditor Id="StockQuantity" AllowEdit="False" />
+        <PropertyEditor Id="Transaction" AllowEdit="False" />
+        <PropertyEditor Id="TransactionType" AllowEdit="False" />
+        <PropertyEditor Id="UpdatedBy" AllowEdit="False" />
+        <PropertyEditor Id="UpdatedOn" AllowEdit="False" />
+        <PropertyEditor Id="VendorBill" AllowEdit="False" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100" ShowCaption="False" Caption="">
+            <LayoutGroup Id="InventoryRecord" Index="0" RelativeSize="100" Caption="">
+              <LayoutGroup Id="InventoryRecord_col1" RelativeSize="49.948822927328557">
+                <LayoutItem Id="Item" ViewItem="Item" Index="0" RelativeSize="4.1237113402061851" IsNewNode="True" />
+                <LayoutItem Id="TransactionUnit" Index="1" RelativeSize="3.0927835051546393" />
+                <LayoutItem Id="Quantity" Index="2" RelativeSize="92.783505154639172" />
+                <LayoutItem Id="QuantityIN" Index="3" RelativeSize="28.571428571428573" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="InventoryRecord_col2" RelativeSize="50.051177072671443">
+                <LayoutItem Id="Price" RelativeSize="4.1237113402061851" Index="0" />
+                <LayoutItem Id="Amount" ViewItem="Amount" Index="1" RelativeSize="3.0927835051546393" IsNewNode="True" />
+                <LayoutItem Id="Notes" ViewItem="Notes" Index="2" RelativeSize="92.783505154639172" IsNewNode="True" />
+                <LayoutItem Id="QuantityOut" RelativeSize="36.363636363636367" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="ExpenseRecord" Index="1" RelativeSize="85.085574572127143" Removed="True">
+              <LayoutGroup Id="ExpenseRecord_col1" RelativeSize="49.948822927328557">
+                <LayoutItem Id="Amount" RelativeSize="23.529411764705884" Removed="True" />
+                <LayoutItem Id="ExpenseDate" RelativeSize="87.915407854984892" />
+                <LayoutItem Id="ExpenseType" RelativeSize="3.6253776435045317" />
+                <LayoutItem Id="Period" RelativeSize="3.6253776435045317" />
+                <LayoutItem Id="Shop" RelativeSize="4.833836858006042" />
+              </LayoutGroup>
+              <LayoutGroup Id="ExpenseRecord_col2" RelativeSize="50.051177072671443">
+                <LayoutItem Id="Status" RelativeSize="3.6253776435045317" Index="1" />
+                <LayoutItem Id="Employee" RelativeSize="91.540785498489427" Index="2" />
+                <LayoutItem Id="Item" Removed="True" />
+                <LayoutItem Id="Notes" RelativeSize="21.428571428571427" Removed="True" />
+                <LayoutItem Id="VendorBill" RelativeSize="4.833836858006042" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Index="2" RelativeSize="68.215158924205383" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="QuarterPeriod_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="YearPeriod" PropertyName="YearPeriod" Caption="Parent" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="PeriodMain" ShowCaption="True" Direction="Horizontal" Index="0" RelativeSize="18.06930693069307" Caption="PeriodMain" IsNewNode="True">
+            <LayoutGroup Id="Autod612e311-276c-49b8-b35a-06f1e124057e" ShowCaption="False" Caption="Autod612e311-276c-49b8-b35a-06f1e124057e(3)" Index="0" RelativeSize="50" IsNewNode="True">
+              <LayoutItem Id="PeriodName" ViewItem="PeriodName" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+              <LayoutItem Id="YearPeriod" ViewItem="YearPeriod" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="StartDate" ViewItem="StartDate" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="EndDate" ViewItem="EndDate" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="Item1" Index="1" RelativeSize="50" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="Periods_Group" Direction="Vertical" RelativeSize="81.930693069306926">
+            <LayoutItem Id="Periods" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="SalesRecord_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="MainGroup" ShowCaption="True" Index="0" RelativeSize="17.848410757946212" Caption="" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Auto1b38a0c0-6eb1-4472-8457-8214b4eeda56" ShowCaption="False" Caption="Auto1b38a0c0-6eb1-4472-8457-8214b4eeda56(5)" Index="0" RelativeSize="49.846782431052091" IsNewNode="True">
+              <LayoutItem Id="RecordNumber" ViewItem="RecordNumber" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+              <LayoutItem Id="Shop" ViewItem="Shop" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="TransactionDate" ViewItem="TransactionDate" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="Period" ViewItem="Period" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto0b6e8fc8-74a7-4bb9-be8a-990e5d95bab3" ShowCaption="False" Caption="Auto0b6e8fc8-74a7-4bb9-be8a-990e5d95bab3(10)" Index="1" RelativeSize="50.153217568947909" IsNewNode="True">
+              <LayoutItem Id="FromDate" ViewItem="FromDate" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+              <LayoutItem Id="ToDate" ViewItem="ToDate" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="Item1" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Items_Group" Direction="Vertical" Index="1" RelativeSize="82.151589242053788">
+            <LayoutItem Id="Items" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesRecord_Items_ListView" AllowEdit="True" NewItemRowPosition="Top" MasterDetailMode="ListViewAndDetailView" MasterDetailView="SalesReportItem_DetailView_ListView" />
+    <ListView Id="SalesRecord_ListView">
+      <Columns>
+        <ColumnInfo Id="RecordNumber" Caption="Number" />
+        <ColumnInfo Id="Shop" Index="1" />
+        <ColumnInfo Id="TransactionDate" Caption="Date" Index="2" />
+        <ColumnInfo Id="Period" Index="3" />
+        <ColumnInfo Id="FromDate" Index="4" />
+        <ColumnInfo Id="ToDate" Index="5" />
+        <ColumnInfo Id="Status" Index="6" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesReportItem_Components_ListView" AllowDelete="False" AllowLink="False" AllowNew="False">
+      <Columns>
+        <ColumnInfo Id="SalesReportItem" Index="-1" />
+        <ColumnInfo Id="Item" AllowEdit="True" Index="0" />
+        <ColumnInfo Id="TransactionUnit" Index="1" Caption="Unit" />
+        <ColumnInfo Id="Quantity" Index="2" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SalesReportItem_DetailView_ListView" ClassName="CostingApp.Module.BO.Items.SalesReportItem" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="Components" PropertyName="Components" View="SalesReportItem_Components_ListView" IsNewNode="True" />
+        <PropertyEditor Id="CreatedBy" PropertyName="CreatedBy" IsNewNode="True" />
+        <PropertyEditor Id="CreatedOn" PropertyName="CreatedOn" IsNewNode="True" />
+        <PropertyEditor Id="IsActive" PropertyName="IsActive" IsNewNode="True" />
+        <PropertyEditor Id="Item" PropertyName="Item" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="Quantity" PropertyName="Quantity" IsNewNode="True" />
+        <PropertyEditor Id="UpdatedBy" PropertyName="UpdatedBy" IsNewNode="True" />
+        <PropertyEditor Id="UpdatedOn" PropertyName="UpdatedOn" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="Components_Group" Index="0" Direction="Vertical" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+            <LayoutItem Id="Components" ViewItem="Components" ShowCaption="" Index="0" RelativeSize="100" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Shop_DetailView" Caption=" ">
+      <Items>
+        <PropertyEditor Id="City" PropertyName="City" IsNewNode="True" />
+        <PropertyEditor Id="FriFrom" Caption="From" />
+        <PropertyEditor Id="FriTo" Caption="To" />
+        <PropertyEditor Id="MonFrom" Caption="From" />
+        <PropertyEditor Id="MonTo" Caption="To" />
+        <PropertyEditor Id="SatFrom" Caption="From" />
+        <PropertyEditor Id="SatTo" Caption="To" />
+        <PropertyEditor Id="ShopCode" Caption="Code" />
+        <PropertyEditor Id="ShopLeader" Caption="Leader" />
+        <PropertyEditor Id="ShopName" Caption="Name" />
+        <PropertyEditor Id="SunFrom" Caption="From" />
+        <PropertyEditor Id="SunTo" Caption="To" />
+        <PropertyEditor Id="ThuFrom" Caption="From" />
+        <PropertyEditor Id="ThuTo" Caption="To" />
+        <PropertyEditor Id="TusFrom" Caption="From" />
+        <PropertyEditor Id="TusTo" Caption="To" />
+        <PropertyEditor Id="WedFrom" Caption="From" />
+        <PropertyEditor Id="WedTo" Caption="To" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="ShopMain" ShowCaption="True" Index="0" RelativeSize="18.06930693069307" Caption="" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Auto3ae7c9b8-bec2-47af-b935-5d472727ad61" ShowCaption="False" Caption="Auto3ae7c9b8-bec2-47af-b935-5d472727ad61(15)" Index="0" RelativeSize="48.619957537154988" IsNewNode="True">
+              <LayoutItem Id="ShopCode" ViewItem="ShopCode" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+              <LayoutItem Id="ShopName" ViewItem="ShopName" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="City" ViewItem="City" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="ShopLeader" ViewItem="ShopLeader" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto355240a6-acb8-4695-bf8d-fb360819343b" ShowCaption="False" Caption="Auto355240a6-acb8-4695-bf8d-fb360819343b(20)" Index="1" RelativeSize="51.380042462845012" IsNewNode="True">
+              <LayoutItem Id="PhoneNumber" ViewItem="PhoneNumber" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+              <LayoutItem Id="Address" ViewItem="Address" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+              <LayoutItem Id="Item1" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="ShopTiming" ShowCaption="True" Direction="Horizontal" Index="1" RelativeSize="81.930693069306926" Caption="Timing" IsNewNode="True">
+            <LayoutGroup Id="Auto1b8d503d-6bd2-448f-bb31-569a8a2ad442" ShowCaption="False" Caption="Auto1b8d503d-6bd2-448f-bb31-569a8a2ad442(26)" Index="0" RelativeSize="15.286624203821656" IsNewNode="True">
+              <LayoutItem Id="SunOn" ViewItem="SunOn" Index="0" RelativeSize="5.0955414012738851" IsNewNode="True" />
+              <LayoutItem Id="MonOn" ViewItem="MonOn" Index="1" RelativeSize="3.8216560509554141" IsNewNode="True" />
+              <LayoutItem Id="TusOn" ViewItem="TusOn" Index="2" RelativeSize="3.8216560509554141" IsNewNode="True" />
+              <LayoutItem Id="WedOn" ViewItem="WedOn" Index="3" RelativeSize="87.261146496815286" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Autoe3ee997e-71c1-410d-9739-77a4a1e0c021" ShowCaption="False" Caption="Autoe3ee997e-71c1-410d-9739-77a4a1e0c021(29)" Direction="Horizontal" Index="1" RelativeSize="84.71337579617834" IsNewNode="True">
+              <LayoutGroup Id="Auto8e15d18f-03fc-475e-a10e-f3790f464c2f" ShowCaption="False" Caption="Auto8e15d18f-03fc-475e-a10e-f3790f464c2f(30)" Index="0" RelativeSize="17.418546365914786" IsNewNode="True">
+                <LayoutItem Id="SunFrom" ViewItem="SunFrom" Index="0" RelativeSize="5.0955414012738851" IsNewNode="True" />
+                <LayoutItem Id="MonFrom" ViewItem="MonFrom" Index="1" RelativeSize="3.8216560509554141" IsNewNode="True" />
+                <LayoutItem Id="TusFrom" ViewItem="TusFrom" Index="2" RelativeSize="3.8216560509554141" IsNewNode="True" />
+                <LayoutItem Id="WedFrom" ViewItem="WedFrom" Index="3" RelativeSize="87.261146496815286" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Autoa48577ec-789b-4295-9135-a675606a1183" ShowCaption="False" Caption="Autoa48577ec-789b-4295-9135-a675606a1183(33)" Direction="Horizontal" Index="1" RelativeSize="82.581453634085207" IsNewNode="True">
+                <LayoutGroup Id="Autoe4017240-2b99-481e-a13c-31491caf1f31" ShowCaption="False" Caption="Autoe4017240-2b99-481e-a13c-31491caf1f31(34)" Index="0" RelativeSize="21.09256449165402" IsNewNode="True">
+                  <LayoutItem Id="SunTo" ViewItem="SunTo" Index="0" RelativeSize="5.0955414012738851" IsNewNode="True" />
+                  <LayoutItem Id="MonTo" ViewItem="MonTo" Index="1" RelativeSize="3.8216560509554141" IsNewNode="True" />
+                  <LayoutItem Id="TusTo" ViewItem="TusTo" Index="2" RelativeSize="3.8216560509554141" IsNewNode="True" />
+                  <LayoutItem Id="WedTo" ViewItem="WedTo" Index="3" RelativeSize="87.261146496815286" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto87ed0f00-39c7-4201-a54a-c11297abdcb7" ShowCaption="False" Caption="Auto87ed0f00-39c7-4201-a54a-c11297abdcb7(37)" Direction="Horizontal" Index="1" RelativeSize="78.907435508345984" IsNewNode="True">
+                  <LayoutGroup Id="Auto8dd3171a-de0c-4cec-b5eb-5dd46ea0b643" ShowCaption="False" Caption="Auto8dd3171a-de0c-4cec-b5eb-5dd46ea0b643(38)" Index="0" RelativeSize="26.73076923076923" IsNewNode="True">
+                    <LayoutItem Id="ThuOn" ViewItem="ThuOn" Index="0" RelativeSize="5.0955414012738851" IsNewNode="True" />
+                    <LayoutItem Id="FriOn" ViewItem="FriOn" Index="1" RelativeSize="3.8216560509554141" IsNewNode="True" />
+                    <LayoutItem Id="SatOn" ViewItem="SatOn" Index="2" RelativeSize="91.0828025477707" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutGroup Id="Auto8f5d1c0f-e094-476e-b9f2-712b88e4e28e" ShowCaption="False" Caption="Auto8f5d1c0f-e094-476e-b9f2-712b88e4e28e(42)" Direction="Horizontal" Index="1" RelativeSize="73.269230769230774" IsNewNode="True">
+                    <LayoutGroup Id="Auto80630acb-3bad-4caf-b4fe-077a5be5615b" ShowCaption="False" Caption="Auto80630acb-3bad-4caf-b4fe-077a5be5615b(43)" Index="0" RelativeSize="36.482939632545929" IsNewNode="True">
+                      <LayoutItem Id="ThuFrom" ViewItem="ThuFrom" Index="0" RelativeSize="5.0955414012738851" IsNewNode="True" />
+                      <LayoutItem Id="FriFrom" ViewItem="FriFrom" Index="1" RelativeSize="3.8216560509554141" IsNewNode="True" />
+                      <LayoutItem Id="SatFrom" ViewItem="SatFrom" Index="2" RelativeSize="91.0828025477707" IsNewNode="True" />
+                    </LayoutGroup>
+                    <LayoutGroup Id="Autode2d72db-0e9d-4cc5-8fe0-d235ce63ba68" ShowCaption="False" Caption="Autode2d72db-0e9d-4cc5-8fe0-d235ce63ba68(47)" Index="1" RelativeSize="63.517060367454071" IsNewNode="True">
+                      <LayoutGroup Id="Auto04f5e692-4c86-46ff-9e9d-a84e135c42b0" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="5.0955414012738851" IsNewNode="True">
+                        <LayoutItem Id="ThuTo" ViewItem="ThuTo" Index="0" RelativeSize="57.438016528925623" IsNewNode="True" />
+                        <LayoutItem Id="Item2" Index="1" RelativeSize="42.561983471074377" IsNewNode="True" />
+                      </LayoutGroup>
+                      <LayoutGroup Id="Autof65dff96-7c91-44e5-8ebd-7d944b4f0577" ShowCaption="False" Caption="" Index="1" RelativeSize="94.904458598726109" IsNewNode="True">
+                        <LayoutGroup Id="Auto3a5b2c20-d4df-4ff7-8606-5c5489b21263" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="4.026845637583893" IsNewNode="True">
+                          <LayoutItem Id="FriTo" ViewItem="FriTo" Index="0" RelativeSize="57.438016528925623" IsNewNode="True" />
+                          <LayoutItem Id="Item3" Index="1" RelativeSize="42.561983471074377" IsNewNode="True" />
+                        </LayoutGroup>
+                        <LayoutGroup Id="Auto8ce23cb4-825a-469c-8de1-4158ba47a003" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="95.973154362416111" IsNewNode="True">
+                          <LayoutItem Id="SatTo" ViewItem="SatTo" Index="0" RelativeSize="57.438016528925623" IsNewNode="True" />
+                          <LayoutItem Id="Item4" Index="1" RelativeSize="42.561983471074377" IsNewNode="True" />
+                        </LayoutGroup>
+                      </LayoutGroup>
+                    </LayoutGroup>
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="64.851485148514854" Direction="Horizontal" Removed="True">
+            <LayoutGroup Id="XPObject" Index="1" RelativeSize="32.63358778625954" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Shop" RelativeSize="100" Removed="True">
+              <LayoutGroup Id="Shop_col1" RelativeSize="48.619957537154988" Caption="Shop_col1" Direction="Horizontal">
+                <LayoutItem Id="Address" Index="0" RelativeSize="9.75609756097561" Removed="True" />
+                <LayoutItem Id="MonFrom" Index="0" RelativeSize="12.5" Removed="True" />
+                <LayoutItem Id="MonOn" Index="0" RelativeSize="12.5" Removed="True" />
+                <LayoutItem Id="MonTo" Index="0" RelativeSize="12.5" Removed="True" />
+                <LayoutItem Id="SunFrom" Index="0" RelativeSize="9.75609756097561" Removed="True" />
+                <LayoutItem Id="SunOn" Index="0" RelativeSize="9.75609756097561" Removed="True" />
+                <LayoutItem Id="SunTo" Index="0" RelativeSize="9.75609756097561" Removed="True" />
+                <LayoutItem Id="TusFrom" Index="0" RelativeSize="100" Removed="True" />
+                <LayoutItem Id="TusOn" Index="0" RelativeSize="28.571428571428573" Removed="True" />
+                <LayoutItem Id="PhoneNumber" Index="1" RelativeSize="7.3170731707317076" Removed="True" />
+                <LayoutItem Id="ShopName" Index="1" RelativeSize="7.3170731707317076" Removed="True" />
+                <LayoutItem Id="ShopCode" Removed="True" />
+                <LayoutItem Id="ShopLeader" RelativeSize="9.75609756097561" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Shop_col2" RelativeSize="51.380042462845012" Caption="Shop_col2" Direction="Horizontal">
+                <LayoutItem Id="WedFrom" RelativeSize="50" Index="0" Removed="True" />
+                <LayoutItem Id="WedOn" RelativeSize="36.363636363636367" Index="0" Removed="True" />
+                <LayoutItem Id="WedTo" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="FriFrom" RelativeSize="10.344827586206897" Index="4" Removed="True" />
+                <LayoutItem Id="FriOn" RelativeSize="9.375" Index="4" Removed="True" />
+                <LayoutItem Id="FriTo" RelativeSize="11.538461538461538" Index="4" Removed="True" />
+                <LayoutItem Id="SatFrom" RelativeSize="15" Index="4" Removed="True" />
+                <LayoutItem Id="SatOn" RelativeSize="13.043478260869565" Index="4" Removed="True" />
+                <LayoutItem Id="SatTo" RelativeSize="23.529411764705884" Index="4" Removed="True" />
+                <LayoutItem Id="ThuFrom" RelativeSize="7.8947368421052628" Index="4" Removed="True" />
+                <LayoutItem Id="ThuTo" RelativeSize="8.5714285714285712" Index="4" Removed="True" />
+                <LayoutItem Id="ThuOn" RelativeSize="7.3170731707317076" Removed="True" />
+                <LayoutItem Id="TusTo" RelativeSize="28.571428571428573" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Shop_ListView" Caption="Shops" PreviewColumnName="">
+      <Columns>
+        <ColumnInfo Id="ShopCode" Index="0" Caption="Code" />
+        <ColumnInfo Id="ShopName" Index="1" Caption="Name" />
+        <ColumnInfo Id="City" Index="2" />
+        <ColumnInfo Id="ShopLeader" Index="3" Caption="Leader" />
+      </Columns>
+    </ListView>
+    <ListView Id="Shop_LookupListView" Caption="Shops">
+      <Columns>
+        <ColumnInfo Id="ShopCode" PropertyName="ShopCode" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="ShopName" Index="1" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Unit_DetailView" Caption="">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="MainGroup" ShowCaption="True" Index="0" RelativeSize="100" Caption="" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Autoad6d4e18-8b8f-4796-b041-c8c1182b7f82" ShowCaption="False" Caption="" Index="0" RelativeSize="52.178423236514526" IsNewNode="True">
+              <LayoutItem Id="UnitName" ViewItem="UnitName" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="BaseUnit" ViewItem="BaseUnit" Index="1" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="ConversionRate" ViewItem="ConversionRate" Index="2" RelativeSize="92.689295039164492" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="47.821576763485474" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" ShowCaption="True" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Unit_ListView">
+      <Columns>
+        <ColumnInfo Id="UnitName" Caption="Name" />
+        <ColumnInfo Id="BaseUnit" Caption="Base" />
+        <ColumnInfo Id="IsActive" Index="4" />
+      </Columns>
+    </ListView>
+    <ListView Id="Unit_LookupListView" Caption="Units">
+      <Columns>
+        <ColumnInfo Id="UnitName" Caption="Name" />
+      </Columns>
+    </ListView>
+    <DetailView Id="UnitType_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="MainGroup" ShowCaption="True" Index="0" RelativeSize="9.1584158415841586" Caption="MainGroup" Direction="Horizontal" IsNewNode="True">
+            <LayoutItem Id="TypeName" ViewItem="TypeName" Index="0" RelativeSize="50" IsNewNode="True" />
+            <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="50" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="Units_Group" Direction="Vertical" Index="1" RelativeSize="90.841584158415841">
+            <LayoutItem Id="Units" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="UnitType_ListView" Caption="Unit Types">
+      <Columns>
+        <ColumnInfo Id="TypeName" Caption="Name" />
+        <ColumnInfo Id="IsActive" Index="1" />
+      </Columns>
+    </ListView>
+    <ListView Id="UnitType_LookupListView" Caption="Unit Types">
+      <Columns>
+        <ColumnInfo Id="TypeName" Caption="Name" />
+      </Columns>
+    </ListView>
+    <ListView Id="UnitType_Units_ListView" AllowEdit="True" NewItemRowPosition="Top" Caption="Units">
+      <Columns>
+        <ColumnInfo Id="UnitName" Caption="Name" />
+        <ColumnInfo Id="BaseUnit" Caption="Base" />
+      </Columns>
+    </ListView>
+    <DetailView Id="YearPeriod_DetailView">
+      <Layout>
+        <LayoutGroup Id="PeriodMain" ShowCaption="True" Index="0" RelativeSize="15.099009900990099" Caption="" Direction="Horizontal" IsNewNode="True">
+          <LayoutGroup Id="Auto76ada659-91c4-4481-ba55-157b2fb352ea" ShowCaption="False" Caption="Auto76ada659-91c4-4481-ba55-157b2fb352ea(2)" Index="0" RelativeSize="50" IsNewNode="True">
+            <LayoutItem Id="PeriodName" ViewItem="PeriodName" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+            <LayoutItem Id="StartDate" ViewItem="StartDate" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+            <LayoutItem Id="EndDate" ViewItem="EndDate" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutItem Id="Item1" Index="1" RelativeSize="50" IsNewNode="True" />
+        </LayoutGroup>
+        <LayoutGroup Id="Quarters_Group" Index="1" Direction="Vertical" ShowCaption="True" RelativeSize="84.9009900990099" Caption="Periods" IsNewNode="True">
+          <LayoutItem Id="Quarters" ViewItem="Quarters" ShowCaption="" Index="0" RelativeSize="100" IsNewNode="True" />
+        </LayoutGroup>
+        <LayoutGroup Id="Main" Direction="Horizontal" RelativeSize="21.287128712871286" Removed="True">
+          <LayoutGroup Id="Quarters_Group" Removed="True" />
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ZReport_Details_ListView" Caption="ZReport Details" AllowEdit="True" NewItemRowPosition="Top" AllowDelete="True" AllowNew="False" AllowLink="False">
+      <Columns>
+        <ColumnInfo Id="Oid" Index="-1" />
+        <ColumnInfo Id="Amount" Index="2" AllowEdit="False" />
+        <ColumnInfo Id="Component.Value" PropertyName="Component.Value" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Component.Calculation" PropertyName="Component.Calculation" Index="4" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ZReport_DetailView" Caption="">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="ZReport" ShowCaption="True" Direction="Horizontal" Index="0" RelativeSize="15.099009900990099" IsNewNode="True">
+            <LayoutGroup Id="ZReport_col1" ShowCaption="False" Index="0" RelativeSize="50.1063829787234" IsNewNode="True">
+              <LayoutItem Id="Number" ViewItem="Number" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutItem Id="Shop" ViewItem="Shop" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+              <LayoutItem Id="ReportDate" ViewItem="ReportDate" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ZReport_col2" ShowCaption="False" Index="1" RelativeSize="49.8936170212766" IsNewNode="True">
+              <LayoutItem Id="Period" ViewItem="Period" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+              <LayoutItem Id="Sales" ViewItem="Sales" Index="1" RelativeSize="63.636363636363633" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Details_Group" Direction="Vertical" Index="1" RelativeSize="84.9009900990099">
+            <LayoutItem Id="Details" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" ShowCaption="True" Index="1" RelativeSize="8.1683168316831676" Removed="True">
+            <LayoutGroup Id="XPObject" Index="0" RelativeSize="100">
+              <LayoutItem Id="Oid" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ZReport" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ZReport_ListView" Caption="ZReports" />
+    <ListView Id="ZReport_LookupListView" Caption="ZReports" />
+    <DetailView Id="ZReportComponent_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="ComponentName" Caption="Name" />
+        <PropertyEditor Id="ExpenseType" Caption="Expense" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="ComponentMain" ShowCaption="True" Caption=" " Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+            <LayoutGroup Id="Auto9ebfa7d3-fd81-457d-b22e-ca6c9e97a472" ShowCaption="False" Caption="Auto9ebfa7d3-fd81-457d-b22e-ca6c9e97a472(4)" Index="0" RelativeSize="50.1063829787234" IsNewNode="True">
+              <LayoutItem Id="ComponentName" ViewItem="ComponentName" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="Calculation" ViewItem="Calculation" Index="1" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="Value" ViewItem="Value" Index="2" RelativeSize="92.689295039164492" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Autodd5ae440-08ab-454d-9498-6ebba11a45a6" ShowCaption="False" Caption="Autodd5ae440-08ab-454d-9498-6ebba11a45a6(8)" Index="1" RelativeSize="49.8936170212766" IsNewNode="True">
+              <LayoutItem Id="ExpenseType" ViewItem="ExpenseType" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="3.133159268929504" IsNewNode="True" />
+              <LayoutItem Id="Item1" Index="2" RelativeSize="92.689295039164492" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" RelativeSize="85.085574572127143" ShowCaption="True" Index="1" Removed="True">
+            <LayoutItem Id="Item2" Index="0" RelativeSize="100" IsNewNode="True" />
+            <LayoutGroup Id="ZReportComponent" RelativeSize="84.9009900990099" Caption="ZReportComponent" Direction="Horizontal" Index="1" Removed="True">
+              <LayoutItem Id="Calculation" Index="0" RelativeSize="38.554216867469883" Removed="True" />
+              <LayoutItem Id="ExpenseType" Index="0" RelativeSize="100" Removed="True" />
+              <LayoutItem Id="Value" Index="0" RelativeSize="54.237288135593218" Removed="True" />
+              <LayoutItem Id="ComponentName" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Index="2" RelativeSize="4.4554455445544558" Caption="Oid" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ZReportComponent_ListView" Caption="ZReport Components">
+      <Columns>
+        <ColumnInfo Id="ComponentName" Caption="Name" />
+        <ColumnInfo Id="ExpenseType" Caption="Expense" />
+      </Columns>
+    </ListView>
+    <ListView Id="ZReportComponent_LookupListView" Caption="ZReport Components">
+      <Columns>
+        <ColumnInfo Id="ComponentName" Caption="Name" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ZReportDetail_DetailView" Caption="">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" ShowCaption="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ZReportDetail_ListView" Caption="ZReport Details" />
+    <ListView Id="ZReportDetail_LookupListView" Caption="ZReport Details" />
+  </Views>
+</Application>

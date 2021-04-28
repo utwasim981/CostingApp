@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="Shop_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SizeableEditors" RelativeSize="84.529702970297024" Caption="Address">
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="18.301610541727673" Caption="Address">
+              <LayoutItem Id="Address" ViewItem="Address" Index="0" RelativeSize="100" ShowCaption="False" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="30.746705710102489" Caption="Item2" Direction="Horizontal">
+              <LayoutGroup Id="Autoff0e2f7a-266c-4ca3-bf2a-83d9c2cda645" ShowCaption="False" Caption="Autoff0e2f7a-266c-4ca3-bf2a-83d9c2cda645(16)" Index="0" RelativeSize="21.021897810218977">
+                <LayoutItem Id="SunOn" ViewItem="SunOn" Index="0" RelativeSize="17.391304347826086" />
+                <LayoutItem Id="MonOn" ViewItem="MonOn" Index="1" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="TusOn" ViewItem="TusOn" Index="2" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="WedOn" ViewItem="WedOn" Index="3" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="ThuOn" ViewItem="ThuOn" Index="4" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="FriOn" ViewItem="FriOn" Index="5" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="SatOn" ViewItem="SatOn" Index="6" RelativeSize="17.391304347826086" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto69bddf6e-24cd-47de-be91-faa1ba737a97" ShowCaption="False" Caption="Auto69bddf6e-24cd-47de-be91-faa1ba737a97(24)" Direction="Horizontal" Index="1" RelativeSize="78.978102189781026">
+                <LayoutGroup Id="Auto8af8d5aa-5f28-4e64-aaad-67f6facd3b69" ShowCaption="False" Caption="Auto8af8d5aa-5f28-4e64-aaad-67f6facd3b69(25)" Index="0" RelativeSize="25.693160813308687">
+                  <LayoutItem Id="SunFrom" ShowCaption="True" ViewItem="SunFrom" Index="0" RelativeSize="17.391304347826086" />
+                  <LayoutItem Id="MonFrom" ShowCaption="True" ViewItem="MonFrom" Index="1" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="TusFrom" ShowCaption="True" ViewItem="TusFrom" Index="2" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="WedFrom" ShowCaption="True" ViewItem="WedFrom" Index="3" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="ThuFrom" ShowCaption="True" ViewItem="ThuFrom" Index="4" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="FriFrom" ShowCaption="True" ViewItem="FriFrom" Index="5" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="SatFrom" ShowCaption="True" ViewItem="SatFrom" Index="6" RelativeSize="17.391304347826086" />
+                </LayoutGroup>
+                <LayoutGroup Id="Autoddb65642-564c-49a6-b816-f6b6346d9425" ShowCaption="False" Caption="Autoddb65642-564c-49a6-b816-f6b6346d9425(33)" Direction="Horizontal" Index="1" RelativeSize="74.3068391866913">
+                  <LayoutGroup Id="Auto5ef07dca-088c-4377-a982-a359ba6d1d60" ShowCaption="False" Caption="Auto5ef07dca-088c-4377-a982-a359ba6d1d60(34)" Index="0" RelativeSize="34.5771144278607">
+                    <LayoutItem Id="SunTo" ShowCaption="True" ViewItem="SunTo" Index="0" RelativeSize="17.391304347826086" />
+                    <LayoutItem Id="MonTo" ShowCaption="True" ViewItem="MonTo" Index="1" RelativeSize="13.043478260869565" />
+                    <LayoutItem Id="TusTo" ShowCaption="True" ViewItem="TusTo" Index="2" RelativeSize="13.043478260869565" />
+                    <LayoutItem Id="WedTo" ShowCaption="True" ViewItem="WedTo" Index="3" RelativeSize="13.043478260869565" />
+                    <LayoutItem Id="ThuTo" ShowCaption="True" ViewItem="ThuTo" Index="4" RelativeSize="13.043478260869565" />
+                    <LayoutItem Id="FriTo" ShowCaption="True" ViewItem="FriTo" Index="5" RelativeSize="13.043478260869565" />
+                    <LayoutItem Id="SatTo" ShowCaption="True" ViewItem="SatTo" Index="6" RelativeSize="17.391304347826086" />
+                  </LayoutGroup>
+                  <LayoutGroup Id="Auto60321298-c16d-4064-aceb-6983b8af1ea8" ShowCaption="False" Caption="Auto60321298-c16d-4064-aceb-6983b8af1ea8(42)" Index="1" RelativeSize="65.422885572139307">
+                    <LayoutItem Id="Item3" Index="0" RelativeSize="16.847826086956523" />
+                    <LayoutItem Id="Item4" Index="1" RelativeSize="13.043478260869565" />
+                    <LayoutItem Id="Item5" Index="2" RelativeSize="13.043478260869565" />
+                    <LayoutItem Id="Item6" Index="3" RelativeSize="13.043478260869565" />
+                    <LayoutItem Id="Item7" Index="4" RelativeSize="13.043478260869565" />
+                    <LayoutItem Id="Item8" Index="5" RelativeSize="12.5" />
+                    <LayoutItem Id="Item9" Index="6" RelativeSize="18.478260869565219" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutItem Id="Item10" Index="2" RelativeSize="50.951683748169842" />
+            <LayoutItem Id="Address" RelativeSize="18.887262079062957" Removed="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Shop">
+              <LayoutGroup Id="Shop_col1">
+                <LayoutItem Id="TusTo" RelativeSize="57.89473684210526" Index="5" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

@@ -1,52 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Logo="TechpoolLogo" Title="CosTech" Description="CosTech is a small software to manage the expenses and inventory of Kebab shops" Copyright="TechPool - Wasim Toutonji">
-  <BOModel>
-    <Class Name="CostingApp.Module.Win.BO.SystemConfigration" IsSystemConfigration="False" />
-  </BOModel>
   <ImageSources>
     <AssemblyResourceImageSource AssemblyName="CostingApp.Module.Win" Folder="Images" />
   </ImageSources>
-  <NavigationItems RootGroupsStyle="OutlookAnimated" DefaultChildItemsDisplayStyle="List" StartupNavigationItem="">
-    <Items>
-      <Item Id="Default" Index="-1" Removed="True">
-        <Items>
-          <Item Id="MyDetails" Removed="True" />
-          <Item Id="WXafRole_ListView" Removed="True" />
-          <Item Id="WXafUser_ListView" Removed="True" />
-        </Items>
-      </Item>
-      <Item Id="MyDetails" ViewId="WXafUser_DetailView" ObjectKey="@CurrentUserID" Caption="My Details" ImageName="BO_MyDetails" Index="0" IsNewNode="True" />
-      <Item Id="Transactions" Index="1" ImageName="Transactions" />
-      <Item Id="Employees Setup" Index="2" ImageName="BO_Department" IsNewNode="True" Removed="True">
-        <Items IsNewNode="True">
-          <Item Id="ContractType_ListView" ViewId="ContractType_ListView" ObjectKey="" Index="0" IsNewNode="True" />
-          <Item Id="Position_ListView" ViewId="Position_ListView" ObjectKey="" Index="1" IsNewNode="True" />
-          <Item Id="Employee_ListView" ViewId="Employee_ListView" ObjectKey="" Index="2" IsNewNode="True" />
-        </Items>
-      </Item>
-      <Item Id="Expenses Setup" Index="3" ImageName="expensetype" IsNewNode="True" Removed="True">
-        <Items IsNewNode="True">
-          <Item Id="ExpenseCategory_ListView" ViewId="ExpenseCategory_ListView" ObjectKey="" Index="0" IsNewNode="True" />
-          <Item Id="ExpenseType_ListView" ViewId="ExpenseType_ListView" ObjectKey="" Index="1" IsNewNode="True" />
-          <Item Id="ZReportComponent_ListView" ViewId="ZReportComponent_ListView" ObjectKey="" Index="2" IsNewNode="True" />
-        </Items>
-      </Item>
-      <Item Id="Inventory Setup" Index="4" ImageName="BO_Product" IsNewNode="True" Removed="True">
-        <Items IsNewNode="True">
-          <Item Id="ItemCategory_ListView" ViewId="ItemCategory_ListView" ObjectKey="" Index="0" IsNewNode="True" />
-          <Item Id="UnitType_ListView" ViewId="UnitType_ListView" ObjectKey="" Index="1" IsNewNode="True" />
-          <Item Id="ItemCard_ListView" ViewId="ItemCard_ListView" ObjectKey="" Index="2" IsNewNode="True" />
-        </Items>
-      </Item>
-      <Item Id="Administration" Index="5" ImageName="setup">
-        <Items>
-          <Item Id="WXafRole_ListView" ViewId="WXafRole_ListView" ObjectKey="" Index="4" IsNewNode="True" />
-          <Item Id="WXafUser_ListView" ViewId="WXafUser_ListView" ObjectKey="" Index="5" IsNewNode="True" />
-        </Items>
-      </Item>
-      <Item Id="Testing" Index="6" />
-    </Items>
-  </NavigationItems>
   <Options UIType="TabbedMDI" FormStyle="Ribbon" LookupSmallCollectionItemCount="0" RestoreTabbedMdiLayout="False" />
   <SchemaModules>
     <SchemaModule Name="CloneObjectModule" Version="17.2.16.0" IsNewNode="True" />

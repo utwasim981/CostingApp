@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Logo="ZahirLogo">
+  <Options CollectionsEditMode="Edit" DataAccessMode="Client" />
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="17.2.16.0" IsNewNode="True" />
+    <SchemaModule Name="SystemAspNetModule" Version="17.2.16.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="17.2.16.0" IsNewNode="True" />
+  </SchemaModules>
+  <ViewItems>
+    <PropertyEditor Name="PropertyEditors">
+      <RegisteredPropertyEditor PropertyType="System.DateTime" DefaultDisplayFormat="{0:dd/MM/yyyy}" DefaultEditMask="dd/MM/yyyy" />
+      <RegisteredPropertyEditor PropertyType="System.Drawing.Color" EditorType="DevExpress.ExpressApp.Web.Editors.ASPx.ASPxColorPickerPropertyEditor" />
+    </PropertyEditor>
+  </ViewItems>
+  <Views>
+    <ListView Id="ContractType_ListView" PageSize="100" EnableEndlessPaging="True" />
+    <ListView Id="Employee_ListView" FreezeColumnIndices="True" PageSize="100">
+      <Columns>
+        <ColumnInfo Id="CreatedBy" Index="-1" />
+        <ColumnInfo Id="CreatedOn" Index="-1" />
+        <ColumnInfo Id="IsActive" Index="-1" />
+        <ColumnInfo Id="Oid" Index="-1" />
+        <ColumnInfo Id="UpdatedBy" Index="-1" />
+        <ColumnInfo Id="UpdatedOn" Index="-1" />
+        <ColumnInfo Id="FullName" Index="0" />
+        <ColumnInfo Id="ContractType" Index="1" />
+        <ColumnInfo Id="Position" Index="2" />
+        <ColumnInfo Id="EmployeeCode" Index="3" />
+        <ColumnInfo Id="FirstName" Index="4" />
+        <ColumnInfo Id="LastName" Index="5" />
+        <ColumnInfo Id="Gender" Index="6" />
+        <ColumnInfo Id="SalaryPerHour" Index="7" />
+        <ColumnInfo Id="MonthlySalary" Index="8" />
+        <ColumnInfo Id="EmployeePhoto" Index="9" />
+      </Columns>
+    </ListView>
+    <ListView Id="Employee_ListView_Advanced" EnableEndlessPaging="True" FreezeColumnIndices="True" PageSize="100">
+      <Columns>
+        <ColumnInfo Id="CreatedBy" Index="-1" />
+        <ColumnInfo Id="CreatedOn" Index="-1" />
+        <ColumnInfo Id="FirstName" Index="-1" />
+        <ColumnInfo Id="IsActive" Index="-1" />
+        <ColumnInfo Id="LastName" Index="-1" />
+        <ColumnInfo Id="Oid" Index="-1" />
+        <ColumnInfo Id="UpdatedBy" Index="-1" />
+        <ColumnInfo Id="UpdatedOn" Index="-1" />
+        <ColumnInfo Id="EmployeeCode" Index="0" />
+        <ColumnInfo Id="EmployeePhoto" Index="0" />
+        <ColumnInfo Id="FullName" Index="1" />
+        <ColumnInfo Id="Gender" Index="2" />
+        <ColumnInfo Id="Position" Index="3" />
+        <ColumnInfo Id="ContractType" Index="4" />
+        <ColumnInfo Id="MonthlySalary" Index="6" />
+        <ColumnInfo Id="SalaryPerHour" Index="8" />
+      </Columns>
+    </ListView>
+    <ListView Id="Employee_ListView_Standard" FreezeColumnIndices="True" PageSize="100">
+      <Columns>
+        <ColumnInfo Id="CreatedBy" Index="-1" />
+        <ColumnInfo Id="CreatedOn" Index="-1" />
+        <ColumnInfo Id="EmployeePhoto" Index="-1" />
+        <ColumnInfo Id="FirstName" Index="-1" />
+        <ColumnInfo Id="IsActive" Index="-1" />
+        <ColumnInfo Id="LastName" Index="-1" />
+        <ColumnInfo Id="Oid" Index="-1" />
+        <ColumnInfo Id="UpdatedBy" Index="-1" />
+        <ColumnInfo Id="UpdatedOn" Index="-1" />
+        <ColumnInfo Id="EmployeeCode" Index="0" />
+        <ColumnInfo Id="FullName" Index="1" />
+        <ColumnInfo Id="Gender" Index="2" />
+        <ColumnInfo Id="Position" Index="3" />
+        <ColumnInfo Id="ContractType" Index="4" />
+        <ColumnInfo Id="MonthlySalary" Index="6" />
+        <ColumnInfo Id="SalaryPerHour" Index="8" />
+      </Columns>
+    </ListView>
+    <ListView Id="EmployeeAttendance_ListView" InlineEditMode="PopupEditForm" PageSize="100" EnableEndlessPaging="True" />
+    <ListView Id="ExpenseCard_ListView" EnableEndlessPaging="True" PageSize="100" />
+    <ListView Id="ExpenseRecord_ListView" EnableEndlessPaging="True" PageSize="100" />
+    <ListView Id="ItemCard_ListView" PageSize="100" EnableEndlessPaging="True" />
+    <ListView Id="MenuItem_Components_ListView" FreezeColumnIndices="False" EnableEndlessPaging="True" />
+    <ListView Id="Position_ListView" PageSize="100" EnableEndlessPaging="True" />
+    <ListView Id="SalesReportItem_ListView" DetailRowMode="DetailView" MasterDetailMode="ListViewOnly" MasterDetailView="" DetailRowView="SalesReportItem_DetailView_ListView" />
+    <DetailView Id="UnitType_DetailView" Caption="" />
+    <ListView Id="UnitType_ListView" EnableEndlessPaging="True" PageSize="100" />
+    <ListView Id="ZReport_Details_ListView" InlineEditMode="Inline" NewItemRowPosition="None" />
+  </Views>
+</Application>
