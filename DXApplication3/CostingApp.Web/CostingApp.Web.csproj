@@ -102,7 +102,7 @@
     </Reference>
     <Reference Include="DevExpress.ExpressApp.Web.v17.2">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Persistent.Base.v17.2">
       <SpecificVersion>False</SpecificVersion>
@@ -118,14 +118,14 @@
     </Reference>
     <Reference Include="DevExpress.Utils.v17.2">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Web.ASPxThemes.v17.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="DevExpress.Web.ASPxTreeList.v17.2">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Web.v17.2">
       <SpecificVersion>False</SpecificVersion>
@@ -241,6 +241,7 @@
   <ItemGroup>
     <Content Include="Model.Desktop.xafml" />
     <Content Include="Model.Tablet.xafml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="ReadMe.txt" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">

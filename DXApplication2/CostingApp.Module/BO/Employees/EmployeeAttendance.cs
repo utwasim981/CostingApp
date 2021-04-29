@@ -176,7 +176,6 @@ namespace CostingApp.Module.BO.Employees {
             if (controller != null)
                 controller.NewObjectAction.Executing += NewObjectAction_Executing;
         }
-
         private void NewObjectAction_Executing(object sender, CancelEventArgs e) {
             if (ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["SalaryExpense"] == null) {
                 MessageOptions options = new MessageOptions();

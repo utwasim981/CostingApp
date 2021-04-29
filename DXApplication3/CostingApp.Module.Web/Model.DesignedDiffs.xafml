@@ -74,7 +74,11 @@
         <ColumnInfo Id="SalaryPerHour" Index="8" />
       </Columns>
     </ListView>
-    <ListView Id="EmployeeAttendance_ListView" InlineEditMode="PopupEditForm" PageSize="100" EnableEndlessPaging="True" />
+    <ListView Id="EmployeeAttendance_ListView" InlineEditMode="EditForm" PageSize="100" EnableEndlessPaging="True">
+      <Columns>
+        <ColumnInfo Id="Amount" AllowEdit="False" />
+      </Columns>
+    </ListView>
     <ListView Id="ExpenseCard_ListView" EnableEndlessPaging="True" PageSize="100" />
     <ListView Id="ExpenseRecord_ListView" EnableEndlessPaging="True" PageSize="100" />
     <ListView Id="ItemCard_ListView" PageSize="100" EnableEndlessPaging="True" />
