@@ -375,8 +375,11 @@
     </ListView>
     <DetailView Id="ExpenseCard_DetailView" Caption="">
       <Items>
+        <PropertyEditor Id="CreatedBy" AllowEdit="False" />
+        <PropertyEditor Id="CreatedOn" AllowEdit="False" />
         <PropertyEditor Id="ExpenseDate" Caption="Date" />
         <PropertyEditor Id="ExpenseType" Caption="Expense" />
+        <PropertyEditor Id="IsActive" AllowEdit="False" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
@@ -426,6 +429,13 @@
     </DetailView>
     <ListView Id="ExpenseCard_ListView" Caption="Expense Cards" AllowEdit="True" NewItemRowPosition="Top">
       <Columns>
+        <ColumnInfo Id="CreatedBy" AllowEdit="False" />
+        <ColumnInfo Id="CreatedOn" AllowEdit="False" />
+        <ColumnInfo Id="IsActive" AllowEdit="False" />
+        <ColumnInfo Id="Notes" AllowEdit="False" />
+        <ColumnInfo Id="Oid" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedBy" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedOn" AllowEdit="False" />
         <ColumnInfo Id="Shop" Index="1" />
         <ColumnInfo Id="ExpenseDate" Caption="Date" Index="2" />
         <ColumnInfo Id="Period" Index="3" />
@@ -522,6 +532,22 @@
     </DetailView>
     <ListView Id="InventoryAdjustment_Items_ListView" Caption="Items" AllowEdit="True" NewItemRowPosition="Top">
       <Columns>
+        <ColumnInfo Id="BaseQuantity" AllowEdit="False" />
+        <ColumnInfo Id="CreatedBy" AllowEdit="False" />
+        <ColumnInfo Id="CreatedOn" AllowEdit="False" />
+        <ColumnInfo Id="Employee" AllowEdit="False" />
+        <ColumnInfo Id="ExpenseDate" AllowEdit="False" />
+        <ColumnInfo Id="ExpenseType" AllowEdit="False" />
+        <ColumnInfo Id="InventoryAdjustment" AllowEdit="False" />
+        <ColumnInfo Id="IsActive" AllowEdit="False" />
+        <ColumnInfo Id="Notes" AllowEdit="False" />
+        <ColumnInfo Id="Price" AllowEdit="False" />
+        <ColumnInfo Id="Shop" AllowEdit="False" />
+        <ColumnInfo Id="StockQuantity" AllowEdit="False" />
+        <ColumnInfo Id="Transaction" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedBy" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedOn" AllowEdit="False" />
+        <ColumnInfo Id="VendorBill" AllowEdit="False" />
         <ColumnInfo Id="Item" Index="0" DataSourceCriteria="[IsActive] = True And [ItemType] &lt;&gt; ##Enum#CostingApp.Module.BO.EnumItemCard,MenuItem#" />
         <ColumnInfo Id="TransactionUnit" Index="1" AllowEdit="False" Caption="Unit" />
         <ColumnInfo Id="ActualQuantity" Index="2" />
@@ -550,13 +576,23 @@
         <PropertyEditor Id="ExpenseType" AllowEdit="False" />
         <PropertyEditor Id="IsActive" AllowEdit="False" />
         <PropertyEditor Id="Item" DataSourceCriteria="[IsActive] = True And [ItemType] &lt;&gt; ##Enum#CostingApp.Module.BO.EnumItemCard,MenuItem#" />
-        <PropertyEditor Id="Oid" AllowEdit="True" />
-        <PropertyEditor Id="Period" AllowEdit="True" />
-        <PropertyEditor Id="QuantityIN" AllowEdit="True" />
-        <PropertyEditor Id="QuantityOnHand" AllowEdit="True" />
-        <PropertyEditor Id="QuantityOut" AllowEdit="True" />
-        <PropertyEditor Id="Status" AllowEdit="True" />
-        <PropertyEditor Id="StockUnit" AllowEdit="True" />
+        <PropertyEditor Id="Oid" AllowEdit="False" />
+        <PropertyEditor Id="Period" AllowEdit="False" />
+        <PropertyEditor Id="Price" AllowEdit="False" />
+        <PropertyEditor Id="Quantity" AllowEdit="False" />
+        <PropertyEditor Id="QuantityIN" AllowEdit="False" />
+        <PropertyEditor Id="QuantityOnHand" AllowEdit="False" />
+        <PropertyEditor Id="QuantityOut" AllowEdit="False" />
+        <PropertyEditor Id="Shop" AllowEdit="False" />
+        <PropertyEditor Id="Status" AllowEdit="False" />
+        <PropertyEditor Id="StockQuantity" AllowEdit="False" />
+        <PropertyEditor Id="StockUnit" AllowEdit="False" />
+        <PropertyEditor Id="Transaction" AllowEdit="False" />
+        <PropertyEditor Id="TransactionType" AllowEdit="False" />
+        <PropertyEditor Id="TransactionUnit" AllowEdit="False" />
+        <PropertyEditor Id="UpdatedBy" AllowEdit="False" />
+        <PropertyEditor Id="UpdatedOn" AllowEdit="False" />
+        <PropertyEditor Id="VendorBill" AllowEdit="False" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
@@ -933,8 +969,23 @@
     </DetailView>
     <ListView Id="PurchaseInvoice_Items_ListView" Caption="Items" AllowEdit="True" NewItemRowPosition="Top">
       <Columns>
+        <ColumnInfo Id="BaseQuantity" AllowEdit="False" />
+        <ColumnInfo Id="CreatedBy" AllowEdit="False" />
+        <ColumnInfo Id="CreatedOn" AllowEdit="False" />
+        <ColumnInfo Id="Employee" AllowEdit="False" />
+        <ColumnInfo Id="ExpenseDate" AllowEdit="False" />
+        <ColumnInfo Id="Invoice" AllowEdit="False" />
+        <ColumnInfo Id="IsActive" AllowEdit="False" />
+        <ColumnInfo Id="Notes" AllowEdit="False" />
         <ColumnInfo Id="QuantityIN" Index="-1" />
         <ColumnInfo Id="QuantityOut" Index="-1" />
+        <ColumnInfo Id="Shop" AllowEdit="False" />
+        <ColumnInfo Id="StockQuantity" AllowEdit="False" />
+        <ColumnInfo Id="Transaction" AllowEdit="False" />
+        <ColumnInfo Id="TransactionType" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedBy" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedOn" AllowEdit="False" />
+        <ColumnInfo Id="VendorBill" AllowEdit="False" />
         <ColumnInfo Id="Item" Index="0" DataSourceCriteria="[IsActive] = True And [ItemType] &lt;&gt; ##Enum#CostingApp.Module.BO.EnumItemCard,MenuItem#" />
         <ColumnInfo Id="TransactionUnit" Index="1" Caption="Unit" />
         <ColumnInfo Id="Quantity" Index="2" />
@@ -1059,7 +1110,16 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="SalesRecord_Items_ListView" AllowEdit="True" NewItemRowPosition="Top" MasterDetailMode="ListViewAndDetailView" MasterDetailView="SalesReportItem_DetailView_ListView" />
+    <ListView Id="SalesRecord_Items_ListView" AllowEdit="True" NewItemRowPosition="Top" MasterDetailMode="ListViewAndDetailView" MasterDetailView="SalesReportItem_DetailView_ListView">
+      <Columns>
+        <ColumnInfo Id="CreatedBy" AllowEdit="False" />
+        <ColumnInfo Id="CreatedOn" AllowEdit="False" />
+        <ColumnInfo Id="IsActive" AllowEdit="False" />
+        <ColumnInfo Id="SalesRecord" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedBy" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedOn" AllowEdit="False" />
+      </Columns>
+    </ListView>
     <ListView Id="SalesRecord_ListView">
       <Columns>
         <ColumnInfo Id="RecordNumber" Caption="Number" />
@@ -1323,10 +1383,24 @@
     </DetailView>
     <ListView Id="ZReport_Details_ListView" Caption="ZReport Details" AllowEdit="True" NewItemRowPosition="Top" AllowDelete="True" AllowNew="False" AllowLink="False">
       <Columns>
+        <ColumnInfo Id="CreatedBy" AllowEdit="False" />
+        <ColumnInfo Id="CreatedOn" AllowEdit="False" />
+        <ColumnInfo Id="Employee" AllowEdit="False" />
+        <ColumnInfo Id="ExpenseDate" AllowEdit="False" />
+        <ColumnInfo Id="ExpenseType" AllowEdit="False" />
+        <ColumnInfo Id="IsActive" AllowEdit="False" />
+        <ColumnInfo Id="Item" AllowEdit="False" />
+        <ColumnInfo Id="Notes" AllowEdit="False" />
         <ColumnInfo Id="Oid" Index="-1" />
+        <ColumnInfo Id="Shop" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedBy" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedOn" AllowEdit="False" />
+        <ColumnInfo Id="VendorBill" AllowEdit="False" />
+        <ColumnInfo Id="ZReport" AllowEdit="False" />
+        <ColumnInfo Id="Component" AllowEdit="False" />
         <ColumnInfo Id="Amount" Index="2" AllowEdit="False" />
-        <ColumnInfo Id="Component.Value" PropertyName="Component.Value" Index="3" IsNewNode="True" />
-        <ColumnInfo Id="Component.Calculation" PropertyName="Component.Calculation" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Component.Value" PropertyName="Component.Value" Index="3" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="Component.Calculation" PropertyName="Component.Calculation" Index="4" AllowEdit="False" IsNewNode="True" />
       </Columns>
     </ListView>
     <DetailView Id="ZReport_DetailView" Caption="">
@@ -1403,9 +1477,42 @@
       </Columns>
     </ListView>
     <DetailView Id="ZReportDetail_DetailView" Caption="">
+      <Items>
+        <PropertyEditor Id="Component" AllowEdit="False" />
+        <PropertyEditor Id="Component.Calculation" PropertyName="Component.Calculation" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="Component.ExpenseType" PropertyName="Component.ExpenseType" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="Component.Value" PropertyName="Component.Value" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="CreatedBy" AllowEdit="False" />
+        <PropertyEditor Id="CreatedOn" AllowEdit="False" />
+        <PropertyEditor Id="Employee" AllowEdit="False" />
+        <PropertyEditor Id="ExpenseDate" AllowEdit="False" />
+        <PropertyEditor Id="ExpenseType" AllowEdit="False" />
+        <PropertyEditor Id="IsActive" AllowEdit="False" />
+        <PropertyEditor Id="Item" AllowEdit="False" />
+        <PropertyEditor Id="Notes" AllowEdit="False" />
+        <PropertyEditor Id="Shop" AllowEdit="False" />
+        <PropertyEditor Id="UpdatedBy" AllowEdit="False" />
+        <PropertyEditor Id="UpdatedOn" AllowEdit="False" />
+        <PropertyEditor Id="VendorBill" AllowEdit="False" />
+      </Items>
       <Layout>
-        <LayoutGroup Id="Main">
-          <LayoutGroup Id="SimpleEditors" ShowCaption="True" />
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="MainGroup" ShowCaption="True" Index="0" RelativeSize="100" Caption="" Direction="Vertical" IsNewNode="True">
+            <LayoutGroup Id="Auto2a9bf68f-f7f5-4762-af70-7ac832df0bb8" ShowCaption="False" Caption="" Index="0" RelativeSize="49.919224555735056" IsNewNode="True">
+              <LayoutItem Id="Component" ViewItem="Component" Index="0" RelativeSize="5.7142857142857144" IsNewNode="True" />
+              <LayoutItem Id="ReportAmount" ViewItem="ReportAmount" Index="1" RelativeSize="94.285714285714292" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto9e0c95a6-a075-4257-96f7-5a4421f9d34e" ShowCaption="False" Caption="" Index="1" RelativeSize="50.080775444264944" IsNewNode="True">
+              <LayoutItem Id="Component.Calculation" ViewItem="Component.Calculation" Index="0" RelativeSize="5.7142857142857144" IsNewNode="True" />
+              <LayoutItem Id="Component.Value" ViewItem="Component.Value" Index="1" RelativeSize="4.2857142857142856" IsNewNode="True" />
+              <LayoutItem Id="Component.ExpenseType" ViewItem="Component.ExpenseType" Index="2" RelativeSize="90" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" ShowCaption="True" Removed="True">
+            <LayoutGroup Id="ExpenseRecord" Removed="True" />
+            <LayoutGroup Id="XPObject" Removed="True" />
+            <LayoutGroup Id="ZReportDetail" Removed="True" />
+          </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>

@@ -79,7 +79,7 @@
         <ColumnInfo Id="Amount" AllowEdit="False" />
       </Columns>
     </ListView>
-    <ListView Id="ExpenseCard_ListView" EnableEndlessPaging="True" PageSize="100" />
+    <ListView Id="ExpenseCard_ListView" EnableEndlessPaging="True" PageSize="100" InlineEditMode="EditForm" />
     <ListView Id="ExpenseRecord_ListView" EnableEndlessPaging="True" PageSize="100" />
     <ListView Id="ItemCard_ListView" PageSize="100" EnableEndlessPaging="True" />
     <ListView Id="MenuItem_Components_ListView" FreezeColumnIndices="False" EnableEndlessPaging="True" />

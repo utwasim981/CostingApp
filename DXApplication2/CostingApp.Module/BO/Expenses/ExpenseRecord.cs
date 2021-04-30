@@ -54,7 +54,7 @@ namespace CostingApp.Module.BO.Expenses {
         }
         double fAmount;
         //[RuleValueComparison("ExpenseRecord_Amount.GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
-        [ModelDefault("AllowEdit", "False")]
+        //[ModelDefault("AllowEdit", "False")]
         public double Amount {
             get { return fAmount; }
             set { SetPropertyValue<double>(nameof(Amount), ref fAmount, value); }
