@@ -37,14 +37,6 @@ namespace CostingApp.Module.DatabaseUpdate {
             var systemconfig = ObjectSpace.FindObject<SystemConfigration>(null);
             if (systemconfig == null)
                 systemconfig = ObjectSpace.CreateObject<SystemConfigration>();
-            systemconfig.CityCodeM = false;
-            systemconfig.CityCodeA = true;
-            systemconfig.ShopCodeM = false;
-            systemconfig.ShopCodeA = true;
-            systemconfig.EmployeeCodeM = false;
-            systemconfig.EmployeeCodeA = true;
-            systemconfig.ItemCodeM = false;
-            systemconfig.ItemCodeA = true;
         }
         void CreateExpenseCategory() {
             var category = ObjectSpace.FindObject<ExpenseCategory>(new BinaryOperator("ExpenseCategoryName", "Food Cost", BinaryOperatorType.Equal));// CriteriaOperator.Parse("ExpenseCategoryName = ?", "Food Cost"));
@@ -52,10 +44,10 @@ namespace CostingApp.Module.DatabaseUpdate {
                 category = ObjectSpace.CreateObject<ExpenseCategory>();
                 category.ExpenseCategoryName = "Food Cost";
             }
-            category = ObjectSpace.FindObject<ExpenseCategory>(new BinaryOperator("ExpenseCategoryName", "Labor Cost", BinaryOperatorType.Equal)); //CriteriaOperator.Parse("ExpenseCategoryName = ?", "Labor Cost"));
+            category = ObjectSpace.FindObject<ExpenseCategory>(new BinaryOperator("ExpenseCategoryName", "Employees Cost", BinaryOperatorType.Equal)); //CriteriaOperator.Parse("ExpenseCategoryName = ?", "Labor Cost"));
             if (category == null) {
                 category = ObjectSpace.CreateObject<ExpenseCategory>();
-                category.ExpenseCategoryName = "Labor Cost";
+                category.ExpenseCategoryName = "Employees Cost";
             }
             category = ObjectSpace.FindObject<ExpenseCategory>(new BinaryOperator("ExpenseCategoryName", "Overhead Cost", BinaryOperatorType.Equal));// CriteriaOperator.Parse("ExpenseCategoryName = ?", "Ovrehead Cost"));
             if (category == null) {

@@ -22,10 +22,8 @@ namespace CostingApp.Module.BO.Masters {
     [XafDefaultProperty(nameof(CityName))]
     [ImageName("city")]
     [NavigationItem("Administration")]
-    public class City : WXafSequenceObject {
+    public class City : WXafBaseObject {
         string fCityCode;
-        [Appearance("City_CityCode.Enable", Enabled = false, Criteria = "GetBoolean('CityCodeA') = True")]
-        [RuleRequiredField("City_CityCode_RuleRequiredField", DefaultContexts.Save, TargetCriteria = "GetBoolean('CityCodeM') = True")]
         [RuleUniqueValue("City_CityCode_RuleUniqueValue", DefaultContexts.Save)]
         public string CityCode {
             get { return fCityCode; }
@@ -46,19 +44,6 @@ namespace CostingApp.Module.BO.Masters {
         public City(Session session) : base(session) { }
         protected override void OnSaving() {
             base.OnSaving();            
-        }
-        protected override void OnChanged(string propertyName, object oldValue, object newValue) {
-            base.OnChanged(propertyName, oldValue, newValue);
-            if (!IsLoading) {
-                if (propertyName == nameof(SequentialNumber))
-                    onSequentialNumberValueChange(oldValue, newValue);
-            }
-        }
-
-        private void onSequentialNumberValueChange(object oldValue, object newValue) {
-            if (oldValue != newValue &&
-                (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["CityCodeA"])
-                CityCode = SequentialNumber.ToString().PadLeft(4, '0');
         }
     }
 }

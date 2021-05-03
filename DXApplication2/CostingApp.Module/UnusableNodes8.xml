@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="MenuItem_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Components_Group" Direction="Vertical" RelativeSize="60.619469026548671" Index="2" Removed="True">
+            <LayoutItem Id="Components" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="InventoryAdjustmentItem_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="MainGroup">
+            <LayoutGroup Id="Auto033e70f1-e9a7-4a12-a0b5-ab7ec2cc3fd0">
+              <LayoutItem Id="TransactionType" ViewItem="TransactionType" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

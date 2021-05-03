@@ -35,11 +35,19 @@ namespace CostingApp.Module.BO.Items {
             get { return fLastPurchasePrice; }
             set { SetPropertyValue<double>(nameof(LastPurchasePrice), ref fLastPurchasePrice, value); }
         }
+        [PersistentAlias("Round(LastPurchasePrice / ItemCard.StockUnit.ConversionRate, 3)")]
+        public double StockLastPururchasePrice {
+            get { return Convert.ToDouble(EvaluateAlias(nameof(StockLastPururchasePrice))); }
+        }           
         double fQuantityOnHand;
         [ModelDefault("AllowEdit", "False")]
         public double QuantityOnHand {
             get { return fQuantityOnHand; }
             set { SetPropertyValue<double>(nameof(QuantityOnHand), ref fQuantityOnHand, value); }
+        }
+        [PersistentAlias("Round(QuantityOnHand / ItemCard.StockUnit.ConversionRate, 3)")]
+        public double StockQuantityOnHand {
+            get { return Convert.ToDouble(EvaluateAlias(nameof(StockQuantityOnHand))); }
         }
         public ItemQuantity(Session session) : base(session) { }
     }

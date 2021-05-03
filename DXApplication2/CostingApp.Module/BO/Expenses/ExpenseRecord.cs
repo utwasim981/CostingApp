@@ -53,7 +53,7 @@ namespace CostingApp.Module.BO.Expenses {
             set { SetPropertyValue<DateTime>(nameof(ExpenseDate), ref fExpenseDate, value); }
         }
         double fAmount;
-        //[RuleValueComparison("ExpenseRecord_Amount.GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
+        [RuleValueComparison("ExpenseRecord_Amount.GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0)]
         //[ModelDefault("AllowEdit", "False")]
         public double Amount {
             get { return fAmount; }

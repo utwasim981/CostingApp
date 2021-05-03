@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CostingApp.Module.BO;
 using CostingApp.Module.BO.Items;
+using CostingApp.Module.BO.ItemTransactions;
 using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
@@ -26,7 +27,6 @@ namespace CostingApp.Module.Controllers {
             base.OnActivated();
             ObjectSpace.ModifiedChanged += ObjectSpace_ModifiedChanged;
             View.CurrentObjectChanged += View_CurrentObjectChanged;
-            enableAction();  
         }
 
         private void View_CurrentObjectChanged(object sender, EventArgs e) {
@@ -51,8 +51,7 @@ namespace CostingApp.Module.Controllers {
 
         private void actApprove_Execute(object sender, SimpleActionExecuteEventArgs e) {
             try {
-                CurrentObject.updateItemCard();
-                CurrentObject.Step = EnumInventorySteps.Approced;
+                CurrentObject.ApproveTransaction();               
                 ObjectSpace.CommitChanges();
             }
             catch(Exception ex) {

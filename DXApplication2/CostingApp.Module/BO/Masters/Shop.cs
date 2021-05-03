@@ -19,7 +19,7 @@ namespace CostingApp.Module.BO.Masters {
     [XafDefaultProperty(nameof(ShopName))]
     [ImageName("company")]
     [NavigationItem("Administration")]
-    public class Shop : WXafSequenceObject {
+    public class Shop : WXafBaseObject {
         City fCity;
         [RuleRequiredField("Shop_City.RuleRequiredField", DefaultContexts.Save)]
         [Association(@"Shop-City")]
@@ -35,8 +35,6 @@ namespace CostingApp.Module.BO.Masters {
             set { SetPropertyValue<Employee>(nameof(ShopLeader), ref fShopLeader, value); }
         }
         string fShopCode;
-        [Appearance("Shop_ShopCode.Enable", Enabled = false, Criteria = "GetBoolean('ShopCodeA') = True")]
-        [RuleRequiredField("Shop_ShopCode_RuleRequiredField", DefaultContexts.Save, TargetCriteria = "GetBoolean('ShopCodeM') = True")]
         [RuleUniqueValue("Shop_ShopCode_RuleUniqueValue", DefaultContexts.Save)]
         public string ShopCode {
             get { return fShopCode; }
@@ -45,6 +43,7 @@ namespace CostingApp.Module.BO.Masters {
         string fShopName;
         [Size(150)]
         [RuleRequiredField("Shop_ShopName.RuleRequiredField", DefaultContexts.Save)]
+        [RuleUniqueValue("Shop_ShopName.RuleUniqueValue", DefaultContexts.Save)]
         public string ShopName {
             get { return fShopName; }
             set { SetPropertyValue<string>(nameof(ShopName), ref fShopName, value); }
@@ -216,21 +215,5 @@ namespace CostingApp.Module.BO.Masters {
             set { SetPropertyValue<string>(nameof(SatTo), ref fSatTo, value); }
         }
         public Shop(Session session) : base(session) { }
-        protected override string GetSequenceName() {            
-            return string.Concat(ClassInfo.FullName, "-", City.CityCode.Replace(" ", "_"));
-        }
-        protected override void OnChanged(string propertyName, object oldValue, object newValue) {
-            base.OnChanged(propertyName, oldValue, newValue);
-            if (!IsLoading) {
-                if (propertyName == nameof(SequentialNumber))
-                    onSequentialNumberValueChange(oldValue, newValue);                    
-            }
-        }
-
-        private void onSequentialNumberValueChange(object oldValue, object newValue) {
-            if (oldValue != newValue &&
-                (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["ShopCodeA"])
-                ShopCode = string.Format("SH-{0}-{1}", City.CityCode, SequentialNumber.ToString().PadLeft(4, '0'));
-        }
     }
 }

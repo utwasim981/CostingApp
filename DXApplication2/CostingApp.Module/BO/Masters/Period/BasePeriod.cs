@@ -34,10 +34,7 @@ namespace CostingApp.Module.BO.Masters.Period {
             base.AfterConstruction();
             PeriodType = EnumPersiodType.Base;
             Status = EnumStatus.Opened;
-        }
-        protected override string GetSequenceName() {
-            return string.Concat(ClassInfo.FullName, QuarterPeriod.SequentialNumber.ToString());
-        }
+        }        
     }
 }
 

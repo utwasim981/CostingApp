@@ -84,7 +84,7 @@
     <ListView Id="ItemCard_ListView" PageSize="100" EnableEndlessPaging="True" />
     <ListView Id="MenuItem_Components_ListView" FreezeColumnIndices="False" EnableEndlessPaging="True" />
     <ListView Id="Position_ListView" PageSize="100" EnableEndlessPaging="True" />
-    <ListView Id="SalesReportItem_ListView" DetailRowMode="DetailView" MasterDetailMode="ListViewOnly" MasterDetailView="" DetailRowView="SalesReportItem_DetailView_ListView" />
+    <ListView Id="SalesReportItem_ListView" DetailRowMode="DetailView" MasterDetailMode="ListViewOnly" MasterDetailView="" DetailRowView="" />
     <DetailView Id="UnitType_DetailView" Caption="" />
     <ListView Id="UnitType_ListView" EnableEndlessPaging="True" PageSize="100" />
     <ListView Id="ZReport_Details_ListView" InlineEditMode="Inline" NewItemRowPosition="None" />

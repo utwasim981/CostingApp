@@ -116,22 +116,32 @@
     <Compile Include="BO\Expenses\ExpenseType.cs" />
     <Compile Include="BO\Expenses\ZReport.cs" />
     <Compile Include="BO\Expenses\ZReportComponent.cs" />
-    <Compile Include="BO\Items\InventoryAdjustment.cs" />
-    <Compile Include="BO\Items\InventoryAdjustmentItem.cs" />
+    <Compile Include="BO\Items\ItemAvaragePrice.cs" />
+    <Compile Include="BO\Items\ItemFifo.cs" />
+    <Compile Include="BO\Items\ItemLifo.cs" />
+    <Compile Include="BO\ItemTransactions\Abstraction\InputInventoryRecord.cs" />
+    <Compile Include="BO\ItemTransactions\Abstraction\InventoryTransaction.cs" />
+    <Compile Include="BO\ItemTransactions\Abstraction\OutputInventoryRecord.cs" />
+    <Compile Include="BO\ItemTransactions\InventoryTransfer.cs" />
+    <Compile Include="BO\ItemTransactions\InventoryTransferDestinationItem.cs" />
+    <Compile Include="BO\ItemTransactions\InventoryTransferSourceItem.cs" />
+    <Compile Include="BO\ItemTransactions\SalesInvoice.cs" />
+    <Compile Include="BO\ItemTransactions\SalesInvoiceDetail.cs" />
+    <Compile Include="BO\ItemTransactions\InventoryAdjustment.cs" />
+    <Compile Include="BO\ItemTransactions\InventoryAdjustmentItem.cs" />
     <Compile Include="BO\Items\InventoryItem.cs" />
-    <Compile Include="BO\Items\InventoryRecord.cs" />
-    <Compile Include="BO\Items\InventoryTransaction.cs" />
+    <Compile Include="BO\ItemTransactions\Abstraction\InventoryRecord.cs" />
     <Compile Include="BO\Items\ItemCard.cs" />
     <Compile Include="BO\Items\ItemCategory.cs" />
     <Compile Include="BO\Items\ItemQuantity.cs" />
     <Compile Include="BO\Items\MenuItem.cs" />
     <Compile Include="BO\Items\MenuItemComponent.cs" />
     <Compile Include="BO\Items\NoneInventoryItem.cs" />
-    <Compile Include="BO\Items\PurchaseInvoice.cs" />
-    <Compile Include="BO\Items\PurchaseInvoiceDetail.cs" />
-    <Compile Include="BO\Items\SalesRecord.cs" />
-    <Compile Include="BO\Items\SalesRecordItemComponent.cs" />
-    <Compile Include="BO\Items\SalesReportItem.cs" />
+    <Compile Include="BO\ItemTransactions\PurchaseInvoice.cs" />
+    <Compile Include="BO\ItemTransactions\PurchaseInvoiceDetail.cs" />
+    <Compile Include="BO\ItemTransactions\MenuSales.cs" />
+    <Compile Include="BO\ItemTransactions\MenuSalesComponent.cs" />
+    <Compile Include="BO\ItemTransactions\MenuSalesItem.cs" />
     <Compile Include="BO\Items\UnitType.cs" />
     <Compile Include="BO\Masters\City.cs" />
     <Compile Include="BO\Masters\Period\BasePeriod.cs" />
@@ -168,6 +178,12 @@
     <Compile Include="Controllers\InventoryAdjustmentController.Designer.cs">
       <DependentUpon>InventoryAdjustmentController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\InventoryTransactionController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\InventoryTransactionController.Designer.cs">
+      <DependentUpon>InventoryTransactionController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\PeriodController.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -186,6 +202,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Controllers\InventoryAdjustmentController.resx">
       <DependentUpon>InventoryAdjustmentController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\InventoryTransactionController.resx">
+      <DependentUpon>InventoryTransactionController.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controllers\PeriodController.resx">
       <DependentUpon>PeriodController.cs</DependentUpon>
@@ -314,6 +333,48 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\ZahirLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes3.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes4.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes5.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes6.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes7.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes8.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes9.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

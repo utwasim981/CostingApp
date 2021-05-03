@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="PurchaseInvoice_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="MainGroup">
+            <LayoutGroup Id="Auto9802aa07-9117-4c26-8bc6-ed75cf95e66d">
+              <LayoutItem Id="BillNumber" ViewItem="BillNumber" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseInvoice_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="BillNumber" Index="-1" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

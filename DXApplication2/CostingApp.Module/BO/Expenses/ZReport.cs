@@ -128,7 +128,7 @@ namespace CostingApp.Module.BO.Expenses {
             set {
                 SetPropertyValue<double>(nameof(ReportAmount), ref fReportAmount, value);
                 if (!IsLoading && Component != null) {
-                    Amount = Component.Calculation == EmumCalculationType.Value ? ReportAmount * Component.Value : Math.Round((ReportAmount * Component.Value) / 100, 2);
+                    Amount = Component.Calculation == EmumCalculationType.Value ? ReportAmount * Component.Value : Math.Round((ReportAmount * Component.Value) / 100, 3);
                 }
             }
         }

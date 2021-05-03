@@ -32,12 +32,15 @@
             this.actApprove.ConfirmationMessage = "Do you want to approve the transaction?";
             this.actApprove.Id = "InventoryAdjustment.Approve";
             this.actApprove.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireSingleObject;
+            this.actApprove.TargetObjectsCriteria = "Step == 0";
+            this.actApprove.TargetObjectType = typeof(CostingApp.Module.BO.ItemTransactions.InventoryAdjustment);
             this.actApprove.ToolTip = null;
             this.actApprove.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.actApprove_Execute);
             // 
             // InventoryAdjustmentController
             // 
             this.Actions.Add(this.actApprove);
+            this.TargetObjectType = typeof(CostingApp.Module.BO.ItemTransactions.InventoryAdjustment);
 
         }
 

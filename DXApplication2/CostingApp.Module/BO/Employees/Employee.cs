@@ -18,7 +18,7 @@ namespace CostingApp.Module.BO.Employees {
     [XafDefaultProperty(nameof(FullName))]
     [ImageName("employee")]
     [NavigationItem("Employees Setup")]
-    public class Employee : WXafSequenceObject {
+    public class Employee : WXafBaseObject {
         ContractType fContractType;
         [XafDisplayName("Contract Type")]
         [RuleRequiredField("Employee_ContractType_RuleRequiredField", DefaultContexts.Save)]
@@ -37,8 +37,6 @@ namespace CostingApp.Module.BO.Employees {
             set { SetPropertyValue<Position>(nameof(Position), ref fPosition, value); }
         }
         string fEmployeeCode;
-        [Appearance("Employee_EmployeeCode.Enable", Enabled = false, Criteria = "GetBoolean('EmployeeCodeA') = True")]
-        [RuleRequiredField("Employee_EmployeeCode_RuleRequiredField", DefaultContexts.Save, TargetCriteria = "GetBoolean('EmployeeCodeM') = True")]
         [RuleUniqueValue("Employee_EmployeeCode_RuleUniqueValue", DefaultContexts.Save)]
         public string EmployeeCode {
             get { return fEmployeeCode; }
@@ -67,15 +65,7 @@ namespace CostingApp.Module.BO.Employees {
                 SetPropertyValue<string>(nameof(LastName), ref fLastName, value);
                 //FullName = calcFullName();
             }
-        }
-        //string fFullName;
-        //[Size(150)]
-        //[ModelDefault("AllowEdit", "False")]
-        //[RuleUniqueValue("Employee_FullName_RuleUniqueValue", DefaultContexts.Save)]
-        //public string FullName {
-        //    get { return fFullName; }
-        //    set { SetPropertyValue<string>(nameof(FullName), ref fFullName, value); }
-        //}
+        }        
         [XafDisplayName("Employee Name")]
         [PersistentAlias("concat(FirstName, ' ', LastName)")]
         public string FullName {
@@ -108,19 +98,6 @@ namespace CostingApp.Module.BO.Employees {
             set { SetPropertyValue<byte[]>(nameof(EmployeePhoto), value); }
         }
         public Employee(Session session) : base(session) { }
-        protected override void OnChanged(string propertyName, object oldValue, object newValue) {
-            base.OnChanged(propertyName, oldValue, newValue);
-            if (!IsLoading) {
-                if (propertyName == nameof(SequentialNumber))
-                    onSequentialNumberValueChange(oldValue, newValue);
-            }
-        }
-
-        private void onSequentialNumberValueChange(object oldValue, object newValue) {
-            if (oldValue != newValue &&
-                (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["EmployeeCodeA"])
-                EmployeeCode = SequentialNumber.ToString().PadLeft(4, '0');            
-        }
         private string calcFullName() {
             return ObjectFormatter.Format("{FirstName} {LastName}", this, EmptyEntriesMode.RemoveDelimiterWhenEntryIsEmpty);
         }

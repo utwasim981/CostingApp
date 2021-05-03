@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application>
-  <NavigationItems ShowImages="True" />
+  <NavigationItems ShowImages="True">
+    <Items>
+      <Item Id="Default" Visible="False" />
+    </Items>
+  </NavigationItems>
   <SchemaModules>
     <SchemaModule Name="CloneObjectModule" Version="17.2.16.0" IsNewNode="True" />
     <SchemaModule Name="SystemAspNetModule" Version="17.2.16.0" IsNewNode="True" />

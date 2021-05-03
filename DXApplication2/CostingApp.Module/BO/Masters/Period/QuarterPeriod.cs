@@ -41,9 +41,6 @@ namespace CostingApp.Module.BO.Masters.Period {
         public override void AfterConstruction() {
             base.AfterConstruction();
             PeriodType = EnumPersiodType.Quarter;
-        }
-        protected override string GetSequenceName() {
-            return string.Concat(ClassInfo.FullName, YearPeriod.SequentialNumber.ToString());
-        }
+        }        
     }
 }

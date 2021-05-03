@@ -15,7 +15,7 @@ namespace CostingApp.Module.BO.Masters.Period {
     [XafDefaultProperty(nameof(PeriodName))]
     [NavigationItem("Administration")]
     [ImageName("Calendar")]
-    public abstract class Period : WXafSequenceObject, ITreeNode {
+    public abstract class Period : WXafBaseObject, ITreeNode {
         private string fPeriodName;
         [RuleRequiredField("Period_PeriodName_RuleRequiredField", DefaultContexts.Save)]
         [RuleUniqueValue("Period_PeriodName_RuleUniqueValue", DefaultContexts.Save)]

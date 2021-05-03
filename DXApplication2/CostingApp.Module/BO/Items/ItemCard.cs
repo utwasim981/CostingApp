@@ -1,11 +1,14 @@
 ﻿
 using CostingApp.Module.BO.Expenses;
+using CostingApp.Module.BO.ItemTransactions;
+using CostingApp.Module.BO.ItemTransactions.Abstraction;
 using CostingApp.Module.BO.Masters;
 using CostingApp.Module.CommonLibrary.General.Model;
 using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.DC;
+using DevExpress.ExpressApp.Editors;
 using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Base.General;
@@ -21,8 +24,8 @@ using System.Threading.Tasks;
 
 namespace CostingApp.Module.BO.Items {
     [NavigationItem("Inventory Setup")]
-//    [ImageName("BO_Product")]
-    public abstract class ItemCard : WXafSequenceObject, ICategorizedItem {
+    [ImageName("BO_Product")]
+    public abstract class ItemCard : WXafBaseObject, ICategorizedItem {
         EnumItemCard fItemType;
         [VisibleInDetailView(false)]
         [ImmediatePostData(true)]
@@ -31,8 +34,7 @@ namespace CostingApp.Module.BO.Items {
             set { SetPropertyValue<EnumItemCard>(nameof(ItemType), ref fItemType, value); }
         }
         string fItemCode;
-        [RuleRequiredField("ItemCard_ItemCode_RuleRequiredField", DefaultContexts.Save, TargetCriteria = "GetBoolean('ItemCodeM') = True")]
-        [Appearance("ItemCard_ItemCode.Enables", Enabled = false, Criteria = "GetBoolean('ItemCodeA') = True")]
+        [RuleUniqueValue("ItemCard_ItemCode_RuleUniqueValue", DefaultContexts.Save)]
         public string ItemCode {
             get { return fItemCode; }
             set { SetPropertyValue<string>(nameof(ItemCode), ref fItemCode, value); }
@@ -59,11 +61,7 @@ namespace CostingApp.Module.BO.Items {
         [ImmediatePostData(true)]
         public UnitType UnitType {
             get { return fUnitType; }
-            set {
-                SetPropertyValue<UnitType>(nameof(UnitType), ref fUnitType, value);
-                if (!IsLoading)
-                    onUnitTypeChanged();
-            }
+            set { SetPropertyValue<UnitType>(nameof(UnitType), ref fUnitType, value); }
         }
         Unit fBaseUnit;
         [ModelDefault("AllowEdit", "False")]
@@ -112,10 +110,10 @@ namespace CostingApp.Module.BO.Items {
         }       
         [Association("ItemCard-ItemQuantity"), DevExpress.Xpo.Aggregated]
         [ModelDefault("AllowEdit", "False")]
+        [Appearance("ItemCard_ItemQuantity.Visible", Visibility = ViewItemVisibility.Hide, Criteria = "ItemType = 2")]
         public XPCollection<ItemQuantity> Inventory {
             get { return GetCollection<ItemQuantity>(nameof(Inventory)); }
-        }
-
+        }        
         ITreeNode ICategorizedItem.Category {
             get {
                 return Category;
@@ -129,16 +127,11 @@ namespace CostingApp.Module.BO.Items {
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
             if (!IsLoading) {
-                if (propertyName == nameof(SequentialNumber))
-                    onSequentialNumberValueChange(oldValue, newValue);
+                if (propertyName == nameof(UnitType) && oldValue != newValue)
+                    onUnitTypeChanged();
             }
         }
 
-        private void onSequentialNumberValueChange(object oldValue, object newValue) {
-            if (oldValue != newValue &&
-                (bool)ValueManager.GetValueManager<Dictionary<string, object>>("Values").Value["CityCodeA"])
-                ItemCode = $"ITM-{SequentialNumber.ToString().PadLeft(5, '0')}";
-        }
         private void onUnitTypeChanged() {
             BaseUnit = UnitType.Units.FirstOrDefault(x => x.BaseUnit);
         }
@@ -158,12 +151,10 @@ namespace CostingApp.Module.BO.Items {
             }
             if (PurchaseDate > itemQuantity.LastPurchaseDate) {
                 itemQuantity.LastPurchaseDate = PurchaseDate;
-                itemQuantity.LastPurchasePrice = PurchaseUnit != null ?
-                                                Math.Round((PurchasePrice * TransactionUnit.ConversionRate) / PurchaseUnit.ConversionRate, 2) :
-                                                PurchasePrice * TransactionUnit.ConversionRate;
+                itemQuantity.LastPurchasePrice = Math.Round(PurchasePrice / TransactionUnit.ConversionRate, 3);
             }
         }
-        public void UpdateQuantityOnHand(Shop Shop, Unit TransactionUnit, double Quantity) {
+        public void UpdateQuantityOnHand(EnumInventoryRecordType RecordType, Shop Shop, Unit TransactionUnit, double Quantity) {
             var itemQuantity = this.Inventory.FirstOrDefault(x => x.Shop == Shop);
             if (itemQuantity == null) {
                 itemQuantity = ObjectSpace.CreateObject<ItemQuantity>();
@@ -172,15 +163,55 @@ namespace CostingApp.Module.BO.Items {
                 itemQuantity.ItemCard = this;
                 Inventory.Add(itemQuantity);
             }
-            itemQuantity.QuantityOnHand += Math.Round((Quantity * TransactionUnit.ConversionRate) / StockUnit.ConversionRate, 2);
+            if (RecordType == EnumInventoryRecordType.In)
+                itemQuantity.QuantityOnHand += Math.Round(Quantity * TransactionUnit.ConversionRate, 3);
+            else
+                itemQuantity.QuantityOnHand -= Math.Round(Quantity * TransactionUnit.ConversionRate, 3);
         }
-        public double GetQuantityOnHand(Shop Shop) {
+        public double GetQuantityOnHand(Shop Shop, Unit TransactionUnit) {
+            if (TransactionUnit == null)
+                return 0;
             var itemQuantity = Inventory.FirstOrDefault(x => x.Shop == Shop);
-            return itemQuantity == null ? 0 : itemQuantity.QuantityOnHand;
+            return itemQuantity == null ? 0 : Math.Round(itemQuantity.QuantityOnHand / TransactionUnit.ConversionRate, 3);
         }
-        public double GetLastPurchasePrice(Shop Shop) {
+        public double GetLastPurchasePrice(Shop Shop, Unit TransactionUnit) {
+            if (TransactionUnit == null)
+                return 0;
             var itemQuantity = Inventory.FirstOrDefault(x => x.Shop == Shop);
-            return itemQuantity == null ? 0 : itemQuantity.LastPurchasePrice;
+            return itemQuantity == null ? 0 : itemQuantity.LastPurchasePrice * TransactionUnit.ConversionRate; ;
+        }
+        public void GetFifoRecord (InventoryRecord Record) {
+
+            //CriteriaOperator co = CriteriaOperator.Parse("RecordType = ? And Shop = ? And Item =? And (Quantity * TransactionUnit.ConversionRate) > FifioQuantity", EnumInventoryRecordType.In, Record.Shop, Record.Item);
+
+            CriteriaOperator co = CriteriaOperator.And(new BinaryOperator(nameof(Record.RecordType), EnumInventoryRecordType.In, BinaryOperatorType.Equal),
+                                              new BinaryOperator(nameof(Record.Shop), Record.Shop, BinaryOperatorType.Equal),
+                                              new BinaryOperator(nameof(Record.Item), Record.Item, BinaryOperatorType.Equal),
+                                              new BinaryOperator(new OperandProperty(nameof(Record.BaseQuantity)), new OperandProperty(nameof(Record.FifoQuantity)), BinaryOperatorType.Greater));
+            var sort = new SortProperty("Date", DevExpress.Xpo.DB.SortingDirection.Ascending);
+            XPCollection<InventoryRecord> Fifo = new XPCollection<InventoryRecord>(Session, co, sort);
+            var quantity = Record.BaseQuantity;
+            double total = 0;
+            double fifoQuantity = Fifo[0].BaseQuantity - Fifo[0].FifoQuantity;
+            int index = 0;
+            if (quantity <= fifoQuantity) {
+                Fifo[0].FifoQuantity += quantity;
+                Record.Price = Fifo[0].BasePrice * Record.TransactionUnit.ConversionRate;
+                return;
+            }
+
+            while (quantity != 0) {
+                var outQuantity = quantity;
+                fifoQuantity = Fifo[index].BaseQuantity - Fifo[index].FifoQuantity;
+                if (outQuantity >= fifoQuantity)
+                    outQuantity -= Math.Abs(outQuantity - fifoQuantity);
+                Fifo[index].FifoQuantity += outQuantity;
+                //quantity -= Fifo[index].FifoQuantity;
+                total += (Fifo[index].BasePrice * outQuantity);
+                quantity -= outQuantity;
+                index++;
+            }
+            Record.Price = Math.Round((total / Record.BaseQuantity) * Record.TransactionUnit.ConversionRate, 3);
         }
     }
 }

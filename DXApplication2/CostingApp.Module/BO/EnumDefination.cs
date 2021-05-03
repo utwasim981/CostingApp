@@ -56,6 +56,13 @@ namespace CostingApp.Module.BO {
         Percentage = 1
     }
     public enum EnumInventoryTransactionType {
+        InventoryAdjustment = 0,
+        PurchaseInvoice = 1,
+        SalesInvoice = 2,
+        InventoryTransfer = 3,
+        MenuSales = 4
+    }
+    public enum EnumInventoryRecordType {
         In = 0,
         Out = 1
     }

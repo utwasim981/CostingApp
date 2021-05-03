@@ -2,6 +2,7 @@
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.DC;
+using DevExpress.ExpressApp.Model;
 using DevExpress.ExpressApp.Xpo;
 using DevExpress.Persistent.Base;
 using DevExpress.Xpo;
@@ -33,38 +34,42 @@ namespace CostingApp.Module.CommonLibrary.General.Model {
             set { fObjectSpace = value; }
         }
         bool fIsActive;
-        [ImmutableObject(true)]
-        [XafDisplayName("Actvie")]
-        [VisibleInListView(false)]
-        [VisibleInDetailView(false)]
+        [ImmutableObject(true),
+            XafDisplayName("Actvie"),
+            VisibleInListView(false),
+            VisibleInDetailView(false)]
         public bool IsActive {
             get { return fIsActive; }
             set { SetPropertyValue<bool>(nameof(IsActive), ref fIsActive, value); }
         }
         WXafUser fCreatedBy;
-        [VisibleInListView(false)]
-        [VisibleInDetailView(false)]
+        [VisibleInListView(false),
+            VisibleInDetailView(false),
+            ModelDefault("AllowEdit", "False")]
         public WXafUser CreatedBy {
             get { return fCreatedBy; }
             set { SetPropertyValue<WXafUser>(nameof(CreatedBy), ref fCreatedBy, value); }
         }
         DateTime fCreatedOn;
-        [VisibleInListView(false)]
-        [VisibleInDetailView(false)]
+        [VisibleInListView(false),
+            VisibleInDetailView(false),
+            ModelDefault("AllowEdit", "False")]
         public DateTime CreatedOn {
             get { return fCreatedOn; }
             set { SetPropertyValue<DateTime>(nameof(CreatedOn), ref fCreatedOn, value); }
         }
         WXafUser fUpdatedBy;
-        [VisibleInListView(false)]
-        [VisibleInDetailView(false)]
+        [VisibleInListView(false),
+            VisibleInDetailView(false),
+            ModelDefault("AllowEdit", "False")]
         public WXafUser UpdatedBy {
             get { return fUpdatedBy; }
             set { SetPropertyValue<WXafUser>(nameof(UpdatedBy), ref fUpdatedBy, value); }
         }
         DateTime fUpdatedOn;
-        [VisibleInListView(false)]
-        [VisibleInDetailView(false)]
+        [VisibleInListView(false),
+            VisibleInDetailView(false),
+            ModelDefault("AllowEdit", "False")]
         public DateTime UpdatedOn {
             get { return fUpdatedOn; }
             set { SetPropertyValue<DateTime>(nameof(UpdatedOn), ref fUpdatedOn, value); }

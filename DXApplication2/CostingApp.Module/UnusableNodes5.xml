@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="SalesRecord_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="MainGroup" ShowCaption="True" Index="0" RelativeSize="17.848410757946212" Caption="" Direction="Horizontal">
+            <LayoutGroup Id="Auto1b38a0c0-6eb1-4472-8457-8214b4eeda56" ShowCaption="False" Caption="Auto1b38a0c0-6eb1-4472-8457-8214b4eeda56(5)" Index="0" RelativeSize="49.846782431052091">
+              <LayoutItem Id="RecordNumber" ViewItem="RecordNumber" Index="0" RelativeSize="28.571428571428573" />
+              <LayoutItem Id="Shop" ViewItem="Shop" Index="1" RelativeSize="21.428571428571427" />
+              <LayoutItem Id="TransactionDate" ViewItem="TransactionDate" Index="2" RelativeSize="21.428571428571427" />
+              <LayoutItem Id="Period" ViewItem="Period" Index="3" RelativeSize="28.571428571428573" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto0b6e8fc8-74a7-4bb9-be8a-990e5d95bab3" ShowCaption="False" Caption="Auto0b6e8fc8-74a7-4bb9-be8a-990e5d95bab3(10)" Index="1" RelativeSize="50.153217568947909">
+              <LayoutItem Id="FromDate" ViewItem="FromDate" Index="0" RelativeSize="28.571428571428573" />
+              <LayoutItem Id="ToDate" ViewItem="ToDate" Index="1" RelativeSize="21.428571428571427" />
+              <LayoutItem Id="Status" ViewItem="Status" Index="2" RelativeSize="21.428571428571427" />
+              <LayoutItem Id="Item1" Index="3" RelativeSize="28.571428571428573" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Items_Group" Direction="Vertical" Index="1" RelativeSize="82.151589242053788">
+            <LayoutItem Id="Items" RelativeSize="100" />
+          </LayoutGroup>
+          <LayoutGroup Id="SimpleEditors" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesRecord_Items_ListView" AllowEdit="True" NewItemRowPosition="Top" MasterDetailMode="ListViewAndDetailView" MasterDetailView="">
+      <Columns Id="Columns">
+        <ColumnInfo Id="CreatedBy" AllowEdit="False" />
+        <ColumnInfo Id="CreatedOn" AllowEdit="False" />
+        <ColumnInfo Id="IsActive" AllowEdit="False" />
+        <ColumnInfo Id="SalesRecord" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedBy" AllowEdit="False" />
+        <ColumnInfo Id="UpdatedOn" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesRecord_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="RecordNumber" Caption="Number" />
+        <ColumnInfo Id="Shop" Index="1" />
+        <ColumnInfo Id="TransactionDate" Caption="Date" Index="2" />
+        <ColumnInfo Id="Period" Index="3" />
+        <ColumnInfo Id="FromDate" Index="4" />
+        <ColumnInfo Id="ToDate" Index="5" />
+        <ColumnInfo Id="Status" Index="6" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesReportItem_Components_ListView" AllowDelete="False" AllowLink="False" AllowNew="False">
+      <Columns Id="Columns">
+        <ColumnInfo Id="SalesReportItem" Index="-1" />
+        <ColumnInfo Id="Item" AllowEdit="True" Index="0" />
+        <ColumnInfo Id="TransactionUnit" Index="1" Caption="Unit" />
+        <ColumnInfo Id="Quantity" Index="2" />
+      </Columns>
+    </ListView>
+  </Views>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Transactions">
+        <Items Id="Items">
+          <Item Id="SalesRecord_ListView" Index="5" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+</Application>

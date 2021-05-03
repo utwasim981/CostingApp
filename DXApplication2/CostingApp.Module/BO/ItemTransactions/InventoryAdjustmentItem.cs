@@ -4,10 +4,13 @@ using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
 using DevExpress.Xpo;
 using System;
+using DevExpress.ExpressApp.DC;
+using CostingApp.Module.BO.Items;
+using CostingApp.Module.BO.ItemTransactions.Abstraction;
 
-namespace CostingApp.Module.BO.Items {
+namespace CostingApp.Module.BO.ItemTransactions {
     [ImageName("")]
-    public class InventoryAdjustmentItem : InventoryRecord {
+    public class InventoryAdjustmentItem : InputInventoryRecord {
         InventoryAdjustment fInventoryAdjustment;
         [Association("InventoryAdjustment-InventoryAdjustmentItem")]
         public InventoryAdjustment InventoryAdjustment {
@@ -15,69 +18,60 @@ namespace CostingApp.Module.BO.Items {
             set { SetPropertyValue<InventoryAdjustment>(nameof(InventoryAdjustment), ref fInventoryAdjustment, value); }
         }
         double fQuantityOnHand;
-        [ModelDefault("AllowEdit", "False")]
+        [ModelDefault("AllowEdit", "False"),
+            ImmediatePostData(true),
+            XafDisplayName("Onhand")]
         public double QuantityOnHand {
             get { return fQuantityOnHand; }
             set { SetPropertyValue<double>(nameof(QuantityOnHand), ref fQuantityOnHand, value); }
         }
         double fActualQuantity;
-        [ImmediatePostData(true)]
+        [ImmediatePostData(true),
+            XafDisplayName("Actual")]
         public double ActualQuantity {
             get { return fActualQuantity; }
             set { SetPropertyValue<double>(nameof(ActualQuantity), ref fActualQuantity, value); }
         }
-
         public InventoryAdjustmentItem(Session session) : base(session) { }
+        public override void AfterConstruction() {
+            base.AfterConstruction();            
+        }
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
             if (!IsLoading) {
-                if (propertyName == nameof(InventoryAdjustment) && oldValue != newValue)
-                    onInventoryAdjustmentValueChange();
+                if (propertyName == nameof(InventoryAdjustment) && oldValue != newValue) {
+                    Transaction = InventoryAdjustment;
+                }
                 if (propertyName == nameof(Item) && oldValue != newValue)
                     onItemValueChange();
+                if (propertyName == nameof(TransactionUnit) && oldValue != newValue)
+                    if (oldValue != null && newValue != null)
+                        QuantityOnHand = Math.Round((QuantityOnHand * ((Unit)oldValue).ConversionRate) / ((Unit)newValue).ConversionRate, 3);
                 if (propertyName == nameof(ActualQuantity) && oldValue != newValue)
                     onActualQuantityValueChange();
             }
         }
-
-        private void onInventoryAdjustmentValueChange() {
-            if (InventoryAdjustment != null) {
-                Shop = InventoryAdjustment.Shop;
-                Transaction = InventoryAdjustment;
-                ExpenseDate = InventoryAdjustment.TransactionDate;
-                Period = InventoryAdjustment.Period;
-            }
+        protected override void OnSavingRecord() {
+            
         }
         private void onActualQuantityValueChange() {
             if (ActualQuantity > QuantityOnHand) {
-                TransactionType = EnumInventoryTransactionType.In;
+                RecordType = EnumInventoryRecordType.In;
                 Quantity = ActualQuantity - QuantityOnHand;
             }
             else if (ActualQuantity < QuantityOnHand) {
-                TransactionType = EnumInventoryTransactionType.Out;
+                RecordType = EnumInventoryRecordType.Out;
                 Quantity = QuantityOnHand - ActualQuantity;
             }
         }
         private void onItemValueChange() {
             if (Item != null) {
-                TransactionUnit = Item.StockUnit;
-                QuantityOnHand = Item.GetQuantityOnHand(Shop);
+                QuantityOnHand = Item.GetQuantityOnHand(Shop, TransactionUnit);
             }
+        }
+        public void ApproveItem() {
+            base.OnSavingRecord();
         }
 
-        public void UpdateItemCard() {
-            object quantityOldValue = null;
-            if (WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(Quantity), out quantityOldValue))
-                if (TransactionType == EnumInventoryTransactionType.In)
-                    Item.UpdateQuantityOnHand(Shop, TransactionUnit, (Quantity - Convert.ToDouble(quantityOldValue)));
-                else
-                    Item.UpdateQuantityOnHand(Shop, TransactionUnit, (Quantity - Convert.ToDouble(quantityOldValue)) * -1);
-            else {
-                if (TransactionType == EnumInventoryTransactionType.In)
-                    Item.UpdateQuantityOnHand(Shop, TransactionUnit, Quantity);
-                else
-                    Item.UpdateQuantityOnHand(Shop, TransactionUnit, Quantity * -1);
-            }
-        }
     }
 }
