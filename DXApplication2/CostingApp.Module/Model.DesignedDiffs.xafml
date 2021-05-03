@@ -96,7 +96,7 @@
       <Item Id="Testing" Index="5" />
     </Items>
   </NavigationItems>
-  <Options>
+  <Options LookupSmallCollectionItemCount="100">
     <LayoutManagerOptions RequiredFieldMark="*" CaptionLocation="Left" />
   </Options>
   <SchemaModules>
