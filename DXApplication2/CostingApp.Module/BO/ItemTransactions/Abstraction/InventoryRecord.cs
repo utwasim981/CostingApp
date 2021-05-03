@@ -82,7 +82,8 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
         Unit fTransactionUnit;
         [RuleRequiredField("InventoryRecord_TransactionUnit_RuleRequiredField", DefaultContexts.Save),
             ImmediatePostData(true),
-            XafDisplayName("Unit")]
+            XafDisplayName("Unit"),
+            DataSourceProperty("Item.UnitType.Units")]
         public Unit TransactionUnit {
             get { return fTransactionUnit; }
             set { SetPropertyValue<Unit>(nameof(TransactionUnit), ref fTransactionUnit, value); }
