@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Logo="ZahirLogo">
+  <ActionDesign>
+    <ActionToContainerMapping>
+      <ActionContainer Id="ListView">
+        <ActionLink ActionId="Delete" IsNewNode="True" />
+      </ActionContainer>
+      <ActionContainer Id="PopupActions">
+        <ActionLink ActionId="AdjustmentAddItems.Close" IsNewNode="True" />
+      </ActionContainer>
+    </ActionToContainerMapping>
+  </ActionDesign>
   <Options CollectionsEditMode="Edit" DataAccessMode="Client" />
   <SchemaModules>
     <SchemaModule Name="CloneObjectModule" Version="17.2.16.0" IsNewNode="True" />
@@ -13,6 +23,10 @@
     </PropertyEditor>
   </ViewItems>
   <Views>
+    <ListView Id="AddInventoryItems_ListView" AllowEdit="True" AllowNew="False" AllowUnlink="False" EnableEndlessPaging="True" />
+    <ListView Id="AddItems_ListView" AllowDelete="True" AllowEdit="True" AllowNew="False" AllowUnlink="False" EnableEndlessPaging="True" />
+    <ListView Id="AddPurchaseItems_ListView" AllowNew="False" AllowEdit="True" AllowDelete="True" AllowUnlink="False" EnableEndlessPaging="True" />
+    <ListView Id="AddSalesItems_ListView" AllowEdit="True" AllowLink="False" AllowNew="False" AllowUnlink="False" EnableEndlessPaging="True" />
     <ListView Id="ContractType_ListView" PageSize="100" EnableEndlessPaging="True" />
     <ListView Id="Employee_ListView" FreezeColumnIndices="True" PageSize="100">
       <Columns>
@@ -84,7 +98,6 @@
     <ListView Id="ItemCard_ListView" PageSize="100" EnableEndlessPaging="True" />
     <ListView Id="MenuItem_Components_ListView" FreezeColumnIndices="False" EnableEndlessPaging="True" />
     <ListView Id="Position_ListView" PageSize="100" EnableEndlessPaging="True" />
-    <ListView Id="SalesReportItem_ListView" DetailRowMode="DetailView" MasterDetailMode="ListViewOnly" MasterDetailView="" DetailRowView="" />
     <DetailView Id="UnitType_DetailView" Caption="" />
     <ListView Id="UnitType_ListView" EnableEndlessPaging="True" PageSize="100" />
     <ListView Id="ZReport_Details_ListView" InlineEditMode="Inline" NewItemRowPosition="None" />

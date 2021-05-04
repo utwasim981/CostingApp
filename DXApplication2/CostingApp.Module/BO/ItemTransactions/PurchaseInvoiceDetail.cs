@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 
 namespace CostingApp.Module.BO.ItemTransactions {
+    [AddItemClass(EnumInventoryTransactionType.PurchaseInvoice)]
     public class PurchaseInvoiceDetail : InputInventoryRecord {
         PurchaseInvoice fInvoice;
         [Association("PurchaseInvoice-PurchaseInvoiceDetail")]

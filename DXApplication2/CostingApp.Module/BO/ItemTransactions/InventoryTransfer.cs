@@ -16,6 +16,7 @@ namespace CostingApp.Module.BO.ItemTransactions {
     [NavigationItem("Transactions"),
         XafDefaultProperty(nameof(Number)),
         ImageName("BO_Order_Item")]
+    [AddItemClass(EnumInventoryTransactionType.InventoryTransfer)]
     public class InventoryTransfer : InventoryTransaction {
         public override EnumInventoryTransactionType TransactionType { get { return EnumInventoryTransactionType.InventoryTransfer; } }
         const string NumberFormat = "Concat('IT-', PadLeft(ToStr(SequentialNumber), 6, '0'))";

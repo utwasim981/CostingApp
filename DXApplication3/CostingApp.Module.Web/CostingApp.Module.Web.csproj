@@ -58,6 +58,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.ExpressApp.ConditionalAppearance.v17.2, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.Security.v17.2, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -120,9 +121,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\SaveMessageController.cs">
+    <Compile Include="Controllers\AddItemsControllers.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controllers\AddItemsControllers.Designer.cs">
+      <DependentUpon>AddItemsControllers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\IAddItemsController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\IAddItemsController.Designer.cs">
+      <DependentUpon>IAddItemsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\SaveMessageController.cs" />
     <Compile Include="WebModule.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -132,6 +143,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controllers\AddItemsControllers.resx">
+      <DependentUpon>AddItemsControllers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\IAddItemsController.resx">
+      <DependentUpon>IAddItemsController.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="WebModule.resx">
@@ -174,6 +191,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="UnusableNodes.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes1.xml">
       <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
       <SubType>Designer</SubType>
     </None>

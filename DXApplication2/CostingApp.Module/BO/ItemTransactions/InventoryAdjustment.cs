@@ -18,8 +18,9 @@ namespace CostingApp.Module.BO.ItemTransactions {
         ImageName("BO_Order_Item"),
         XafDefaultProperty(nameof(Number))]
     [Appearance("InventoryAdjustment_Approved.Enabled", Enabled = false, TargetItems = "*", Criteria = "Step = 1")]
+    [AddItemClass(EnumInventoryTransactionType.InventoryAdjustment)]
     public class InventoryAdjustment : InventoryTransaction {
-        public override EnumInventoryTransactionType TransactionType { get { return EnumInventoryTransactionType.InventoryAdjustment; } }
+        public override EnumInventoryTransactionType TransactionType { get { return EnumInventoryTransactionType.InventoryAdjustment; } }       
         const string NumberFormat = "Concat('IA-', PadLeft(ToStr(SequentialNumber), 6, '0'))";
         [PersistentAlias(NumberFormat)]
         public string Number {
@@ -35,7 +36,7 @@ namespace CostingApp.Module.BO.ItemTransactions {
         [RuleRequiredField("InventoryAdjustment_Items_RuleRequiredField", DefaultContexts.Save)]
         public XPCollection<InventoryAdjustmentItem> Items { get { return GetCollection<InventoryAdjustmentItem>(nameof(Items)); } }
 
-        public InventoryAdjustment(Session session) : base(session) {}
+        public InventoryAdjustment(Session session) : base(session) { }
         protected override void OnSaving() {
             base.OnSaving();
         }

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="AddAdjustmentItemList_Items_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Item" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <DetailView Id="InventoryAdjustmentItem_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="MainGroup">
+            <LayoutGroup Id="Auto033e70f1-e9a7-4a12-a0b5-ab7ec2cc3fd0">
+              <LayoutItem Id="TransactionType" ViewItem="TransactionType" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

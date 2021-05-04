@@ -93,7 +93,11 @@
           <Item Id="SystemConfigration_ListView" Index="5" ObjectKey="1" ViewId="SystemConfigration_DetailView" />
         </Items>
       </Item>
-      <Item Id="Testing" Index="5" />
+      <Item Id="Testing" Index="5">
+        <Items>
+          <Item Id="@e39b18f1-5b59-459c-ac10-baf0ebe921ad" ViewId="AddAdjustmentItems_ListView" IsNewNode="True" />
+        </Items>
+      </Item>
     </Items>
   </NavigationItems>
   <Options LookupSmallCollectionItemCount="100">
@@ -104,6 +108,12 @@
     <SchemaModule Name="SystemModule" Version="17.2.16.0" IsNewNode="True" />
   </SchemaModules>
   <Views>
+    <ListView Id="AddAdjustmentItemList_Items_ListView" AllowDelete="True" AllowNew="False" AllowEdit="True" AllowUnlink="False">
+      <Columns>
+        <ColumnInfo Id="ItemName" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <ListView Id="AddAdjustmentItems_ListView" AllowDelete="True" AllowEdit="True" AllowNew="False" AllowUnlink="False" />
     <DetailView Id="BasePeriod_DetailView" Caption="">
       <Items>
         <PropertyEditor Id="PeriodName" Caption="Name" />

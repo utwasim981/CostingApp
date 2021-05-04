@@ -103,9 +103,10 @@ namespace CostingApp.Module.BO.Masters.Period {
         }
 
         public static BasePeriod GetOpenedPeriodForDate(IObjectSpace objectSpace, DateTime date) {
-            var co = CriteriaOperator.And(CriteriaOperator.And(new BinaryOperator(nameof(StartDate), date, BinaryOperatorType.LessOrEqual),
-                new BinaryOperator(nameof(EndDate), date, BinaryOperatorType.GreaterOrEqual)),
+            var co = CriteriaOperator.And(CriteriaOperator.And(new BinaryOperator(nameof(StartDate), date.Date, BinaryOperatorType.LessOrEqual),
+                new BinaryOperator(nameof(EndDate), date.Date, BinaryOperatorType.GreaterOrEqual)),
                 new BinaryOperator(nameof(Status), EnumStatus.Opened, BinaryOperatorType.Equal));
+            //var co = new BetweenOperator(date, new OperandProperty("StartDate"), new OperandProperty("EndDate"));
             return objectSpace.FindObject<BasePeriod>(co);
         }
         public static BasePeriod GetClosedPeriodForDate(IObjectSpace objectSpace, DateTime date) {

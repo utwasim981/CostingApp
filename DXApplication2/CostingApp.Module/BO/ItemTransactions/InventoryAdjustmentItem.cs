@@ -9,7 +9,7 @@ using CostingApp.Module.BO.Items;
 using CostingApp.Module.BO.ItemTransactions.Abstraction;
 
 namespace CostingApp.Module.BO.ItemTransactions {
-    [ImageName("")]
+    [AddItemClass(EnumInventoryTransactionType.InventoryAdjustment)]
     public class InventoryAdjustmentItem : InputInventoryRecord {
         InventoryAdjustment fInventoryAdjustment;
         [Association("InventoryAdjustment-InventoryAdjustmentItem")]
@@ -34,7 +34,8 @@ namespace CostingApp.Module.BO.ItemTransactions {
         }
         public InventoryAdjustmentItem(Session session) : base(session) { }
         public override void AfterConstruction() {
-            base.AfterConstruction();            
+            base.AfterConstruction();
+            
         }
         protected override void OnChanged(string propertyName, object oldValue, object newValue) {
             base.OnChanged(propertyName, oldValue, newValue);
@@ -45,7 +46,9 @@ namespace CostingApp.Module.BO.ItemTransactions {
                 if (propertyName == nameof(Item) && oldValue != newValue)
                     onItemValueChange();
                 if (propertyName == nameof(TransactionUnit) && oldValue != newValue)
-                    if (oldValue != null && newValue != null)
+                    if (Session.IsNewObject(this))
+                        QuantityOnHand = Item.GetQuantityOnHand(Shop, (Unit)newValue);
+                    else
                         QuantityOnHand = Math.Round((QuantityOnHand * ((Unit)oldValue).ConversionRate) / ((Unit)newValue).ConversionRate, 3);
                 if (propertyName == nameof(ActualQuantity) && oldValue != newValue)
                     onActualQuantityValueChange();

@@ -21,8 +21,7 @@ using System.Threading.Tasks;
 namespace CostingApp.Module.BO.ItemTransactions {
     [NavigationItem("Transactions"),
         ImageName("invoice"),
-        XafDefaultProperty(nameof(Number))]
-
+        XafDefaultProperty(nameof(Number))]    
     public class PurchaseInvoice : InventoryTransaction {
         public override EnumInventoryTransactionType TransactionType { get { return EnumInventoryTransactionType.PurchaseInvoice; } }
         const string NumberFormat = "Concat('PI-', PadLeft(ToStr(SequentialNumber), 6, '0'))";
@@ -44,9 +43,7 @@ namespace CostingApp.Module.BO.ItemTransactions {
             }
         }
 
-
-        public PurchaseInvoice(Session session) : base(session) {
-        }
+        public PurchaseInvoice(Session session) : base(session) { }
         protected override string GetSequenceName() {
             return ClassInfo.FullName;
         }

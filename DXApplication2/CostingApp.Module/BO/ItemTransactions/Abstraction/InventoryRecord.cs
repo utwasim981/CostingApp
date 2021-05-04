@@ -237,6 +237,7 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
         public double StockLifoQuantity {
             get { return Convert.ToDouble(EvaluateAlias(nameof(StockLifoQuantity))); }
         }
+        [Browsable(false)]
         public EnumInventoryRecordType NotRecordType {
             get { return RecordType == EnumInventoryRecordType.In ? EnumInventoryRecordType.Out : EnumInventoryRecordType.In; }
         }

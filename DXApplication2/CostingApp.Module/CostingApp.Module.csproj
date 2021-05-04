@@ -62,7 +62,6 @@
     <Reference Include="DevExpress.ExpressApp.ViewVariantsModule.v17.2, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="DevExpress.ExpressApp.Win.v17.2, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.Xpo.v17.2">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
@@ -119,9 +118,17 @@
     <Compile Include="BO\Items\ItemAvaragePrice.cs" />
     <Compile Include="BO\Items\ItemFifo.cs" />
     <Compile Include="BO\Items\ItemLifo.cs" />
+    <Compile Include="BO\ItemTransactions\Abstraction\AddItemAttributes.cs" />
     <Compile Include="BO\ItemTransactions\Abstraction\InputInventoryRecord.cs" />
+    <Compile Include="BO\ItemTransactions\Abstraction\InventoryRecordAddItemsController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BO\ItemTransactions\Abstraction\InventoryTransacrionCheckShopController.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="BO\ItemTransactions\Abstraction\InventoryTransaction.cs" />
     <Compile Include="BO\ItemTransactions\Abstraction\OutputInventoryRecord.cs" />
+    <Compile Include="BO\ItemTransactions\Abstraction\AddItems.cs" />
     <Compile Include="BO\ItemTransactions\InventoryTransfer.cs" />
     <Compile Include="BO\ItemTransactions\InventoryTransferDestinationItem.cs" />
     <Compile Include="BO\ItemTransactions\InventoryTransferSourceItem.cs" />
@@ -153,7 +160,6 @@
     <Compile Include="BO\SystemConfigration.cs" />
     <Compile Include="CommnLibrary\General\CriteriaOperators\CriteriaOperatorRegistration.cs" />
     <Compile Include="CommnLibrary\General\CriteriaOperators\IshowInternalIDFunctionOperator.cs" />
-    <Compile Include="CommnLibrary\General\CriteriaOperators\ShowInternalIDControllers.cs" />
     <Compile Include="CommnLibrary\General\CriteriaOperators\ValueManagerFunctionOperators.cs" />
     <Compile Include="CommnLibrary\General\ModelExtenders\IModelCommonMemberViewItem.cs" />
     <Compile Include="CommnLibrary\General\Model\SequenceGenerator.cs" />
@@ -172,6 +178,12 @@
     <Compile Include="CommnLibrary\General\StringTrimingValueConvertor.cs" />
     <Compile Include="CommnLibrary\General\SystemConfigrationHelper.cs" />
     <Compile Include="CommnLibrary\WXafHelper.cs" />
+    <Compile Include="Controllers\AdditionalPersonObjectSpaceController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\AdditionalPersonObjectSpaceController.Designer.cs">
+      <DependentUpon>AdditionalPersonObjectSpaceController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\InventoryAdjustmentController.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -375,6 +387,21 @@
       <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes10.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnusableNodes11.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BO\ItemTransactions\NonePersistant\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

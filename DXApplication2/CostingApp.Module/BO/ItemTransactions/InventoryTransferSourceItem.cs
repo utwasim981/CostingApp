@@ -3,6 +3,7 @@ using DevExpress.Xpo;
 using System.Linq;
 
 namespace CostingApp.Module.BO.ItemTransactions {
+    [AddItemClass(EnumInventoryTransactionType.InventoryTransfer)]
     public class InventoryTransferSourceItem : OutputInventoryRecord {
         InventoryTransfer fInventoryTransfer;
         [Association("InventoryTransfer-InventoryTransferSourceItem")]
