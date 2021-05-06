@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Testing">
+        <Items Id="Items">
+          <Item Id="@e39b18f1-5b59-459c-ac10-baf0ebe921ad" ViewId="AddAdjustmentItems_ListView" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Views Id="Views">
+    <DetailView Id="InventoryAdjustmentItem_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="MainGroup">
+            <LayoutGroup Id="Auto033e70f1-e9a7-4a12-a0b5-ab7ec2cc3fd0">
+              <LayoutItem Id="TransactionType" ViewItem="TransactionType" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

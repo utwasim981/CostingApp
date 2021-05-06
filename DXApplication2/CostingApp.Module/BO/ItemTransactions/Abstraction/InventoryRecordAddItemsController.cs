@@ -1,6 +1,9 @@
 ﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
+using DevExpress.Xpo;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
     public class InventoryRecordAddItemsController : ViewController<ListView> {

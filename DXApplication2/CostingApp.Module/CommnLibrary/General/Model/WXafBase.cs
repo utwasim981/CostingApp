@@ -8,6 +8,7 @@ using DevExpress.Persistent.Base;
 using DevExpress.Xpo;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -97,12 +98,16 @@ namespace CostingApp.Module.CommonLibrary.General.Model {
             UpdatedOn = DateTime.Now;
             UpdatedBy = Session.GetObjectByKey<WXafUser>(((WXafUser)SecuritySystem.CurrentUser).Oid);
         }
-        //protected override void OnChanged(string propertyName, object oldValue, object newValue) {
-        //    base.OnChanged(propertyName, oldValue, newValue);
-        //    if (!IsLoading && oldValue != newValue) {
-        //        if (ClassInfo.FindMember(propertyName).MemberType.Name.ToUpper() == "STRING")
-        //            newValue = WXafHelper.TrimStringValue(newValue.ToString());
-        //    }
-        //}
+        protected override void OnChanged(string propertyName, object oldValue, object newValue) {
+            base.OnChanged(propertyName, oldValue, newValue);
+            if (!IsLoading) {
+                if (ClassInfo.FindMember(propertyName).IsAssociation && oldValue != newValue) {
+                    if (Session.IsNewObject(this) && newValue != null) {
+                        if (ClassInfo.FindMember(propertyName).GetAssociatedMember().IsCollection)
+                            Oid = ((ClassInfo.FindMember(propertyName).GetAssociatedMember().GetValue(newValue) as IList).Count + 1) * -1;
+                    }
+                }
+            }
+        }
     }
 }

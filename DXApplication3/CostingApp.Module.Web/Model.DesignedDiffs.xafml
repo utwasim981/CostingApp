@@ -23,10 +23,9 @@
     </PropertyEditor>
   </ViewItems>
   <Views>
-    <ListView Id="AddInventoryItems_ListView" AllowEdit="True" AllowNew="False" AllowUnlink="False" EnableEndlessPaging="True" />
-    <ListView Id="AddItems_ListView" AllowDelete="True" AllowEdit="True" AllowNew="False" AllowUnlink="False" EnableEndlessPaging="True" />
-    <ListView Id="AddPurchaseItems_ListView" AllowNew="False" AllowEdit="True" AllowDelete="True" AllowUnlink="False" EnableEndlessPaging="True" />
-    <ListView Id="AddSalesItems_ListView" AllowEdit="True" AllowLink="False" AllowNew="False" AllowUnlink="False" EnableEndlessPaging="True" />
+    <ListView Id="AddInventoryItems_ListView" EnableEndlessPaging="True" FreezeColumnIndices="False" />
+    <ListView Id="AddPurchaseItems_ListView" EnableEndlessPaging="True" />
+    <ListView Id="AddSalesItems_ListView" EnableEndlessPaging="True" />
     <ListView Id="ContractType_ListView" PageSize="100" EnableEndlessPaging="True" />
     <ListView Id="Employee_ListView" FreezeColumnIndices="True" PageSize="100">
       <Columns>

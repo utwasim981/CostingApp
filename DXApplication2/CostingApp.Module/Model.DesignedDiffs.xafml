@@ -108,12 +108,21 @@
     <SchemaModule Name="SystemModule" Version="17.2.16.0" IsNewNode="True" />
   </SchemaModules>
   <Views>
-    <ListView Id="AddAdjustmentItemList_Items_ListView" AllowDelete="True" AllowNew="False" AllowEdit="True" AllowUnlink="False">
-      <Columns>
-        <ColumnInfo Id="ItemName" AllowEdit="False" />
-      </Columns>
+    <ListView Id="AddInventoryItems_ListView" AllowEdit="True" AllowLink="False" AllowNew="False" AllowUnlink="False">
+      <Sorting>
+        <SortProperty Id="Date" PropertyName="Date" IsNewNode="True" />
+      </Sorting>
     </ListView>
-    <ListView Id="AddAdjustmentItems_ListView" AllowDelete="True" AllowEdit="True" AllowNew="False" AllowUnlink="False" />
+    <ListView Id="AddPurchaseItems_ListView" AllowEdit="True" AllowLink="False" AllowNew="False" AllowUnlink="False">
+      <Sorting>
+        <SortProperty Id="Date" PropertyName="Date" IsNewNode="True" />
+      </Sorting>
+    </ListView>
+    <ListView Id="AddSalesItems_ListView" AllowEdit="True" AllowLink="False" AllowNew="False" AllowUnlink="False">
+      <Sorting>
+        <SortProperty Id="Date" PropertyName="Date" IsNewNode="True" />
+      </Sorting>
+    </ListView>
     <DetailView Id="BasePeriod_DetailView" Caption="">
       <Items>
         <PropertyEditor Id="PeriodName" Caption="Name" />

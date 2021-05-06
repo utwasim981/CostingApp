@@ -111,6 +111,7 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
         }
         public AddPurchaseItems() {
         }
+
         [Browsable(false)]
         [Key]
         public long ID { get; set; }
@@ -139,6 +140,8 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                 if (fUnit != value) {
                     fUnit = value;
                     OnPropertyChanged(nameof(Unit));
+                    if (objectSpace != null)
+                        objectSpace.SetModified(this);
                 }
             }
         }
@@ -149,10 +152,13 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                 if (fQuantity != value) {
                     fQuantity = value;
                     OnPropertyChanged(nameof(Quantity));
+                    if (objectSpace != null)
+                        objectSpace.SetModified(this);
                 }
             }
         }
-
+        [VisibleInListView(false)]
+        public DateTime Date { get; set; }
 
         #region IXafEntityObject members (see https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppIXafEntityObjecttopic.aspx)
         void IXafEntityObject.OnCreated() {
@@ -218,6 +224,8 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                 if (fUnit != value) {
                     fUnit = value;
                     OnPropertyChanged(nameof(Unit));
+                    if (objectSpace != null)
+                        objectSpace.SetModified(this);
                 }
             }
         }
@@ -228,9 +236,13 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                 if (fQuantity != value) {
                     fQuantity = value;
                     OnPropertyChanged(nameof(Quantity));
+                    if (objectSpace != null)
+                        objectSpace.SetModified(this);
                 }
             }
         }
+        [VisibleInListView(false)]
+        public DateTime Date { get; set; }
 
 
         #region IXafEntityObject members (see https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppIXafEntityObjecttopic.aspx)
@@ -297,6 +309,8 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                 if (fUnit != value) {
                     fUnit = value;
                     OnPropertyChanged(nameof(Unit));
+                    if (objectSpace != null)
+                        objectSpace.SetModified(this);
                 }
             }
         }
@@ -307,9 +321,13 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                 if (fQuantity != value) {
                     fQuantity = value;
                     OnPropertyChanged(nameof(Quantity));
+                    if (objectSpace != null)
+                        objectSpace.SetModified(this);
                 }
             }
         }
+        [VisibleInListView(false)]
+        public DateTime Date { get; set; }
 
 
         #region IXafEntityObject members (see https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppIXafEntityObjecttopic.aspx)

@@ -51,6 +51,22 @@ namespace CostingApp.Module.Web {
             var nonPersistentObjectSpace = e.ObjectSpace as NonPersistentObjectSpace;
             if (nonPersistentObjectSpace != null) {
                 nonPersistentObjectSpace.ObjectsGetting += NonPersistentObjectSpace_ObjectsGetting;
+                nonPersistentObjectSpace.Committing += NonPersistentObjectSpace_Committing;
+            }
+        }
+
+        private void NonPersistentObjectSpace_Committing(object sender, CancelEventArgs e) {
+            IObjectSpace os = (IObjectSpace)sender;
+            foreach (object obj in os.ModifiedObjects) {
+                if (obj is AddPurchaseItems && ((AddPurchaseItems)obj).Quantity != 0) {
+                    ((AddPurchaseItems)obj).Date = DateTime.Now;
+                }
+                if (obj is AddInventoryItems && ((AddInventoryItems)obj).Quantity != 0) {
+                    ((AddInventoryItems)obj).Date = DateTime.Now;
+                }
+                if (obj is AddSalesItems && ((AddSalesItems)obj).Quantity != 0) {
+                    ((AddSalesItems)obj).Date = DateTime.Now;
+                }
             }
         }
 
@@ -87,6 +103,9 @@ namespace CostingApp.Module.Web {
         }
         private BindingList<AddPurchaseItems> FillAddPurchaseItems() {
             BindingList<AddPurchaseItems> objects = new BindingList<AddPurchaseItems>();
+            objects.AllowNew = true;
+            objects.AllowEdit = true;
+            objects.AllowRemove = true;
             var os = Application.CreateObjectSpace();
             IList<ItemCard> items = null;
             int index = 0;
