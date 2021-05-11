@@ -14,6 +14,7 @@ using DevExpress.ExpressApp.Data;
 
 namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
 
+    public interface IAddItemList { }
     public interface IAddItems {}
 
     public interface IAddInventoryItem: IAddItems { }
@@ -152,6 +153,18 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                 if (fQuantity != value) {
                     fQuantity = value;
                     OnPropertyChanged(nameof(Quantity));
+                    if (objectSpace != null)
+                        objectSpace.SetModified(this);
+                }
+            }
+        }
+        private double fPrice;
+        public double Price {
+            get { return fPrice; }
+            set {
+                if (fPrice != value) {
+                    fPrice = value;
+                    OnPropertyChanged(nameof(Price));
                     if (objectSpace != null)
                         objectSpace.SetModified(this);
                 }
@@ -356,4 +369,88 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
     }
+    [DomainComponent]
+    public class AddMenuSalesItems : IAddMenuItems, IXafEntityObject, IObjectSpaceLink, INotifyPropertyChanged {
+        private IObjectSpace objectSpace;
+        private void OnPropertyChanged(String propertyName) {
+            if (PropertyChanged != null) {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        public AddMenuSalesItems() {
+        }
+        [Browsable(false)]
+        [Key]
+        public long ID { get; set; }
+        private ItemCard fItem;
+        [Browsable(false)]
+        public ItemCard Item {
+            get { return fItem; }
+            set {
+                if (fItem != value) {
+                    fItem = value;
+                    OnPropertyChanged(nameof(Item));
+                }
+            }
+        }
+        public string ItemName { get { return Item.ItemName; } }
+        [ModelDefault("AllowEdit", "False")]
+        public string Category { get { return Item.Category.ItemCategoryName; } }
+        public string SalesUnit { get { return Item.SalesUnit != null ? Item.SalesUnit.UnitName : null; } }
+        //private Unit fUnit;
+        //[DataSourceProperty("Item.UnitType.Units")]
+        //public Unit Unit {
+        //    get { return fUnit; }
+        //    set {
+        //        if (fUnit != value) {
+        //            fUnit = value;
+        //            OnPropertyChanged(nameof(Unit));
+        //            if (objectSpace != null)
+        //                objectSpace.SetModified(this);
+        //        }
+        //    }
+        //}
+        private double fQuantity;
+        public double Quantity {
+            get { return fQuantity; }
+            set {
+                if (fQuantity != value) {
+                    fQuantity = value;
+                    OnPropertyChanged(nameof(Quantity));
+                    if (objectSpace != null)
+                        objectSpace.SetModified(this);
+                }
+            }
+        }
+        [VisibleInListView(false)]
+        public DateTime Date { get; set; }
+
+
+        #region IXafEntityObject members (see https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppIXafEntityObjecttopic.aspx)
+        void IXafEntityObject.OnCreated() {
+            // Place the entity initialization code here.
+            // You can initialize reference properties using Object Space methods; e.g.:
+            // this.Address = objectSpace.CreateObject<Address>();
+        }
+        void IXafEntityObject.OnLoaded() {
+            // Place the code that is executed each time the entity is loaded here.
+        }
+        void IXafEntityObject.OnSaving() {
+            // Place the code that is executed each time the entity is saved here.
+        }
+        #endregion
+
+        #region IObjectSpaceLink members (see https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppIObjectSpaceLinktopic.aspx)
+        // Use the Object Space to access other entities from IXafEntityObject methods (see https://documentation.devexpress.com/eXpressAppFramework/CustomDocument113707.aspx).
+        IObjectSpace IObjectSpaceLink.ObjectSpace {
+            get { return objectSpace; }
+            set { objectSpace = value; }
+        }
+        #endregion
+
+        #region INotifyPropertyChanged members (see http://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged(v=vs.110).aspx)
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+    }
+
 }

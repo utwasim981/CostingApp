@@ -8,9 +8,11 @@ using DevExpress.ExpressApp.Model;
 using CostingApp.Module.CommonLibrary.General.Model;
 using CostingApp.Module.CommonLibrary;
 using CostingApp.Module.BO.Items;
+using CostingApp.Module.BO.ItemTransactions.Abstraction;
 
 namespace CostingApp.Module.BO.ItemTransactions {
-    public class MenuSalesItem : WXafBase {
+    [AddItemClass(EnumInventoryTransactionType.MenuSales)]
+    public class MenuSalesItem : WXafBase, IAddItemList {
         MenuSales fMenuSales;
         [Association("MenuSales-MenuSalesItem")]
         public MenuSales MenuSales {

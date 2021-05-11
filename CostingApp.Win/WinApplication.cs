@@ -18,6 +18,7 @@ namespace CostingApp.Win {
         static CostingAppWindowsFormsApplication() {
             DevExpress.Persistent.Base.PasswordCryptographer.EnableRfc2898 = true;
             DevExpress.Persistent.Base.PasswordCryptographer.SupportLegacySha512 = false;
+            DevExpress.ExpressApp.ReportsV2.Win.WinReportServiceController.UseNewWizard = true;
         }
         private void InitializeDefaults() {
             LinkNewObjectToParentImmediately = false;

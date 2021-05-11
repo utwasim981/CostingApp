@@ -10,7 +10,7 @@ using CostingApp.Module.BO.ItemTransactions.Abstraction;
 
 namespace CostingApp.Module.BO.ItemTransactions {
     [AddItemClass(EnumInventoryTransactionType.InventoryAdjustment)]
-    public class InventoryAdjustmentItem : InputInventoryRecord {
+    public class InventoryAdjustmentItem : InputInventoryRecord, IAddItemList {
         InventoryAdjustment fInventoryAdjustment;
         [Association("InventoryAdjustment-InventoryAdjustmentItem")]
         public InventoryAdjustment InventoryAdjustment {
@@ -56,6 +56,8 @@ namespace CostingApp.Module.BO.ItemTransactions {
         }
         protected override void OnSavingRecord() {
             
+        }
+        protected override void OnDeletingRecord() {            
         }
         private void onActualQuantityValueChange() {
             if (ActualQuantity > QuantityOnHand) {

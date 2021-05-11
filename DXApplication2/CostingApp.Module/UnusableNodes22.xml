@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="EmployeeAttendanceParameter_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="EmployeeAttendanceParameter" RelativeSize="100" Direction="Horizontal">
+              <LayoutGroup Id="Autoe1d1b146-3422-42c3-a82b-f9da2f094d16" ShowCaption="False" Caption="Autoe1d1b146-3422-42c3-a82b-f9da2f094d16(4)" Index="0" RelativeSize="46.234676007005255">
+                <LayoutItem Id="StartDate" ViewItem="StartDate" Index="0" RelativeSize="3.9603960396039604" />
+                <LayoutItem Id="Shop" ViewItem="Shop" Index="1" RelativeSize="2.9702970297029703" />
+                <LayoutItem Id="GroupByShop" ViewItem="GroupByShop" Index="2" RelativeSize="2.9702970297029703" />
+                <LayoutItem Id="GroupbyShop" ViewItem="GroupbyShop" Index="3" RelativeSize="90.0990099009901" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto331862b0-4381-46bb-ab58-0dd75d611b28" ShowCaption="False" Caption="Auto331862b0-4381-46bb-ab58-0dd75d611b28(7)" Index="1" RelativeSize="53.765323992994745">
+                <LayoutItem Id="EndDate" ViewItem="EndDate" Index="0" RelativeSize="3.9603960396039604" />
+                <LayoutItem Id="Employee" ViewItem="Employee" Index="1" RelativeSize="2.9702970297029703" />
+                <LayoutItem Id="GroupByEmployee" ViewItem="GroupByEmployee" Index="2" RelativeSize="2.9702970297029703" />
+                <LayoutItem Id="GroupbyEmployee" ViewItem="GroupbyEmployee" Index="3" RelativeSize="90.0990099009901" />
+              </LayoutGroup>
+              <LayoutItem Id="Shop" Index="1" RelativeSize="27.906976744186046" Removed="True" />
+              <LayoutItem Id="Employee" Index="2" RelativeSize="34.883720930232556" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="DateRangeParameterObject" Caption="DateRangeParameterObject" RelativeSize="89.486552567237169" Direction="Horizontal" Removed="True">
+              <LayoutItem Id="EndDate" Index="0" RelativeSize="100" Removed="True" />
+              <LayoutItem Id="StartDate" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="InventoryAdjustmentItem_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="MainGroup">
+            <LayoutGroup Id="Auto033e70f1-e9a7-4a12-a0b5-ab7ec2cc3fd0">
+              <LayoutItem Id="TransactionType" ViewItem="TransactionType" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Testing">
+        <Items Id="Items">
+          <Item Id="@e39b18f1-5b59-459c-ac10-baf0ebe921ad" ViewId="AddAdjustmentItems_ListView" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+</Application>

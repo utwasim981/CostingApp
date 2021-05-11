@@ -21,7 +21,8 @@ using System.Threading.Tasks;
 namespace CostingApp.Module.BO.ItemTransactions {
     [NavigationItem("Transactions"),
         ImageName("invoice"),
-        XafDefaultProperty(nameof(Number))]    
+        XafDefaultProperty(nameof(Number)),
+        VisibleInReports(true)]    
     public class PurchaseInvoice : InventoryTransaction {
         public override EnumInventoryTransactionType TransactionType { get { return EnumInventoryTransactionType.PurchaseInvoice; } }
         const string NumberFormat = "Concat('PI-', PadLeft(ToStr(SequentialNumber), 6, '0'))";

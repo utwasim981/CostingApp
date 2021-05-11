@@ -17,8 +17,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
-    [NavigationItem("Testing")]
-    [RuleCombinationOfPropertiesIsUnique("InventoryRecord_RuleUniqueField", DefaultContexts.Save, "Transaction, Item, TransactionUnit")]
+    [NavigationItem("Testing"),
+        RuleCombinationOfPropertiesIsUnique("InventoryRecord_RuleUniqueField", DefaultContexts.Save, "Transaction, Item, TransactionUnit"),
+        VisibleInReports(true)]
     public abstract class InventoryRecord : WXafBaseObject {
         #region Virtual
         protected virtual void OnDeletingRecord() { }
@@ -99,8 +100,8 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
         }
 
         double fPrice;
-        [//RuleValueComparison("InventoryRecord_Price_GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0),
-            ImmediatePostData(true),
+        //[RuleValueComparison("InventoryRecord_Price_GreaterThan0", DefaultContexts.Save, ValueComparisonType.GreaterThan, 0),
+            [ImmediatePostData(true),
             Appearance("InventoryRecord_Price.Enabled", Enabled = false, Criteria = "RecordType = 1")]
         public double Price {
             get { return fPrice; }

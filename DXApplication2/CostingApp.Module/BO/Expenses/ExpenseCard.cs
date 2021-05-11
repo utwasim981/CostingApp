@@ -14,8 +14,9 @@ using DevExpress.Data.Filtering;
 using CostingApp.Module.BO.Masters.Period;
 
 namespace CostingApp.Module.BO.Expenses {
-    [NavigationItem("Transactions")]
-    [ImageName("money")]
+    [NavigationItem("Transactions"),
+        ImageName("money"),
+        VisibleInReports(true)]
     public class ExpenseCard : ExpenseRecord {
         const string NumberFormat = "Concat('EX-', PadLeft(ToStr(SequentialNumber), 6, '0'))";
         [PersistentAlias(NumberFormat)]

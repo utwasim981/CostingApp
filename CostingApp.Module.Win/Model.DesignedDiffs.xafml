@@ -6,45 +6,6 @@
       <Action Id="Period.OpenFullYearPeriod" CutomAction="True" />
     </Actions>
   </ActionDesign>
-  <NavigationItems DefaultChildItemsDisplayStyle="LargeIcons" NavigationStyle="NavBar" StartupNavigationItem="">
-    <Items>
-      <Item Id="Transactions" Index="0" />
-      <Item Id="Employees Setup" Index="1">
-        <Items>
-          <Item Id="ContractType_ListView" Index="0" />
-          <Item Id="Position_ListView" Index="1" />
-          <Item Id="Employee_ListView" Index="2" />
-        </Items>
-      </Item>
-      <Item Id="Expenses Setup" Index="2">
-        <Items>
-          <Item Id="ExpenseCategory_ListView" Index="0" />
-          <Item Id="ExpenseType_ListView" Index="1" />
-          <Item Id="ZReportComponent_ListView" Index="2" />
-        </Items>
-      </Item>
-      <Item Id="Inventory Setup" Index="3">
-        <Items>
-          <Item Id="ItemCategory_ListView" Index="0" />
-          <Item Id="UnitType_ListView" Index="1" />
-          <Item Id="ItemCard_ListView" Index="2" />
-        </Items>
-      </Item>
-      <Item Id="Administration" Index="4">
-        <Items>
-          <Item Id="City_ListView" Index="0" />
-          <Item Id="Shop_ListView" Index="1" />
-          <Item Id="Period_ListView" Index="2" />
-          <Item Id="SystemConfigration_ListView" Index="3" />
-        </Items>
-      </Item>
-      <Item Id="Testing">
-        <Items>
-          <Item Id="@a1493adf-ac25-4d90-86c9-6828eef1a106" ViewId="ExpenseRecord_LookupListView_Copy" Caption="Expense Report" IsNewNode="True" />
-        </Items>
-      </Item>
-    </Items>
-  </NavigationItems>
   <SchemaModules>
     <SchemaModule Name="CloneObjectModule" Version="17.2.16.0" IsNewNode="True" />
     <SchemaModule Name="SystemModule" Version="17.2.16.0" IsNewNode="True" />
@@ -295,40 +256,6 @@
         <LayoutItem Id="UserPanelLayout" Removed="True" />
       </Layout>
     </DetailView>
-    <ListView Id="InventoryAdjustment_Items_ListView" NewItemRowPosition="Bottom" AllowEdit="True">
-      <Columns>
-        <ColumnInfo Id="Amount" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="BaseQuantity" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="BaseUnit" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="CreatedBy" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="CreatedOn" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Employee" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="ExpenseDate" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="ExpenseType" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="InventoryAdjustment" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="IsActive" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Notes" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Period" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Price" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="QuantityIN" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="QuantityOut" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Shop" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Status" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="StockQuantity" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="StockUnit" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Transaction" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="UpdatedBy" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="UpdatedOn" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="VendorBill" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Oid" Index="0" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Item" Index="1" />
-        <ColumnInfo Id="TransactionUnit" Index="2" AllowClear="False" AllowEdit="False" AllowGroup="False" />
-        <ColumnInfo Id="QuantityOnHand" Index="3" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="ActualQuantity" Index="4" />
-        <ColumnInfo Id="TransactionType" Index="5" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="Quantity" Index="6" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-      </Columns>
-    </ListView>
     <ListView Id="InventoryAdjustment_ListView">
       <Columns>
         <ColumnInfo Id="Oid" Index="0" />
@@ -346,8 +273,6 @@
         <PropertyEditor Id="BaseQuantity" AllowEdit="False" />
         <PropertyEditor Id="CreatedBy" AllowEdit="False" />
         <PropertyEditor Id="CreatedOn" AllowEdit="False" />
-        <PropertyEditor Id="Employee" AllowEdit="False" />
-        <PropertyEditor Id="ExpenseDate" AllowEdit="False" />
         <PropertyEditor Id="ExpenseType" AllowEdit="False" />
         <PropertyEditor Id="IsActive" AllowEdit="False" />
         <PropertyEditor Id="Notes" AllowEdit="False" />
@@ -356,28 +281,12 @@
         <PropertyEditor Id="Shop" AllowEdit="False" />
         <PropertyEditor Id="StockQuantity" AllowEdit="False" />
         <PropertyEditor Id="Transaction" AllowEdit="False" />
-        <PropertyEditor Id="TransactionType" AllowEdit="False" />
         <PropertyEditor Id="TransactionUnit" AllowEdit="False" />
         <PropertyEditor Id="UpdatedBy" AllowEdit="False" />
         <PropertyEditor Id="UpdatedOn" AllowEdit="False" />
-        <PropertyEditor Id="VendorBill" AllowEdit="False" />
       </Items>
       <Layout>
-        <LayoutGroup Id="Main" RelativeSize="4.6454767726161368">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
-            <LayoutGroup Id="InventoryRecord" RelativeSize="71.641791044776113" Removed="True">
-              <LayoutGroup Id="InventoryRecord_col1" RelativeSize="50" Caption="InventoryRecord_col1">
-                <LayoutItem Id="Quantity" RelativeSize="50" Index="0" Removed="True" />
-                <LayoutItem Id="QuantityIN" RelativeSize="100" Index="0" />
-                <LayoutItem Id="TransactionUnit" RelativeSize="36.363636363636367" Removed="True" />
-              </LayoutGroup>
-              <LayoutGroup Id="InventoryRecord_col2" RelativeSize="50">
-                <LayoutItem Id="Price" RelativeSize="50" />
-                <LayoutItem Id="QuantityOut" RelativeSize="50" />
-              </LayoutGroup>
-            </LayoutGroup>
-          </LayoutGroup>
-        </LayoutGroup>
+        <LayoutGroup Id="Main" RelativeSize="4.6454767726161368" />
         <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="91.442542787286058" IsNewNode="True">
           <LayoutGroup Id="Auto72384a32-fd37-4859-b4ee-8f64f85cd222" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="11.0803324099723" IsNewNode="True">
             <LayoutGroup Id="Auto11cfd7f5-0c70-4ac4-b686-7ddfb4d663ab" ShowCaption="False" Caption="" Index="0" RelativeSize="50" IsNewNode="True">
@@ -619,22 +528,14 @@
         <ColumnInfo Id="BaseUnit" Index="-1" AllowGroup="False" AllowEdit="False" AllowSort="False" />
         <ColumnInfo Id="CreatedBy" AllowEdit="False" AllowGroup="False" AllowSort="False" />
         <ColumnInfo Id="CreatedOn" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Employee" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="ExpenseDate" AllowEdit="False" AllowGroup="False" AllowSort="False" />
         <ColumnInfo Id="Invoice" AllowEdit="False" AllowGroup="False" AllowSort="False" />
         <ColumnInfo Id="IsActive" AllowEdit="False" AllowGroup="False" AllowSort="False" />
         <ColumnInfo Id="Period" AllowGroup="False" AllowEdit="False" AllowSort="False" />
-        <ColumnInfo Id="QuantityIN" Index="-1" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="QuantityOut" Width="66" Index="-1" AllowGroup="False" AllowEdit="False" AllowSort="False" />
         <ColumnInfo Id="Shop" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Status" AllowGroup="False" AllowEdit="False" AllowSort="False" />
         <ColumnInfo Id="StockQuantity" Index="-1" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="StockUnit" Index="-1" AllowGroup="False" AllowEdit="False" AllowSort="False" />
         <ColumnInfo Id="Transaction" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="TransactionType" AllowEdit="False" AllowGroup="False" AllowSort="False" />
         <ColumnInfo Id="UpdatedBy" AllowEdit="False" AllowGroup="False" AllowSort="False" />
         <ColumnInfo Id="UpdatedOn" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="VendorBill" AllowEdit="False" AllowGroup="False" AllowSort="False" />
         <ColumnInfo Id="Oid" AllowGroup="False" AllowEdit="False" AllowSort="False" Index="0" />
         <ColumnInfo Id="Item" Index="1" DataSourceCriteria="[IsActive] = True And [ItemType] &lt;&gt; ##Enum#CostingApp.Module.Win.BO.EnumItemCard,MenuItem#" AllowGroup="False" AllowSort="False" />
         <ColumnInfo Id="TransactionUnit" Caption="Unit" Index="2" DataSourceProperty="Item.UnitType.Units" AllowGroup="False" AllowSort="False" />
@@ -650,10 +551,8 @@
         <ColumnInfo Id="Notes" Index="-1" />
         <ColumnInfo Id="Oid" Index="0" />
         <ColumnInfo Id="Shop" Index="1" />
-        <ColumnInfo Id="InvoiceNumber" Index="2" />
         <ColumnInfo Id="TransactionDate" Caption="Invoice Date" Index="3" />
         <ColumnInfo Id="Period" Index="4" />
-        <ColumnInfo Id="BillNumber" Index="5" />
         <ColumnInfo Id="Total" Index="6" />
       </Columns>
     </ListView>
@@ -664,29 +563,17 @@
         <PropertyEditor Id="BaseUnit" DataSourceProperty="Item.UnitType.Units" />
         <PropertyEditor Id="CreatedBy" AllowEdit="False" />
         <PropertyEditor Id="CreatedOn" AllowEdit="False" />
-        <PropertyEditor Id="Employee" AllowEdit="False" />
-        <PropertyEditor Id="ExpenseDate" AllowEdit="False" />
         <PropertyEditor Id="ExpenseType" AllowEdit="False" />
         <PropertyEditor Id="IsActive" AllowEdit="False" />
         <PropertyEditor Id="Item" DataSourceCriteria="[IsActive] = True And [ItemType] &lt;&gt; ##Enum#CostingApp.Module.Win.BO.EnumItemCard,MenuItem#" />
         <PropertyEditor Id="Quantity" AllowEdit="False" />
-        <PropertyEditor Id="QuantityOut" AllowEdit="False" />
         <PropertyEditor Id="Shop" AllowEdit="False" />
         <PropertyEditor Id="StockQuantity" AllowEdit="False" />
         <PropertyEditor Id="UpdatedBy" AllowEdit="False" />
         <PropertyEditor Id="UpdatedOn" AllowEdit="False" />
-        <PropertyEditor Id="VendorBill" AllowEdit="False" />
       </Items>
       <Layout>
-        <LayoutGroup Id="Main" RelativeSize="4.6454767726161368">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
-            <LayoutGroup Id="InventoryRecord" Index="0" RelativeSize="37.719298245614034" Caption="InventoryRecord" Direction="Horizontal" Removed="True">
-              <LayoutItem Id="Price" Index="0" RelativeSize="100" Removed="True" />
-              <LayoutItem Id="Quantity" Index="0" RelativeSize="44.444444444444443" Removed="True" />
-              <LayoutItem Id="TransactionUnit" Index="0" RelativeSize="37.2093023255814" Removed="True" />
-            </LayoutGroup>
-          </LayoutGroup>
-        </LayoutGroup>
+        <LayoutGroup Id="Main" RelativeSize="4.6454767726161368" />
         <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="13.93643031784841" Caption=" " Direction="Horizontal" IsNewNode="True">
           <LayoutGroup Id="Auto4d127f14-a6e0-4cd2-bdf0-2f7575770496" ShowCaption="False" Caption="Auto4d127f14-a6e0-4cd2-bdf0-2f7575770496(7)" Index="0" RelativeSize="49.897540983606561" IsNewNode="True">
             <LayoutItem Id="Item" ViewItem="Item" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
@@ -714,161 +601,6 @@
             <LayoutItem Id="Periods" RelativeSize="100" />
           </LayoutGroup>
         </LayoutGroup>
-      </Layout>
-    </DetailView>
-    <DetailView Id="SalesRecord_DetailView">
-      <Layout>
-        <LayoutGroup Id="Main" RelativeSize="96.088019559902207">
-          <LayoutGroup Id="Items_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="76.844783715012724">
-            <LayoutItem Id="Items" RelativeSize="100" />
-          </LayoutGroup>
-        </LayoutGroup>
-        <LayoutItem Id="UserPanel" ViewItem="UserPanel" Index="1" RelativeSize="3.9119804400977993" IsNewNode="True" />
-        <LayoutItem Id="UserPanelLayout" Removed="True" />
-      </Layout>
-    </DetailView>
-    <ListView Id="SalesRecord_Items_ListView" AllowDelete="True" NewItemRowPosition="Bottom" AllowEdit="True" MasterDetailMode="ListViewAndDetailView" MasterDetailView="SalesReportItem_DetailView_ListView">
-      <Columns>
-        <ColumnInfo Id="CreatedBy" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="CreatedOn" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="IsActive" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="SalesRecord" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="UpdatedBy" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="UpdatedOn" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="Oid" Index="0" AllowSort="False" AllowGroup="False" />
-        <ColumnInfo Id="Item" Index="1" AllowSort="False" AllowGroup="False" />
-        <ColumnInfo Id="Quantity" Index="2" AllowSort="False" AllowGroup="False" />
-      </Columns>
-      <SplitLayout SplitterPosition="500" />
-    </ListView>
-    <ListView Id="SalesRecord_ListView">
-      <Columns>
-        <ColumnInfo Id="Oid" Index="0" />
-        <ColumnInfo Id="Shop" Index="1" />
-        <ColumnInfo Id="RecordNumber" Index="2" />
-        <ColumnInfo Id="TransactionDate" Index="3" Caption="Rcord Date" />
-        <ColumnInfo Id="Period" Index="4" />
-        <ColumnInfo Id="FromDate" Index="5" />
-        <ColumnInfo Id="ToDate" Index="6" />
-        <ColumnInfo Id="Status" Index="7" />
-      </Columns>
-    </ListView>
-    <DetailView Id="SalesRecordItemComponent_DetailView" AllowDelete="False" AllowEdit="False" AllowNew="False">
-      <Layout>
-        <LayoutGroup Id="Main" RelativeSize="18.581907090464547">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
-            <LayoutGroup Id="Autobf487327-c8b9-4ada-a46d-05f211325357" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="21.05263157894737" IsNewNode="True">
-              <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="33.7" IsNewNode="True" />
-              <LayoutItem Id="Item3" Index="1" RelativeSize="66.3" IsNewNode="True" />
-            </LayoutGroup>
-            <LayoutGroup Id="InventoryRecord" RelativeSize="78.94736842105263" Direction="Vertical" Index="1" Caption=" ">
-              <LayoutGroup Id="InventoryRecord_col1" RelativeSize="100" Direction="Horizontal">
-                <LayoutGroup Id="Autoc0b7aa7b-165e-4eb1-979b-888b024d88c3" ShowCaption="False" Caption="" Index="0" RelativeSize="50.819672131147541" IsNewNode="True">
-                  <LayoutItem Id="Item" ViewItem="Item" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
-                  <LayoutItem Id="TransactionUnit" ViewItem="TransactionUnit" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
-                  <LayoutItem Id="Quantity" ViewItem="Quantity" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
-                </LayoutGroup>
-                <LayoutItem Id="Item1" Index="1" RelativeSize="49.180327868852459" IsNewNode="True" />
-                <LayoutItem Id="TransactionUnit" RelativeSize="27.272727272727273" Index="1" Removed="True" />
-                <LayoutItem Id="Quantity" RelativeSize="36.363636363636367" Index="2" Removed="True" />
-                <LayoutItem Id="QuantityIN" RelativeSize="28.571428571428573" Index="3" Removed="True" />
-              </LayoutGroup>
-              <LayoutGroup Id="InventoryRecord_col2" RelativeSize="50" Caption="InventoryRecord_col2" Direction="Horizontal" Removed="True">
-                <LayoutItem Id="Price" RelativeSize="100" Index="0" Removed="True" />
-                <LayoutItem Id="QuantityOut" RelativeSize="36.363636363636367" Removed="True" />
-              </LayoutGroup>
-            </LayoutGroup>
-            <LayoutGroup Id="XPObject" Caption="Oid" Direction="Horizontal" Index="2" RelativeSize="81.424936386768451" Removed="True">
-              <LayoutItem Id="Oid" Removed="True" />
-            </LayoutGroup>
-            <LayoutGroup Id="ExpenseRecord" RelativeSize="20.610687022900763" Removed="True">
-              <LayoutGroup Id="ExpenseRecord_col1" RelativeSize="50">
-                <LayoutItem Id="Amount" RelativeSize="23.529411764705884" />
-                <LayoutItem Id="ExpenseDate" RelativeSize="17.647058823529413" />
-                <LayoutItem Id="ExpenseType" RelativeSize="17.647058823529413" />
-                <LayoutItem Id="Period" RelativeSize="17.647058823529413" />
-                <LayoutItem Id="Shop" RelativeSize="23.529411764705884" />
-              </LayoutGroup>
-              <LayoutGroup Id="ExpenseRecord_col2" RelativeSize="50">
-                <LayoutItem Id="Employee" RelativeSize="41.1764705882353" />
-                <LayoutItem Id="Item" RelativeSize="23.529411764705884" Removed="True" />
-                <LayoutItem Id="Notes" RelativeSize="17.647058823529413" />
-                <LayoutItem Id="Status" RelativeSize="17.647058823529413" />
-                <LayoutItem Id="VendorBill" RelativeSize="23.529411764705884" />
-              </LayoutGroup>
-            </LayoutGroup>
-          </LayoutGroup>
-        </LayoutGroup>
-        <LayoutItem Id="Item2" Index="1" RelativeSize="77.506112469437653" IsNewNode="True" />
-        <LayoutItem Id="UserPanel" ViewItem="UserPanel" Index="2" RelativeSize="3.9119804400977993" IsNewNode="True" />
-        <LayoutItem Id="UserPanelLayout" Removed="True" />
-      </Layout>
-    </DetailView>
-    <ListView Id="SalesRecordItemComponent_ListView" AllowDelete="False" AllowLink="False" AllowNew="False" />
-    <ListView Id="SalesRecordItemComponent_LookupListView" AllowDelete="False" AllowLink="False" AllowNew="False" />
-    <ListView Id="SalesReportItem_Components_ListView" AllowDelete="False" AllowLink="False" AllowNew="False">
-      <Columns>
-        <ColumnInfo Id="Amount" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="BaseQuantity" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="BaseUnit" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="CreatedBy" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="CreatedOn" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="Employee" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="ExpenseDate" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="ExpenseType" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="IsActive" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="Notes" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="Period" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="Price" AllowGroup="False" AllowSort="False" AllowEdit="False" Index="-1" />
-        <ColumnInfo Id="QuantityIN" Index="-1" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="QuantityOut" AllowGroup="False" AllowSort="False" AllowEdit="False" Caption="Quantity" Index="-1" />
-        <ColumnInfo Id="SalesReportItem" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="Shop" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="Status" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="StockQuantity" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="StockUnit" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="Transaction" AllowEdit="False" AllowGroup="False" AllowSort="False" />
-        <ColumnInfo Id="UpdatedBy" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="UpdatedOn" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="VendorBill" AllowGroup="False" AllowSort="False" AllowEdit="False" />
-        <ColumnInfo Id="Oid" AllowGroup="False" AllowSort="False" Index="0" />
-        <ColumnInfo Id="Item" AllowGroup="False" AllowSort="False" AllowEdit="False" Index="1" AllowClear="False" />
-        <ColumnInfo Id="Quantity" AllowGroup="False" AllowSort="False" AllowEdit="False" Index="2" />
-        <ColumnInfo Id="TransactionUnit" AllowGroup="False" AllowSort="False" AllowEdit="False" Index="3" Caption="Unit" />
-      </Columns>
-    </ListView>
-    <DetailView Id="SalesReportItem_DetailView">
-      <Layout>
-        <LayoutGroup Id="Main" RelativeSize="96.088019559902207">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="17.684478371501271">
-            <LayoutGroup Id="SalesReportItem" RelativeSize="92.0863309352518">
-              <LayoutGroup Id="Auto01683d5a-31b7-489b-b056-532b21c778ce" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="25" IsNewNode="True">
-                <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="27.6" IsNewNode="True" />
-                <LayoutItem Id="Item4" Index="1" RelativeSize="72.4" IsNewNode="True" />
-              </LayoutGroup>
-              <LayoutItem Id="Item" Index="1" RelativeSize="19.672131147540984" Removed="True" />
-              <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="75" Caption=" " Direction="Horizontal" IsNewNode="True">
-                <LayoutGroup Id="Auto1cb55265-4b05-4c32-ab3b-132380f692a5" ShowCaption="False" Caption="" Index="0" RelativeSize="50" IsNewNode="True">
-                  <LayoutItem Id="Item" ViewItem="Item" Index="0" RelativeSize="50" IsNewNode="True" />
-                  <LayoutItem Id="Quantity" ViewItem="Quantity" Index="1" RelativeSize="50" IsNewNode="True" />
-                </LayoutGroup>
-                <LayoutGroup Id="Autof97764cf-5c49-44f6-8a71-d0f3383384fd" ShowCaption="False" Caption="" Index="1" RelativeSize="50" IsNewNode="True">
-                  <LayoutItem Id="Item1" Index="0" RelativeSize="50" IsNewNode="True" />
-                  <LayoutItem Id="Item3" Index="1" RelativeSize="50" IsNewNode="True" />
-                </LayoutGroup>
-              </LayoutGroup>
-              <LayoutItem Id="Quantity" Index="2" RelativeSize="23.076923076923077" Removed="True" />
-            </LayoutGroup>
-            <LayoutGroup Id="XPObject" Caption="Oid" Direction="Horizontal" Index="1" RelativeSize="7.9136690647482011">
-              <LayoutItem Id="Oid" Removed="True" />
-            </LayoutGroup>
-          </LayoutGroup>
-          <LayoutGroup Id="Components_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="82.315521628498729">
-            <LayoutItem Id="Components" RelativeSize="100" />
-          </LayoutGroup>
-        </LayoutGroup>
-        <LayoutItem Id="UserPanel" ViewItem="UserPanel" Index="1" RelativeSize="3.9119804400977993" IsNewNode="True" />
-        <LayoutItem Id="UserPanelLayout" Removed="True" />
       </Layout>
     </DetailView>
     <DetailView Id="Shop_DetailView">
@@ -1053,35 +785,7 @@
         <PropertyEditor Id="VendorBill" AllowEdit="False" />
       </Items>
       <Layout>
-        <LayoutGroup Id="Main" RelativeSize="4.7029702970297027">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
-            <LayoutGroup Id="ZReportDetail" RelativeSize="100" Caption="ZReportDetail" Direction="Horizontal">
-              <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="24.688796680497926" IsNewNode="True" />
-              <LayoutItem Id="Component" Index="1" RelativeSize="27.906976744186046" Removed="True" />
-              <LayoutItem Id="Item3" Index="1" RelativeSize="75.31120331950207" IsNewNode="True" />
-              <LayoutItem Id="ReportAmount" Index="1" RelativeSize="48.387096774193552" Removed="True" />
-            </LayoutGroup>
-            <LayoutGroup Id="XPObject" Caption="Oid" Direction="Horizontal" Index="2" RelativeSize="68.041237113402062" Removed="True">
-              <LayoutItem Id="Oid" Removed="True" />
-            </LayoutGroup>
-            <LayoutGroup Id="ExpenseRecord" RelativeSize="81.553398058252426" Removed="True">
-              <LayoutGroup Id="ExpenseRecord_col1" RelativeSize="50">
-                <LayoutItem Id="ExpenseDate" RelativeSize="58.8235294117647" Index="2" />
-                <LayoutItem Id="Amount" RelativeSize="41.1764705882353" Index="3" Removed="True" />
-                <LayoutItem Id="ExpenseType" RelativeSize="17.647058823529413" Removed="True" />
-                <LayoutItem Id="Period" RelativeSize="17.647058823529413" />
-                <LayoutItem Id="Shop" RelativeSize="23.529411764705884" />
-              </LayoutGroup>
-              <LayoutGroup Id="ExpenseRecord_col2" RelativeSize="50">
-                <LayoutItem Id="Employee" RelativeSize="17.647058823529413" />
-                <LayoutItem Id="Item" RelativeSize="23.529411764705884" />
-                <LayoutItem Id="Notes" RelativeSize="17.647058823529413" />
-                <LayoutItem Id="Status" RelativeSize="17.647058823529413" />
-                <LayoutItem Id="VendorBill" RelativeSize="23.529411764705884" />
-              </LayoutGroup>
-            </LayoutGroup>
-          </LayoutGroup>
-        </LayoutGroup>
+        <LayoutGroup Id="Main" RelativeSize="4.7029702970297027" />
         <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="20.049504950495049" Caption="Item2" Direction="Horizontal" IsNewNode="True">
           <LayoutGroup Id="Autoc0fdca51-ead4-451f-afe6-6840aa964176" ShowCaption="False" Caption="Autoc0fdca51-ead4-451f-afe6-6840aa964176(7)" Index="0" RelativeSize="50" IsNewNode="True">
             <LayoutItem Id="Component" ViewItem="Component" Index="0" RelativeSize="23.529411764705884" IsNewNode="True" />

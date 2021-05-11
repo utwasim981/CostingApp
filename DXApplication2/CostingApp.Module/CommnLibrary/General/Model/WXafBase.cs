@@ -29,7 +29,8 @@ namespace CostingApp.Module.CommonLibrary.General.Model {
     [NonPersistent]
     public abstract class WXafBase : XPObject, IWXafObject, IObjectSpaceLink {
         IObjectSpace fObjectSpace;
-        [Browsable(false)]
+        [Browsable(false),
+            VisibleInReports(false)]
         public IObjectSpace ObjectSpace {
             get { return fObjectSpace; }
             set { fObjectSpace = value; }
@@ -46,6 +47,7 @@ namespace CostingApp.Module.CommonLibrary.General.Model {
         WXafUser fCreatedBy;
         [VisibleInListView(false),
             VisibleInDetailView(false),
+            VisibleInReports(false),
             ModelDefault("AllowEdit", "False")]
         public WXafUser CreatedBy {
             get { return fCreatedBy; }
@@ -54,6 +56,7 @@ namespace CostingApp.Module.CommonLibrary.General.Model {
         DateTime fCreatedOn;
         [VisibleInListView(false),
             VisibleInDetailView(false),
+            VisibleInReports(false),
             ModelDefault("AllowEdit", "False")]
         public DateTime CreatedOn {
             get { return fCreatedOn; }
@@ -62,6 +65,7 @@ namespace CostingApp.Module.CommonLibrary.General.Model {
         WXafUser fUpdatedBy;
         [VisibleInListView(false),
             VisibleInDetailView(false),
+            VisibleInReports(false),
             ModelDefault("AllowEdit", "False")]
         public WXafUser UpdatedBy {
             get { return fUpdatedBy; }
@@ -70,6 +74,7 @@ namespace CostingApp.Module.CommonLibrary.General.Model {
         DateTime fUpdatedOn;
         [VisibleInListView(false),
             VisibleInDetailView(false),
+            VisibleInReports(false),
             ModelDefault("AllowEdit", "False")]
         public DateTime UpdatedOn {
             get { return fUpdatedOn; }

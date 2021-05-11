@@ -59,6 +59,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.ExpressApp.ConditionalAppearance.v17.2, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.ExpressApp.ReportsV2.v17.2, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.ExpressApp.ReportsV2.Web.v17.2, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.Security.v17.2, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -108,6 +110,9 @@
     <Reference Include="DevExpress.Xpo.v17.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.XtraReports.v17.2, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v17.2.Extensions, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v17.2.Web, Version=17.2.16.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
@@ -127,13 +132,9 @@
     <Compile Include="Controllers\AddItemsControllers.Designer.cs">
       <DependentUpon>AddItemsControllers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\IAddItemsController.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controllers\IAddItemsController.Designer.cs">
-      <DependentUpon>IAddItemsController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\SaveMessageController.cs" />
+    <Compile Include="Editors\RadioButtonEnumPropertyEditor.cs" />
+    <Compile Include="Editors\WebDashboardReportViewItem.cs" />
     <Compile Include="WebModule.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -145,9 +146,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Controllers\AddItemsControllers.resx">
       <DependentUpon>AddItemsControllers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controllers\IAddItemsController.resx">
-      <DependentUpon>IAddItemsController.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Properties\licenses.licx" />

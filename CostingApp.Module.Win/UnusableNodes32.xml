@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Testing">
+        <Items Id="Items">
+          <Item Id="@a1493adf-ac25-4d90-86c9-6828eef1a106" ViewId="ExpenseRecord_LookupListView_Copy" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Views Id="Views">
+    <DetailView Id="City_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="City">
+              <LayoutItem Id="City_DetailViewUserPanel" ViewItem="City_DetailViewUserPanel" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="InventoryAdjustmentItem_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Item2">
+          <LayoutGroup Id="Auto72384a32-fd37-4859-b4ee-8f64f85cd222">
+            <LayoutGroup Id="Autod7896848-95aa-45d2-87d1-a151b9cdd28f">
+              <LayoutItem Id="TransactionType" ViewItem="TransactionType" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemCard_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="XPObject">
+              <LayoutGroup Id="Item11">
+                <LayoutGroup Id="Auto0f36fc13-bf90-4421-9333-9d07d746c682">
+                  <LayoutItem Id="QuantityOnHand" ViewItem="QuantityOnHand" />
+                </LayoutGroup>
+                <LayoutGroup Id="Autocfceb0e5-31d4-4c78-80df-c7ff7aa318d6">
+                  <LayoutItem Id="LastPurchasePrice" ViewItem="LastPurchasePrice" />
+                  <LayoutItem Id="LastPurchaseDate" ViewItem="LastPurchaseDate" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

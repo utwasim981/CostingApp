@@ -18,7 +18,8 @@ using System.Threading.Tasks;
 namespace CostingApp.Module.BO.ItemTransactions {
     [NavigationItem("Transactions"),
         ImageName("BO_Sale_v92"),
-        XafDefaultProperty(nameof(Number))]
+        XafDefaultProperty(nameof(Number)),
+        VisibleInReports(true)]
     public class MenuSales : InventoryTransaction {
         public override EnumInventoryTransactionType TransactionType { get { return EnumInventoryTransactionType.MenuSales; } }
         const string NumberFormat = "Concat('MS-', PadLeft(ToStr(SequentialNumber), 6, '0'))";

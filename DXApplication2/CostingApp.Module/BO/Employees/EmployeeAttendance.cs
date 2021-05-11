@@ -17,8 +17,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CostingApp.Module.BO.Employees {
-    [NavigationItem("Transactions")]
-    [ImageName("BO_Appointment")]
+    [NavigationItem("Transactions"),
+        ImageName("BO_Appointment"),
+        VisibleInReports(true)]
     public class EmployeeAttendance : ExpenseRecord {
         public string Number {
             get {

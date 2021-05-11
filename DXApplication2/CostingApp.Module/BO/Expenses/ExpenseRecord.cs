@@ -2,6 +2,7 @@
 using CostingApp.Module.BO.Items;
 using CostingApp.Module.BO.Masters;
 using CostingApp.Module.BO.Masters.Period;
+using CostingApp.Module.CommnLibrary.ReportParameters;
 using CostingApp.Module.CommonLibrary.General.Model;
 using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp.ConditionalAppearance;
@@ -18,8 +19,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CostingApp.Module.BO.Expenses {
-    [NavigationItem("Testing")]
-    public abstract class ExpenseRecord : WXafSequenceObject {
+    [NavigationItem("Testing"),
+        VisibleInReports(true)]
+    public abstract class ExpenseRecord : WXafSequenceObject, IReportDateRange {
         Shop fShop;
         [DataSourceCriteria("IsActive = True")]
         [RuleRequiredField("ExpenseRecord_Shop_RuleRequiredField", DefaultContexts.Save)]
@@ -92,6 +94,11 @@ namespace CostingApp.Module.BO.Expenses {
                 if (!IsLoading)
                     ExpenseType = Item != null ? Item.ExpenseType : null;
             }
+        }
+
+        [PersistentAlias(nameof(ExpenseDate))]
+        public DateTime Date {
+            get { return ExpenseDate; }
         }
 
         //[NonPersistent]

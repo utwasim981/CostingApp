@@ -26,6 +26,8 @@ namespace CostingApp.Web {
         private DevExpress.ExpressApp.TreeListEditors.Web.TreeListEditorsAspNetModule treeListEditorsAspNetModule;
         private DevExpress.ExpressApp.Validation.ValidationModule validationModule;
         private DevExpress.ExpressApp.Validation.Web.ValidationAspNetModule validationAspNetModule;
+        private DevExpress.ExpressApp.ReportsV2.ReportsModuleV2 reportsModuleV21;
+        private DevExpress.ExpressApp.ReportsV2.Web.ReportsAspNetModuleV2 reportsAspNetModuleV21;
         private DevExpress.ExpressApp.ViewVariantsModule.ViewVariantsModule viewVariantsModule;
 
         #region Default XAF configuration options (https://www.devexpress.com/kb=T501418)
@@ -109,6 +111,8 @@ namespace CostingApp.Web {
             this.validationModule = new DevExpress.ExpressApp.Validation.ValidationModule();
             this.validationAspNetModule = new DevExpress.ExpressApp.Validation.Web.ValidationAspNetModule();
             this.viewVariantsModule = new DevExpress.ExpressApp.ViewVariantsModule.ViewVariantsModule();
+            this.reportsModuleV21 = new DevExpress.ExpressApp.ReportsV2.ReportsModuleV2();
+            this.reportsAspNetModuleV21 = new DevExpress.ExpressApp.ReportsV2.Web.ReportsAspNetModuleV2();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // securityStrategyComplex1
@@ -127,6 +131,17 @@ namespace CostingApp.Web {
             this.validationModule.AllowValidationDetailsAccess = true;
             this.validationModule.IgnoreWarningAndInformationRules = false;
             // 
+            // reportsModuleV21
+            // 
+            this.reportsModuleV21.EnableInplaceReports = true;
+            this.reportsModuleV21.ReportDataType = typeof(DevExpress.Persistent.BaseImpl.ReportDataV2);
+            // 
+            // reportsAspNetModuleV21
+            // 
+            this.reportsAspNetModuleV21.DesignAndPreviewDisplayMode = DevExpress.ExpressApp.ReportsV2.Web.DesignAndPreviewDisplayModes.DetailView;
+            this.reportsAspNetModuleV21.ReportViewerType = DevExpress.ExpressApp.ReportsV2.Web.ReportViewerTypes.HTML5;
+            this.reportsAspNetModuleV21.ShowReportDesignerActionTarget = DevExpress.ExpressApp.ReportsV2.Web.ActionTarget.NewTab;
+            // 
             // CostingAppAspNetApplication
             // 
             this.ApplicationName = "CostingApp";
@@ -140,9 +155,11 @@ namespace CostingApp.Web {
             this.Modules.Add(this.validationModule);
             this.Modules.Add(this.viewVariantsModule);
             this.Modules.Add(this.securityModule1);
+            this.Modules.Add(this.reportsModuleV21);
             this.Modules.Add(this.module3);
             this.Modules.Add(this.treeListEditorsAspNetModule);
             this.Modules.Add(this.validationAspNetModule);
+            this.Modules.Add(this.reportsAspNetModuleV21);
             this.Modules.Add(this.module4);
             this.Security = this.securityStrategyComplex1;
             this.DatabaseVersionMismatch += new System.EventHandler<DevExpress.ExpressApp.DatabaseVersionMismatchEventArgs>(this.CostingAppAspNetApplication_DatabaseVersionMismatch);

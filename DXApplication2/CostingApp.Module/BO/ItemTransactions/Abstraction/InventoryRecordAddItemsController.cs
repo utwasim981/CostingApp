@@ -11,7 +11,7 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
         private InventoryTransaction MasterObject = null;
         PropertyCollectionSource collectionSource = null;
         public InventoryRecordAddItemsController() {
-            TargetObjectType = typeof(InventoryRecord);
+            TargetObjectType = typeof(IAddItemList);
             TargetViewNesting = Nesting.Nested;
             actAddItems = new PopupWindowShowAction();
             actAddItems.Id = "InventoryRecord.AddItems";
@@ -70,6 +70,9 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                     case EnumInventoryTransactionType.InventoryTransfer:
                         view = Application.CreateListView(typeof(AddInventoryItems), true);
                         break;
+                    case EnumInventoryTransactionType.MenuSales:
+                        view = Application.CreateListView(typeof(AddMenuSalesItems), true);
+                        break;
                 }
             }
             e.View = view;
@@ -86,6 +89,7 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                         newObj.Item = ObjectSpace.GetObject(((AddPurchaseItems)item).Item);
                         newObj.TransactionUnit = ObjectSpace.GetObject(((AddPurchaseItems)item).Unit);
                         newObj.Quantity = ((AddPurchaseItems)item).Quantity;
+                        newObj.Price = ((AddPurchaseItems)item).Price;
                         ((PurchaseInvoice)MasterObject).Items.Add(newObj);
                     }
                 }
@@ -96,7 +100,7 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                         var newObj = ObjectSpace.CreateObject<SalesInvoiceDetail>();
                         newObj.Item = ObjectSpace.GetObject(((AddSalesItems)item).Item);
                         newObj.TransactionUnit = ObjectSpace.GetObject(((AddSalesItems)item).Unit);
-                        newObj.Quantity = ((AddPurchaseItems)item).Quantity;
+                        newObj.Quantity = ((AddSalesItems)item).Quantity;
                         ((SalesInvoice)MasterObject).Items.Add(newObj);
                     }
                 }
@@ -118,8 +122,18 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
                         var newObj = ObjectSpace.CreateObject<InventoryAdjustmentItem>();
                         newObj.Item = ObjectSpace.GetObject(((AddInventoryItems)item).Item);
                         newObj.TransactionUnit = ObjectSpace.GetObject(((AddInventoryItems)item).Unit);
-                        newObj.Quantity = ((AddInventoryItems)item).Quantity;
+                        newObj.ActualQuantity = ((AddInventoryItems)item).Quantity;
                         ((InventoryAdjustment)MasterObject).Items.Add(newObj);
+                    }
+                }
+            }
+            else if (attribute.TransactionType == EnumInventoryTransactionType.MenuSales) {
+                foreach (var item in items) {
+                    if (((AddMenuSalesItems)item).Quantity != 0) {
+                        var newObj = ObjectSpace.CreateObject<MenuSalesItem>();
+                        newObj.Item = ObjectSpace.GetObject(((AddMenuSalesItems)item).Item);
+                        newObj.Quantity = ((AddMenuSalesItems)item).Quantity;
+                        ((MenuSales)MasterObject).Items.Add(newObj);
                     }
                 }
             }

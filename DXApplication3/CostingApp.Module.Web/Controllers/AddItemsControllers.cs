@@ -16,6 +16,7 @@ using DevExpress.ExpressApp.Utils;
 using DevExpress.ExpressApp.Web.Editors.ASPx;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Validation;
+using DevExpress.Xpo;
 
 namespace CostingApp.Module.Web.Controllers {
     // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppViewControllertopic.aspx.
@@ -25,10 +26,10 @@ namespace CostingApp.Module.Web.Controllers {
             TargetObjectType = typeof(IAddItems);
         }
 
-        private DevExpress.ExpressApp.ConditionalAppearance.AppearanceController appearanceController;
+        private AppearanceController appearanceController;
         protected override void OnActivated() {
             base.OnActivated();
-            appearanceController = Frame.GetController<DevExpress.ExpressApp.ConditionalAppearance.AppearanceController>();
+            appearanceController = Frame.GetController<AppearanceController>();
             if (appearanceController != null) {
                 appearanceController.CustomApplyAppearance += appearanceController_CustomApplyAppearance;
             }
@@ -39,7 +40,7 @@ namespace CostingApp.Module.Web.Controllers {
                 if (e.Item is ColumnWrapper) {
                     if (View.ObjectTypeInfo.Implements<IAddPurchaseItems>() && ((ColumnWrapper)e.Item).PropertyName == "SalesUnit")
                         e.AppearanceObject.Visibility = ViewItemVisibility.Hide;
-                    else if(View.ObjectTypeInfo.Implements<IAddSalesItems>() && ((ColumnWrapper)e.Item).PropertyName == "PurchaseUnit")
+                    else if (View.ObjectTypeInfo.Implements<IAddSalesItems>() && ((ColumnWrapper)e.Item).PropertyName == "PurchaseUnit")
                         e.AppearanceObject.Visibility = ViewItemVisibility.Hide;
                     else if (View.ObjectTypeInfo.Implements<IAddStockItems>() && ((ColumnWrapper)e.Item).PropertyName == "SalesUnit")
                         e.AppearanceObject.Visibility = ViewItemVisibility.Hide;
@@ -82,6 +83,6 @@ namespace CostingApp.Module.Web.Controllers {
 
         private void actClose_Execute(object sender, SimpleActionExecuteEventArgs e) {
             View.Close();
-        }
-    }
+        }        
+    }    
 }

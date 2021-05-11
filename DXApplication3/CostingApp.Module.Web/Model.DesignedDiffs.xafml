@@ -6,7 +6,7 @@
         <ActionLink ActionId="Delete" IsNewNode="True" />
       </ActionContainer>
       <ActionContainer Id="PopupActions">
-        <ActionLink ActionId="AdjustmentAddItems.Close" IsNewNode="True" />
+        <ActionLink ActionId="AddItems.Close" IsNewNode="True" />
       </ActionContainer>
     </ActionToContainerMapping>
   </ActionDesign>

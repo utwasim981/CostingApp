@@ -42,6 +42,8 @@
             this.pivotGridModule1 = new DevExpress.ExpressApp.PivotGrid.PivotGridModule();
             this.pivotGridWindowsFormsModule1 = new DevExpress.ExpressApp.PivotGrid.Win.PivotGridWindowsFormsModule();
             this.costingAppModule1 = new CostingApp.Module.CostingAppModule();
+            this.reportsModuleV21 = new DevExpress.ExpressApp.ReportsV2.ReportsModuleV2();
+            this.reportsWindowsFormsModuleV21 = new DevExpress.ExpressApp.ReportsV2.Win.ReportsWindowsFormsModuleV2();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // securityStrategyComplex1
@@ -65,6 +67,12 @@
             this.pivotChartModuleBase1.DataAccessMode = DevExpress.ExpressApp.CollectionSourceDataAccessMode.Client;
             this.pivotChartModuleBase1.ShowAdditionalNavigation = false;
             // 
+            // reportsModuleV21
+            // 
+            this.reportsModuleV21.EnableInplaceReports = true;
+            this.reportsModuleV21.ReportDataType = typeof(DevExpress.Persistent.BaseImpl.ReportDataV2);
+            this.reportsModuleV21.ReportStoreMode = DevExpress.ExpressApp.ReportsV2.ReportStoreModes.XML;
+            // 
             // CostingAppWindowsFormsApplication
             // 
             this.ApplicationName = "CostingApp";
@@ -82,10 +90,12 @@
             this.Modules.Add(this.pivotChartWindowsFormsModule1);
             this.Modules.Add(this.pivotGridModule1);
             this.Modules.Add(this.pivotGridWindowsFormsModule1);
-            this.Modules.Add(this.module4);
-            this.Modules.Add(this.securityModule1);
             this.Modules.Add(this.objectsModule);
+            this.Modules.Add(this.securityModule1);
+            this.Modules.Add(this.reportsModuleV21);
             this.Modules.Add(this.costingAppModule1);
+            this.Modules.Add(this.reportsWindowsFormsModuleV21);
+            this.Modules.Add(this.module4);
             this.Security = this.securityStrategyComplex1;
             this.UseOldTemplates = false;
             this.DatabaseVersionMismatch += new System.EventHandler<DevExpress.ExpressApp.DatabaseVersionMismatchEventArgs>(this.CostingAppWindowsFormsApplication_DatabaseVersionMismatch);
@@ -115,5 +125,7 @@
         private DevExpress.ExpressApp.PivotGrid.PivotGridModule pivotGridModule1;
         private DevExpress.ExpressApp.PivotGrid.Win.PivotGridWindowsFormsModule pivotGridWindowsFormsModule1;
         private Module.CostingAppModule costingAppModule1;
+        private DevExpress.ExpressApp.ReportsV2.ReportsModuleV2 reportsModuleV21;
+        private DevExpress.ExpressApp.ReportsV2.Win.ReportsWindowsFormsModuleV2 reportsWindowsFormsModuleV21;
     }
 }

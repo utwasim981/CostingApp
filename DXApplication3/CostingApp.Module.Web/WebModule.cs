@@ -67,6 +67,9 @@ namespace CostingApp.Module.Web {
                 if (obj is AddSalesItems && ((AddSalesItems)obj).Quantity != 0) {
                     ((AddSalesItems)obj).Date = DateTime.Now;
                 }
+                if (obj is AddMenuSalesItems && ((AddMenuSalesItems)obj).Quantity != 0) {
+                    ((AddMenuSalesItems)obj).Date = DateTime.Now;
+                }
             }
         }
 
@@ -77,6 +80,8 @@ namespace CostingApp.Module.Web {
                 e.Objects = FillAddPurchaseItems();
             else if (e.ObjectType == typeof(AddSalesItems))
                 e.Objects = FillAddSalesItems();
+            else if (e.ObjectType == typeof(AddMenuSalesItems))
+                e.Objects = FillAddMenuSalesItems();
         }
 
         private BindingList<AddInventoryItems> FillAddInventoryItems() {
@@ -138,6 +143,28 @@ namespace CostingApp.Module.Web {
                     addItem.ID = item.Oid;
                     addItem.Item = item;
                     addItem.Unit = item.SalesUnit;
+                    addItem.Quantity = 0;
+                    objects.Add(addItem);
+                    index++;
+                }
+                return objects;
+            }
+            catch (Exception ex) {
+                return null;
+            }
+        }
+        private BindingList<AddMenuSalesItems> FillAddMenuSalesItems() {
+            BindingList<AddMenuSalesItems> objects = new BindingList<AddMenuSalesItems>();
+            var os = Application.CreateObjectSpace();
+            IList<ItemCard> items = null;
+            int index = 0;
+            try {
+                items = os.GetObjects<ItemCard>(CriteriaOperator.Parse("IsActive = ?", true));
+                foreach (var item in items) {
+                    var addItem = new AddMenuSalesItems();
+                    addItem.ID = item.Oid;
+                    addItem.Item = item;
+                    //addItem.Unit = item.SalesUnit;
                     addItem.Quantity = 0;
                     objects.Add(addItem);
                     index++;

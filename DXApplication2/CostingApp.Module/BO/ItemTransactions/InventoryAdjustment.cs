@@ -16,7 +16,8 @@ using System.Threading.Tasks;
 namespace CostingApp.Module.BO.ItemTransactions {
     [NavigationItem("Transactions"),
         ImageName("BO_Order_Item"),
-        XafDefaultProperty(nameof(Number))]
+        XafDefaultProperty(nameof(Number)),
+        VisibleInReports(true)]
     [Appearance("InventoryAdjustment_Approved.Enabled", Enabled = false, TargetItems = "*", Criteria = "Step = 1")]
     [AddItemClass(EnumInventoryTransactionType.InventoryAdjustment)]
     public class InventoryAdjustment : InventoryTransaction {

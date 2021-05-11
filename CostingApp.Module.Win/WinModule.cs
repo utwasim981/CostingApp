@@ -15,6 +15,7 @@ using DevExpress.ExpressApp.Model.NodeGenerators;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Base;
 using CostingApp.Module.Win.ViewItems;
+using DevExpress.ExpressApp.ReportsV2.Win;
 //using WXafLib.Module;
 
 namespace CostingApp.Module.Win {

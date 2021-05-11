@@ -15,7 +15,8 @@ using System.Threading.Tasks;
 namespace CostingApp.Module.BO.ItemTransactions {
     [NavigationItem("Transactions"),
         XafDefaultProperty(nameof(Number)),
-        ImageName("BO_Order_Item")]
+        ImageName("BO_Order_Item"),
+        VisibleInReports(true)]
     [AddItemClass(EnumInventoryTransactionType.InventoryTransfer)]
     public class InventoryTransfer : InventoryTransaction {
         public override EnumInventoryTransactionType TransactionType { get { return EnumInventoryTransactionType.InventoryTransfer; } }

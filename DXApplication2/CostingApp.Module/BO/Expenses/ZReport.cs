@@ -19,8 +19,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CostingApp.Module.BO.Expenses {
-    [NavigationItem("Transactions")]
-    [ImageName("BO_Sale_Item")]
+    [NavigationItem("Transactions"),
+        ImageName("BO_Sale_Item"),
+        VisibleInReports(true)]
     public class ZReport : WXafSequenceObject {
         public string Number {
             get {

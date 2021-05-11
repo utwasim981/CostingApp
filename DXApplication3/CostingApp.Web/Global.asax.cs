@@ -10,6 +10,7 @@ using DevExpress.ExpressApp.Security;
 using DevExpress.ExpressApp.Web;
 using DevExpress.Web;
 using CostingApp.Module.BO.Expenses;
+using DevExpress.XtraReports.Security;
 
 namespace CostingApp.Web {
     public class Global : System.Web.HttpApplication {
@@ -19,6 +20,7 @@ namespace CostingApp.Web {
         protected void Application_Start(Object sender, EventArgs e) {
             SecurityAdapterHelper.Enable();
             ASPxWebControl.CallbackError += new EventHandler(Application_Error);
+            ScriptPermissionManager.GlobalInstance = new ScriptPermissionManager(ExecutionMode.Unrestricted);
 #if EASYTEST
             DevExpress.ExpressApp.Web.TestScripts.TestScriptsManager.EasyTestEnabled = true;
 #endif

@@ -190,6 +190,10 @@ namespace CostingApp.Module.BO.Items {
                                               new BinaryOperator(new OperandProperty(nameof(Record.BaseQuantity)), new OperandProperty(nameof(Record.FifoQuantity)), BinaryOperatorType.Greater));
             var sort = new SortProperty("Date", DevExpress.Xpo.DB.SortingDirection.Ascending);
             XPCollection<InventoryRecord> Fifo = new XPCollection<InventoryRecord>(Session, co, sort);
+            if (Fifo.Count == 0) {
+                Record.Price = 0;
+                return;
+            }
             var quantity = Record.BaseQuantity;
             double total = 0;
             double fifoQuantity = Fifo[0].BaseQuantity - Fifo[0].FifoQuantity;

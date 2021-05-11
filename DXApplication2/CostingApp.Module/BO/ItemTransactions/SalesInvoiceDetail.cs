@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace CostingApp.Module.BO.ItemTransactions {
     [AddItemClass(EnumInventoryTransactionType.SalesInvoice)]
-    public class SalesInvoiceDetail : OutputInventoryRecord {
+    public class SalesInvoiceDetail : OutputInventoryRecord, IAddItemList {
         SalesInvoice fInvoice;
         [Association("SalesInvoice-SalesInvoiceDetail")]
         public SalesInvoice Invoice {

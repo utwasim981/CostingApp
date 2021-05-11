@@ -21,27 +21,32 @@ namespace CostingApp.Module.BO.ItemTransactions.Abstraction {
         }
         protected override void OnSavingRecord() {
             base.OnSavingRecord();
-            object quantityOldValue = null;
-            WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(Quantity), out quantityOldValue);
-            object unitOldValue = null;
-            WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(TransactionUnit), out unitOldValue);
-            if (quantityOldValue != null || unitOldValue != null) {
-                if (Transaction.TransactionType == EnumInventoryTransactionType.PurchaseInvoice)
-                    Item.UpdateLasPurchasePrice(Shop, TransactionUnit, Date, Price);
-                if (quantityOldValue != null)
-                    if (unitOldValue != null) {
-                        Item.UpdateQuantityOnHand(NotRecordType, Shop, (Unit)unitOldValue, Convert.ToDouble(quantityOldValue));
-                        Item.UpdateQuantityOnHand(RecordType, Shop, TransactionUnit, Quantity);
-                    }
-                    else {
-                        if (Quantity - Convert.ToDouble(quantityOldValue) < 0)
-                            Item.UpdateQuantityOnHand(RecordType, Shop, TransactionUnit, Math.Abs((Quantity - Convert.ToDouble(quantityOldValue))));
-                        else
-                            Item.UpdateQuantityOnHand(NotRecordType, Shop, TransactionUnit, Math.Abs((Quantity - Convert.ToDouble(quantityOldValue))));
-                    }
-                else
-                    Item.UpdateQuantityOnHand(RecordType, Shop, TransactionUnit, Quantity);
+            if (Transaction.TransactionType == EnumInventoryTransactionType.PurchaseInvoice)
+                Item.UpdateLasPurchasePrice(Shop, TransactionUnit, Date, Price);
+
+            if (Session.IsNewObject(this)) {
+                Item.UpdateQuantityOnHand(RecordType, Shop, TransactionUnit, Quantity);
+                return;
             }
+            double quantityOldValue = 0;
+            Unit unitOldValue = null;
+            if (WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(Quantity)) &&
+                WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(TransactionUnit))){
+                quantityOldValue = Convert.ToDouble(WXafHelper.GetOldValue(ClassInfo, this, nameof(Quantity)));
+                unitOldValue = (Unit)WXafHelper.GetOldValue(ClassInfo, this, nameof(TransactionUnit));
+                Item.UpdateQuantityOnHand(NotRecordType, Shop, unitOldValue, quantityOldValue);
+                Item.UpdateQuantityOnHand(RecordType, Shop, TransactionUnit, Quantity);
+            }
+            else if (WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(TransactionUnit))) {
+                unitOldValue = (Unit)WXafHelper.GetOldValue(ClassInfo, this, nameof(TransactionUnit));
+                Item.UpdateQuantityOnHand(NotRecordType, Shop, unitOldValue, Quantity);
+                Item.UpdateQuantityOnHand(RecordType, Shop, TransactionUnit, Quantity);
+            }
+            else if (WXafHelper.IsProrpotyChanged(ClassInfo, this, nameof(Quantity))) {
+                quantityOldValue = Convert.ToDouble(WXafHelper.GetOldValue(ClassInfo, this, nameof(Quantity)));
+                Item.UpdateQuantityOnHand(NotRecordType, Shop, TransactionUnit, quantityOldValue);
+                Item.UpdateQuantityOnHand(RecordType, Shop, TransactionUnit, Quantity);
+            }            
         }
     }
 }

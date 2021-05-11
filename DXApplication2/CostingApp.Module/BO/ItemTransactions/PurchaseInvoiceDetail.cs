@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace CostingApp.Module.BO.ItemTransactions {
     [AddItemClass(EnumInventoryTransactionType.PurchaseInvoice)]
-    public class PurchaseInvoiceDetail : InputInventoryRecord {
+    public class PurchaseInvoiceDetail : InputInventoryRecord, IAddItemList {
         PurchaseInvoice fInvoice;
         [Association("PurchaseInvoice-PurchaseInvoiceDetail")]
         public PurchaseInvoice Invoice {

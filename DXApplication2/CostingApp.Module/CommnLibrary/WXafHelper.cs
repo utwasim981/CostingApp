@@ -40,10 +40,19 @@ namespace CostingApp.Module.CommonLibrary {
             }
             return false;
         }
+        public static bool IsProrpotyChanged(XPClassInfo ClassInfo, object Obj, string ProportName) {
+            XPMemberInfo memberInfo = ClassInfo.GetMember(ProportName);
+            var oldValue = PersistentBase.GetModificationsStore(Obj).GetPropertyOldValue(memberInfo);
+            return oldValue != null;
+        }
         public static bool IsProrpotyChanged(XPClassInfo ClassInfo, object Obj, string ProportName, out object OldValue) {
             XPMemberInfo memberInfo = ClassInfo.GetMember(ProportName);
             OldValue = PersistentBase.GetModificationsStore(Obj).GetPropertyOldValue(memberInfo);
             return OldValue != null;
+        }
+        public static object GetOldValue(XPClassInfo ClassInfo, object Obj, string ProportName) {
+            XPMemberInfo memberInfo = ClassInfo.GetMember(ProportName);
+            return PersistentBase.GetModificationsStore(Obj).GetPropertyOldValue(memberInfo);
         }
     }
 }
