@@ -10,6 +10,18 @@
       </ActionContainer>
     </ActionToContainerMapping>
   </ActionDesign>
+  <BOModel>
+    <Class Name="CostingApp.Module.BO.Employees.Employee">
+      <OwnMembers>
+        <Member Name="Gender" PropertyEditorType="CostingApp.Module.Web.Editors.RadioButtonEnumPropertyEditor" />
+      </OwnMembers>
+    </Class>
+    <Class Name="CostingApp.Module.CommnLibrary.ReportParameters.DateRangeParameterObject">
+      <OwnMembers>
+        <Member Name="Option" PropertyEditorType="CostingApp.Module.Web.Editors.RadioButtonEnumPropertyEditor" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
   <Options CollectionsEditMode="Edit" DataAccessMode="Client" />
   <SchemaModules>
     <SchemaModule Name="CloneObjectModule" Version="17.2.16.0" IsNewNode="True" />

@@ -1,4 +1,5 @@
-﻿using CostingApp.Module.CommnLibrary.General;
+﻿using CostingApp.Module.BO.Masters;
+using CostingApp.Module.CommnLibrary.General;
 using CostingApp.Module.CommonLibrary.General.Model;
 using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.DC;
@@ -35,6 +36,12 @@ namespace CostingApp.Module.BO.Employees {
         public Position Position {
             get { return fPosition; }
             set { SetPropertyValue<Position>(nameof(Position), ref fPosition, value); }
+        }
+        Shop fDefaultShop;
+        [DataSourceCriteria("IsActive = True")]
+        public Shop DefaultShop {
+            get { return fDefaultShop; }
+            set { SetPropertyValue<Shop>(nameof(DefaultShop), ref fDefaultShop, value); }
         }
         string fEmployeeCode;
         [RuleUniqueValue("Employee_EmployeeCode_RuleUniqueValue", DefaultContexts.Save)]

@@ -297,27 +297,28 @@
       </Items>
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="EmplyeeMain" ShowCaption="True" Index="0" RelativeSize="14.91442542787286" Caption="Personal Info" Direction="Horizontal" IsNewNode="True">
-            <LayoutItem Id="EmployeePhoto" ViewItem="EmployeePhoto" Index="0" RelativeSize="16.16" IsNewNode="True" />
-            <LayoutGroup Id="Auto37b41673-0bf9-4ac4-8428-8b52842a6cc1" ShowCaption="False" Caption="Auto37b41673-0bf9-4ac4-8428-8b52842a6cc1(14)" Index="1" RelativeSize="35.04" IsNewNode="True">
+          <LayoutGroup Id="EmplyeeMain" ShowCaption="True" Index="0" RelativeSize="12.995049504950496" Caption="Personal Info" Direction="Horizontal" IsNewNode="True">
+            <LayoutItem Id="EmployeePhoto" ViewItem="EmployeePhoto" Index="0" RelativeSize="16.930022573363431" IsNewNode="True" />
+            <LayoutGroup Id="Auto37b41673-0bf9-4ac4-8428-8b52842a6cc1" ShowCaption="False" Caption="Auto37b41673-0bf9-4ac4-8428-8b52842a6cc1(14)" Index="1" RelativeSize="34.650112866817153" IsNewNode="True">
               <LayoutItem Id="EmployeeCode" ViewItem="EmployeeCode" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
               <LayoutItem Id="FirstName" ViewItem="FirstName" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
               <LayoutItem Id="LastName" ViewItem="LastName" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="Auto58ebdff9-101a-45e1-86f9-b28de9735d7e" ShowCaption="False" Caption="Auto58ebdff9-101a-45e1-86f9-b28de9735d7e(18)" Index="2" RelativeSize="48.8" IsNewNode="True">
+            <LayoutGroup Id="Auto58ebdff9-101a-45e1-86f9-b28de9735d7e" ShowCaption="False" Caption="Auto58ebdff9-101a-45e1-86f9-b28de9735d7e(18)" Index="2" RelativeSize="48.419864559819416" IsNewNode="True">
               <LayoutItem Id="FullName" ViewItem="FullName" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
               <LayoutItem Id="Gender" ViewItem="Gender" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
               <LayoutItem Id="IsActive" ViewItem="IsActive" Index="2" RelativeSize="36.363636363636367" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="WorkInfo" ShowCaption="True" Caption="Work Info" Index="1" RelativeSize="85.085574572127143" Direction="Horizontal" IsNewNode="True">
-            <LayoutGroup Id="Auto482fda96-9e8a-4f1a-baa0-f9b0168ca23a" ShowCaption="False" Caption="Auto482fda96-9e8a-4f1a-baa0-f9b0168ca23a(13)" Index="0" RelativeSize="50" IsNewNode="True">
-              <LayoutItem Id="ContractType" ViewItem="ContractType" Index="0" RelativeSize="4.833836858006042" IsNewNode="True" />
-              <LayoutItem Id="Position" ViewItem="Position" Index="1" RelativeSize="95.166163141993962" IsNewNode="True" />
+          <LayoutGroup Id="WorkInfo" ShowCaption="True" Caption="Work Info" Index="1" RelativeSize="87.0049504950495" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Auto482fda96-9e8a-4f1a-baa0-f9b0168ca23a" ShowCaption="False" Caption="Auto482fda96-9e8a-4f1a-baa0-f9b0168ca23a(13)" Index="0" RelativeSize="49.887133182844245" IsNewNode="True">
+              <LayoutItem Id="ContractType" ViewItem="ContractType" Index="0" RelativeSize="4.6647230320699711" IsNewNode="True" />
+              <LayoutItem Id="Position" ViewItem="Position" Index="1" RelativeSize="95.335276967930028" IsNewNode="True" />
             </LayoutGroup>
-            <LayoutGroup Id="Auto02cdf10e-e0f1-463b-bc33-eec673a375d9" ShowCaption="False" Caption="Auto02cdf10e-e0f1-463b-bc33-eec673a375d9(16)" Index="1" RelativeSize="50" IsNewNode="True">
-              <LayoutItem Id="SalaryPerHour" ViewItem="SalaryPerHour" Index="0" RelativeSize="4.833836858006042" IsNewNode="True" />
-              <LayoutItem Id="MonthlySalary" ViewItem="MonthlySalary" Index="1" RelativeSize="95.166163141993962" IsNewNode="True" />
+            <LayoutGroup Id="Auto02cdf10e-e0f1-463b-bc33-eec673a375d9" ShowCaption="False" Caption="Auto02cdf10e-e0f1-463b-bc33-eec673a375d9(16)" Index="1" RelativeSize="50.112866817155755" IsNewNode="True">
+              <LayoutItem Id="SalaryPerHour" ViewItem="SalaryPerHour" Index="0" RelativeSize="4.6647230320699711" IsNewNode="True" />
+              <LayoutItem Id="MonthlySalary" ViewItem="MonthlySalary" Index="1" RelativeSize="3.4985422740524781" IsNewNode="True" />
+              <LayoutItem Id="DefaultShop" ViewItem="DefaultShop" Index="2" RelativeSize="91.836734693877546" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
           <LayoutGroup Id="SimpleEditors" RelativeSize="73.762376237623769" Direction="Horizontal" Removed="True">
@@ -412,24 +413,24 @@
       </Items>
       <Layout>
         <LayoutGroup Id="Main" Direction="Horizontal" RelativeSize="100">
-          <LayoutGroup Id="AttendanceMain" ShowCaption="True" Direction="Vertical" Index="0" RelativeSize="59.175257731958766" Caption="Attendance" IsNewNode="True">
-            <LayoutItem Id="Shop" ViewItem="Shop" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
-            <LayoutItem Id="Employee" ViewItem="Employee" Index="1" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="ExpenseDate" ViewItem="ExpenseDate" Index="2" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="Period" ViewItem="Period" Index="3" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="StartAt" ViewItem="StartAt" Index="4" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="EndAt" ViewItem="EndAt" Index="5" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="NumberOfHours" ViewItem="NumberOfHours" Index="6" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="HourPrice" ViewItem="HourPrice" Index="7" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="Amount" ViewItem="Amount" Index="8" RelativeSize="73.89033942558747" IsNewNode="True" />
+          <LayoutGroup Id="AttendanceMain" ShowCaption="True" Direction="Vertical" Index="0" RelativeSize="59.115426105717368" Caption="Attendance" IsNewNode="True">
+            <LayoutItem Id="Employee" ViewItem="Employee" Index="0" RelativeSize="4.0868454661558111" IsNewNode="True" />
+            <LayoutItem Id="Shop" ViewItem="Shop" Index="1" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="ExpenseDate" ViewItem="ExpenseDate" Index="2" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="Period" ViewItem="Period" Index="3" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="StartAt" ViewItem="StartAt" Index="4" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="EndAt" ViewItem="EndAt" Index="5" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="NumberOfHours" ViewItem="NumberOfHours" Index="6" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="HourPrice" ViewItem="HourPrice" Index="7" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="Amount" ViewItem="Amount" Index="8" RelativeSize="74.457215836526174" IsNewNode="True" />
           </LayoutGroup>
-          <LayoutGroup Id="EmployeeMain" Caption="Employee Info" ShowCaption="True" Direction="Vertical" Index="1" RelativeSize="40.824742268041234" IsNewNode="True">
-            <LayoutItem Id="Employee.EmployeePhoto" ViewItem="Employee.EmployeePhoto" Index="0" RelativeSize="4.1775456919060057" IsNewNode="True" />
-            <LayoutItem Id="Employee.EmployeeCode" ViewItem="Employee.EmployeeCode" Index="1" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="Employee.Position" ViewItem="Employee.Position" Index="2" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="Employee.ContractType" ViewItem="Employee.ContractType" Index="3" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="Employee.ContractType.SalaryType" ViewItem="Employee.ContractType.SalaryType" Index="4" RelativeSize="3.133159268929504" IsNewNode="True" />
-            <LayoutItem Id="ExpenseType" ViewItem="ExpenseType" Index="5" RelativeSize="83.289817232375981" IsNewNode="True" />
+          <LayoutGroup Id="EmployeeMain" Caption="Employee Info" ShowCaption="True" Direction="Vertical" Index="1" RelativeSize="40.884573894282632" IsNewNode="True">
+            <LayoutItem Id="Employee.EmployeePhoto" ViewItem="Employee.EmployeePhoto" Index="0" RelativeSize="4.0868454661558111" IsNewNode="True" />
+            <LayoutItem Id="Employee.EmployeeCode" ViewItem="Employee.EmployeeCode" Index="1" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="Employee.Position" ViewItem="Employee.Position" Index="2" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="Employee.ContractType" ViewItem="Employee.ContractType" Index="3" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="Employee.ContractType.SalaryType" ViewItem="Employee.ContractType.SalaryType" Index="4" RelativeSize="3.0651340996168583" IsNewNode="True" />
+            <LayoutItem Id="ExpenseType" ViewItem="ExpenseType" Index="5" RelativeSize="83.652618135376756" IsNewNode="True" />
           </LayoutGroup>
           <LayoutGroup Id="SimpleEditors" Removed="True" />
         </LayoutGroup>
@@ -438,8 +439,8 @@
     <ListView Id="EmployeeAttendance_ListView" AllowEdit="True" NewItemRowPosition="Top">
       <Columns>
         <ColumnInfo Id="Status" Index="-1" />
-        <ColumnInfo Id="Shop" Index="1" />
-        <ColumnInfo Id="Employee" Index="2" />
+        <ColumnInfo Id="Employee" Index="1" />
+        <ColumnInfo Id="Shop" Index="2" />
         <ColumnInfo Id="ExpenseDate" Index="3" Caption="Date" />
         <ColumnInfo Id="Period" Index="4" />
         <ColumnInfo Id="StartAt" Index="5" />

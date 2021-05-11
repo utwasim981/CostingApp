@@ -7,7 +7,7 @@ using DevExpress.ExpressApp.Model;
 using DevExpress.Web;
 
 namespace CostingApp.Module.Web.Editors {
-    [DevExpress.ExpressApp.Editors.PropertyEditor(typeof(Enum), true)]
+    [DevExpress.ExpressApp.Editors.PropertyEditor(typeof(Enum), false)]
     public class RadioButtonEnumPropertyEditor : WebPropertyEditor {
         private EnumDescriptor enumDescriptor;
         private List<object> controlsHash = new List<object>();

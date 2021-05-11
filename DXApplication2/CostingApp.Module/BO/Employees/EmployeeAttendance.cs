@@ -134,6 +134,7 @@ namespace CostingApp.Module.BO.Employees {
                 if (propertyName == nameof(Employee) && oldValue != newValue) {
                     CardHourPrice = Employee != null && Employee.ContractType.SalaryType == EnumSalaryType.Hourly ? Employee.SalaryPerHour : 0;
                     HourPrice = Employee != null && Employee.ContractType.SalaryType == EnumSalaryType.Hourly ? Employee.SalaryPerHour : 0;
+                    Shop = (Employee != null && Employee.DefaultShop != null) ? Employee.DefaultShop : null;
                 }
                 if (propertyName == nameof(ExpenseDate) && oldValue != newValue)
                     Period = BasePeriod.GetOpenedPeriodForDate(ObjectSpace, ExpenseDate);
